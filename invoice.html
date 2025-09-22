@@ -640,49 +640,41 @@
         <div class="timeline-section">
             <h3>Current Status: 65% Complete</h3>
             
-            <div class="table-responsive">
-                <table class="timeline-table">
-                    <thead>
-                        <tr>
-                            <th>Phase</th>
-                            <th>Status</th>
-                            <th>Deliverable</th>
-                            <th>Timeline</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="completed">
-                            <td><strong>Phase 1</strong></td>
-                            <td>✅ DONE</td>
-                            <td>Project setup, database design</td>
-                            <td>Complete</td>
-                        </tr>
-                        <tr class="completed">
-                            <td><strong>Phase 2</strong></td>
-                            <td>80%</td>
-                            <td>API development, authentication</td>
-                            <td>Mostly Done</td>
-                        </tr>
-                        <tr class="pending">
-                            <td><strong>Phase 3</strong></td>
-                            <td>30%</td>
-                            <td>User interfaces, booking systems</td>
-                            <td>3-4 weeks</td>
-                        </tr>
-                        <tr class="pending">
-                            <td><strong>Phase 4</strong></td>
-                            <td>40%</td>
-                            <td>API integrations, testing</td>
-                            <td>1-2 weeks</td>
-                        </tr>
-                        <tr class="pending">
-                            <td><strong>Phase 5</strong></td>
-                            <td>🔄</td>
-                            <td>Live deployment, documentation</td>
-                            <td>1 week</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="timeline-grid">
+                <div class="timeline-card completed">
+                    <div class="timeline-phase">Phase 1</div>
+                    <span class="timeline-status done">✅ DONE</span>
+                    <p class="timeline-deliverable">Project setup, database design</p>
+                    <p class="timeline-duration">Complete</p>
+                </div>
+                
+                <div class="timeline-card completed">
+                    <div class="timeline-phase">Phase 2</div>
+                    <span class="timeline-status in-progress">80% Complete</span>
+                    <p class="timeline-deliverable">API development, authentication</p>
+                    <p class="timeline-duration">Mostly Done</p>
+                </div>
+                
+                <div class="timeline-card pending">
+                    <div class="timeline-phase">Phase 3</div>
+                    <span class="timeline-status pending">30% Complete</span>
+                    <p class="timeline-deliverable">User interfaces, booking systems</p>
+                    <p class="timeline-duration">3-4 weeks</p>
+                </div>
+                
+                <div class="timeline-card pending">
+                    <div class="timeline-phase">Phase 4</div>
+                    <span class="timeline-status pending">40% Complete</span>
+                    <p class="timeline-deliverable">API integrations, testing</p>
+                    <p class="timeline-duration">1-2 weeks</p>
+                </div>
+                
+                <div class="timeline-card pending">
+                    <div class="timeline-phase">Phase 5</div>
+                    <span class="timeline-status pending">🔄 Pending</span>
+                    <p class="timeline-deliverable">Live deployment, documentation</p>
+                    <p class="timeline-duration">1 week</p>
+                </div>
             </div>
             
             <div class="timeline-details">

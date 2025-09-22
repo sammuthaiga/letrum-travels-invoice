@@ -176,7 +176,7 @@ body {
     margin-bottom: 10px;
 }
 
-/* Cost Tables - Ultra Responsive */
+/* Cost Tables - Ultra Mobile Optimized */
 .cost-section {
     margin: 30px 0;
 }
@@ -203,27 +203,26 @@ body {
 .table-responsive {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    margin: 15px -5px;
+    margin: 15px 0;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    position: relative;
 }
 
 .cost-table, .timeline-table {
     width: 100%;
-    min-width: 0; /* allow tables to compress on small screens */
     border-collapse: collapse;
     background: white;
+    table-layout: fixed;
 }
 
 .cost-table th, .timeline-table th {
     background: var(--primary-color);
-    color: #000; /* make headers black */
-    padding: 12px 8px;
+    color: #000000; /* Black text for headers */
+    padding: 12px 4px;
     text-align: left;
     font-weight: 600;
     font-size: 0.85rem;
-    white-space: normal; /* allow wrapping */
+    white-space: normal;
     word-break: break-word;
     position: sticky;
     top: 0;
@@ -231,31 +230,37 @@ body {
 }
 
 .cost-table td, .timeline-table td {
-    padding: 10px 8px;
+    padding: 10px 4px;
     border-bottom: 1px solid #eee;
     font-size: 0.85rem;
+    word-break: break-word;
 }
 
-/* Make first column wider for descriptions */
+/* Optimized column widths for mobile */
 .cost-table th:first-child,
 .cost-table td:first-child {
-    min-width: 140px;
+    width: 50%;
+    padding-left: 8px;
 }
 
-/* Make numeric columns narrower */
 .cost-table th:nth-child(2),
-.cost-table td:nth-child(2),
+.cost-table td:nth-child(2) {
+    width: 12%;
+    text-align: center;
+}
+
 .cost-table th:nth-child(3),
 .cost-table td:nth-child(3) {
-    width: 60px;
+    width: 15%;
     text-align: center;
 }
 
 .cost-table th:last-child,
 .cost-table td:last-child {
-    width: 80px;
+    width: 23%;
     text-align: right;
     font-weight: bold;
+    padding-right: 8px;
 }
 
 .cost-table tr:hover {
@@ -433,26 +438,101 @@ hr.bold-line {
     margin-top: 10px;
 }
 
-/* Timeline */
+/* Timeline Cards - New Design */
 .timeline-section {
-    background: var(--bg-lighter);
-    padding: 20px;
-    border-radius: 10px;
     margin: 20px 0;
 }
 
 .timeline-section h3 {
     color: var(--primary-color);
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.timeline-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.timeline-card.completed {
+    background: var(--success-bg);
+    border-left: 4px solid var(--success-text);
+}
+
+.timeline-card.pending {
+    background: var(--pending-bg);
+    border-left: 4px solid var(--pending-text);
+}
+
+.timeline-phase {
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+.timeline-status {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.timeline-status.done {
+    background: var(--success-text);
+    color: white;
+}
+
+.timeline-status.in-progress {
+    background: #f39c12;
+    color: white;
+}
+
+.timeline-status.pending {
+    background: var(--pending-text);
+    color: white;
+}
+
+.timeline-deliverable {
+    color: var(--text-primary);
+    margin: 8px 0;
+    font-size: 0.9rem;
+}
+
+.timeline-duration {
+    color: var(--text-secondary);
+    font-style: italic;
+    margin-top: 10px;
+    font-size: 0.85rem;
 }
 
 .timeline-details {
+    background: var(--bg-light);
+    padding: 20px;
+    border-radius: 10px;
     margin-top: 20px;
 }
 
 .timeline-details h4 {
     color: var(--primary-color);
-    margin: 15px 0 10px 0;
+    margin-bottom: 15px;
 }
 
 .timeline-details ul {
@@ -898,6 +978,10 @@ hr.bold-line {
         grid-template-columns: 1fr;
     }
     
+    .timeline-grid {
+        grid-template-columns: 1fr;
+    }
+    
     .button-group {
         flex-direction: column;
     }
@@ -911,46 +995,44 @@ hr.bold-line {
     .table-responsive {
         margin: 10px -10px;
         padding: 0 5px;
+        overflow-x: visible; /* No scrolling needed */
     }
     
-    .cost-table, .timeline-table {
-        font-size: 0.75rem;
-    }
-    
-    .cost-table th, .timeline-table th {
-        padding: 8px 5px;
+    .cost-table {
         font-size: 0.7rem;
-        white-space: normal;
-        word-break: break-word;
-    }
-
-    .cost-table td, .timeline-table td {
-        padding: 6px 5px;
-        font-size: 0.7rem;
-        white-space: normal;
     }
     
-    /* Make columns even more compact on mobile */
-    .cost-table th:first-child,
-    .cost-table td:first-child {
-        min-width: 100px;
+    .cost-table th,
+    .cost-table td {
+        padding: 6px 2px;
         font-size: 0.65rem;
     }
     
+    .cost-table th:first-child,
+    .cost-table td:first-child {
+        width: 45%;
+        font-size: 0.6rem;
+        padding-left: 4px;
+    }
+    
     .cost-table th:nth-child(2),
-    .cost-table td:nth-child(2),
+    .cost-table td:nth-child(2) {
+        width: 10%;
+        font-size: 0.6rem;
+    }
+    
     .cost-table th:nth-child(3),
     .cost-table td:nth-child(3) {
-        width: 40px;
+        width: 15%;
+        font-size: 0.6rem;
     }
     
     .cost-table th:last-child,
     .cost-table td:last-child {
-        width: 60px;
+        width: 30%;
+        font-size: 0.65rem;
+        padding-right: 4px;
     }
-    
-    /* Add scroll indicator for tables */
-    /* remove visual swipe hint - allow table to compress and wrap content instead */
     
     /* Adjust cost breakdown for mobile */
     .cost-line {
@@ -995,38 +1077,54 @@ hr.bold-line {
     }
     
     /* Ultra compact tables for small screens */
-    .cost-table, .timeline-table {
-        font-size: 0.65rem;
-    }
-    
-    .cost-table th, .timeline-table th {
-        padding: 6px 3px;
+    .cost-table {
         font-size: 0.6rem;
     }
     
-    .cost-table td, .timeline-table td {
-        padding: 5px 3px;
-        font-size: 0.6rem;
+    .cost-table th,
+    .cost-table td {
+        padding: 4px 1px;
+        font-size: 0.55rem;
+        line-height: 1.3;
     }
     
-    /* Further reduce column widths */
     .cost-table th:first-child,
     .cost-table td:first-child {
-        min-width: 80px;
+        width: 42%;
+        font-size: 0.5rem;
+        padding-left: 3px;
     }
     
     .cost-table th:nth-child(2),
-    .cost-table td:nth-child(2),
+    .cost-table td:nth-child(2) {
+        width: 8%;
+        font-size: 0.5rem;
+    }
+    
     .cost-table th:nth-child(3),
     .cost-table td:nth-child(3) {
-        width: 35px;
-        font-size: 0.6rem;
+        width: 18%;
+        font-size: 0.5rem;
     }
     
     .cost-table th:last-child,
     .cost-table td:last-child {
-        width: 55px;
-        font-size: 0.65rem;
+        width: 32%;
+        font-size: 0.55rem;
+        padding-right: 3px;
+    }
+    
+    /* Timeline cards for small screens */
+    .timeline-card {
+        padding: 15px;
+    }
+    
+    .timeline-phase {
+        font-size: 1rem;
+    }
+    
+    .timeline-deliverable {
+        font-size: 0.85rem;
     }
     
     /* Simplify payment details */

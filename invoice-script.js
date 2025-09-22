@@ -179,19 +179,21 @@ function saveSignature() {
     showStatus('Signature saved successfully!', 'success');
 }
 
-// Generate PDF function
+// Generate PDF function - Fixed for proper rendering
 function generatePDF() {
     const clientCompany = document.getElementById('clientCompany').value || 'Client';
     
     showStatus('📄 Generating PDF... Please wait...', 'warning');
     
-    // Clone and clean the container
+    // Get the original container
     const original = document.querySelector('.container');
+    
+    // Clone the container for PDF generation
     const clone = original.cloneNode(true);
     
-    // Remove non-printable elements
+    // Remove non-printable elements from clone
     const elementsToRemove = clone.querySelectorAll(
-        '.no-print, .action-buttons, .signature-section-digital, .signature-controls'
+        '.no-print, .action-buttons, .signature-section-digital, .signature-controls, button'
     );
     elementsToRemove.forEach(el => el.remove());
     
@@ -203,6 +205,9 @@ function generatePDF() {
             if (img) {
                 img.src = providerSignatureDataUrl;
                 img.style.display = 'block';
+                // Ensure image is visible
+                img.style.opacity = '1';
+                img.style.visibility = 'visible';
             }
         }
     }
@@ -214,6 +219,9 @@ function generatePDF() {
             if (img) {
                 img.src = signaturePad.toDataURL();
                 img.style.display = 'block';
+                // Ensure image is visible
+                img.style.opacity = '1';
+                img.style.visibility = 'visible';
             }
             const placeholder = clientDisplay.querySelector('#signaturePlaceholder');
             if (placeholder) {
@@ -221,81 +229,93 @@ function generatePDF() {
             }
         }
     }
-
-    // Prevent sticky headers and other positioned elements from breaking html2pdf pagination
-    const clonedTHs = clone.querySelectorAll('th');
-    clonedTHs.forEach(th => {
-        th.style.position = 'static';
-        th.style.top = 'auto';
-    });
-    const clonedHeaders = clone.querySelectorAll('.header');
-    clonedHeaders.forEach(h => {
-        h.style.position = 'static';
+    
+    // Fix all editable fields to show values
+    const editableFields = clone.querySelectorAll('.editable-field');
+    editableFields.forEach(field => {
+        field.style.border = 'none';
+        field.style.borderBottom = '1px solid #333';
+        field.style.background = 'transparent';
+        field.setAttribute('readonly', 'readonly');
     });
     
-    // PDF generation options
+    // Ensure all tables are visible
+    const tables = clone.querySelectorAll('.cost-table');
+    tables.forEach(table => {
+        table.style.pageBreakInside = 'avoid';
+    });
+    
+    // Fix positioning issues
+    clone.style.margin = '0';
+    clone.style.padding = '20px';
+    clone.style.background = 'white';
+    
+    // PDF generation options - optimized
     const opt = {
-        margin: 0.2,
-        filename: `Invoice_${clientCompany.replace(/\s+/g, '_')}_${Date.now()}.pdf`,
-        image: { type: 'jpeg', quality: 0.98 },
+        margin: [10, 10, 10, 10],
+        filename: `Invoice_${clientCompany.replace(/\s+/g, '_')}_${new Date().toISOString().slice(0,10)}.pdf`,
+        image: { 
+            type: 'jpeg', 
+            quality: 0.98 
+        },
         html2canvas: { 
-            scale: 1.8, 
+            scale: 2,
             useCORS: true,
             letterRendering: true,
-            scrollY: -window.scrollY,
-            backgroundColor: '#ffffff'
+            logging: false,
+            scrollY: 0,
+            scrollX: 0,
+            backgroundColor: '#ffffff',
+            windowWidth: clone.scrollWidth,
+            windowHeight: clone.scrollHeight
         },
         jsPDF: { 
-            unit: 'in', 
-            format: 'letter', 
-            orientation: 'portrait' 
+            unit: 'mm', 
+            format: 'a4', 
+            orientation: 'portrait',
+            compress: true
+        },
+        pagebreak: { 
+            mode: ['avoid-all', 'css', 'legacy'] 
         }
     };
     
-    // Create temporary wrapper
-    const wrapper = document.createElement('div');
-    wrapper.style.padding = '10px';
-    wrapper.style.background = '#ffffff';
-    wrapper.appendChild(clone);
-    document.body.appendChild(wrapper);
-
-    // Helper: wait for images inside wrapper to finish loading (important for dataURL signatures)
-    function waitForImagesToLoad(root) {
-        const imgs = Array.from(root.querySelectorAll('img'));
-        if (!imgs.length) return Promise.resolve();
-        return Promise.all(imgs.map(img => new Promise((resolve) => {
-            if (img.complete && img.naturalHeight !== 0) return resolve();
-            // ensure display so html2canvas can capture them
-            img.style.display = img.style.display || 'block';
-            img.onload = () => resolve();
-            img.onerror = () => resolve();
-            // small timeout fallback
-            setTimeout(resolve, 1500);
-        })));
-    }
-
-    // Generate PDF after images are ready
-    return waitForImagesToLoad(wrapper).then(() => {
-        return html2pdf()
+    // Create a temporary container for PDF
+    const pdfContainer = document.createElement('div');
+    pdfContainer.style.position = 'absolute';
+    pdfContainer.style.left = '-9999px';
+    pdfContainer.style.top = '0';
+    pdfContainer.style.width = '210mm';
+    pdfContainer.style.background = 'white';
+    pdfContainer.appendChild(clone);
+    document.body.appendChild(pdfContainer);
+    
+    // Wait for images to load
+    setTimeout(() => {
+        html2pdf()
             .set(opt)
-            .from(wrapper)
+            .from(clone)
             .save()
             .then(() => {
                 showStatus('✅ PDF downloaded successfully!', 'success');
-                wrapper.remove();
+                // Clean up
+                document.body.removeChild(pdfContainer);
+            })
+            .catch((err) => {
+                showStatus('❌ Error generating PDF. Please try again.', 'error');
+                console.error('PDF generation error:', err);
+                // Clean up on error
+                if (pdfContainer.parentNode) {
+                    document.body.removeChild(pdfContainer);
+                }
             });
-    }).catch((err) => {
-        showStatus('❌ Error generating PDF. Please try again.', 'error');
-        if (wrapper && wrapper.parentNode) wrapper.remove();
-        console.error('PDF generation error:', err);
-        throw err;
-    });
+    }, 500);
 }
 
 // Print invoice function
 function printInvoice() {
     if (!hasSignature) {
-        showStatus('❌ Please add your digital signature before printing', 'warning');
+        showStatus('⚠️ Please add your digital signature before printing', 'warning');
         return;
     }
     
@@ -314,19 +334,19 @@ function downloadAndEmail() {
     }
     
     if (!hasSignature) {
-        showStatus('❌ Please add your digital signature before proceeding', 'error');
+        showStatus('⚠️ Please add your digital signature before proceeding', 'error');
         return;
     }
     
     showStatus('⚡ Generating your signed invoice PDF...', 'warning');
     
     // Generate PDF then open email
-    generatePDF().then(() => {
-        setTimeout(() => openEmailClient(), 800);
-    }).catch((err) => {
-        showStatus('❌ Could not generate PDF. Please try again.', 'error');
-        console.error(err);
-    });
+    generatePDF();
+    
+    // Wait a bit for PDF generation then open email
+    setTimeout(() => {
+        openEmailClient();
+    }, 2000);
 }
 
 // Validate form fields
@@ -343,7 +363,7 @@ function validateFields() {
         if (!value) {
             return {
                 isValid: false,
-                message: `❌ Please enter your ${fieldName}`,
+                message: `⚠️ Please enter your ${fieldName}`,
                 focusField: fieldId
             };
         }
@@ -355,7 +375,7 @@ function validateFields() {
     if (!emailRegex.test(email)) {
         return {
             isValid: false,
-            message: '❌ Please enter a valid email address',
+            message: '⚠️ Please enter a valid email address',
             focusField: 'clientEmail'
         };
     }
@@ -363,14 +383,14 @@ function validateFields() {
     return { isValid: true };
 }
 
-// Open email client with pre-filled content
+// Open email client with pre-filled content - FIXED ENCODING
 function openEmailClient() {
     const clientCompany = document.getElementById('clientCompany').value;
     const clientEmail = document.getElementById('clientEmail').value;
     const clientAddress = document.getElementById('clientAddress').value;
     const clientPhone = document.getElementById('clientPhone').value;
     
-    const recipients = ['cliff.okiko@gmail.com', 'muthaigasam222@gmail.com'];
+    const recipients = 'cliff.okiko@gmail.com,muthaigasam222@gmail.com';
     const subject = `✅ SIGNED INVOICE - ${clientCompany} - Letrum Travel Platform Development`;
     const currentURL = window.location.href;
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
@@ -420,13 +440,15 @@ ${clientCompany}
 🔗 Original form: ${currentURL}
 📅 Generated: ${new Date().toLocaleString()}`;
     
-    // Create mailto URL using encodeURIComponent (avoids '+' for spaces)
-    const encodedSubject = encodeURIComponent(subject).replace(/\+/g, '%20');
-    const encodedBody = encodeURIComponent(bodyContent).replace(/\+/g, '%20');
-    const mailto = `mailto:${recipients.join(',')}?subject=${encodedSubject}&body=${encodedBody}`;
-
-    // Open email client (use _blank to avoid being blocked by some browsers)
-    window.open(mailto, '_blank');
+    // Properly encode for mailto - fixing the spaces issue
+    const encodedSubject = encodeURIComponent(subject);
+    const encodedBody = encodeURIComponent(bodyContent);
+    
+    // Create mailto URL without replacing spaces with +
+    const mailto = `mailto:${recipients}?subject=${encodedSubject}&body=${encodedBody}`;
+    
+    // Open email client
+    window.location.href = mailto;
     
     showStatus('✅ Email opened! Please attach the downloaded PDF before sending.', 'success');
 }
