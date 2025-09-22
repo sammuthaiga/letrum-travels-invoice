@@ -18,14 +18,14 @@
             line-height: 1.6;
             color: #333;
             background-color: #f8f9fa;
-            padding: 20px;
+            padding: 10px;
         }
         
         .container {
             max-width: 900px;
             margin: 0 auto;
             background: white;
-            padding: 40px;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
@@ -34,25 +34,24 @@
             border-bottom: 3px solid #7fb069;
             padding-bottom: 20px;
             margin-bottom: 30px;
+            text-align: center;
         }
         
         .company-name {
-            font-size: 2.5em;
+            font-size: 2em;
             font-weight: bold;
             color: #2c3e50;
             margin-bottom: 5px;
         }
         
         .company-tagline {
-            font-size: 1.1em;
+            font-size: 1em;
             color: #6c757d;
             margin-bottom: 20px;
         }
         
         .invoice-details {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            display: block;
             margin-bottom: 30px;
         }
         
@@ -61,21 +60,25 @@
             padding: 20px;
             border-radius: 8px;
             border-left: 4px solid #7fb069;
+            margin-bottom: 20px;
         }
         
         .invoice-title {
-            font-size: 2em;
+            font-size: 1.8em;
             font-weight: bold;
             color: #7fb069;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         
         .bill-to, .bill-from {
             margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
         }
         
         .section-title {
-            font-size: 1.8em;
+            font-size: 1.5em;
             color: #2c3e50;
             margin: 30px 0 20px 0;
             border-bottom: 2px solid #7fb069;
@@ -85,33 +88,42 @@
         .project-overview {
             background: #e8f0f7;
             color: #2c3e50;
-            padding: 25px;
+            padding: 20px;
             border-radius: 10px;
             margin: 20px 0;
             border-left: 5px solid #7fb069;
         }
         
+        /* Responsive Table Styles */
+        .cost-table-wrapper {
+            margin: 20px 0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
         .cost-table {
             width: 100%;
+            min-width: 600px;
             border-collapse: collapse;
-            margin: 20px 0;
             background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         
         .cost-table th {
             background: #7fb069;
             color: white;
-            padding: 15px;
+            padding: 12px 8px;
             text-align: left;
             font-weight: 600;
+            font-size: 14px;
+            white-space: nowrap;
         }
         
         .cost-table td {
-            padding: 12px 15px;
+            padding: 10px 8px;
             border-bottom: 1px solid #eee;
+            font-size: 14px;
         }
         
         .cost-table tr:hover {
@@ -141,6 +153,88 @@
             font-size: 1.1em;
         }
         
+        /* Mobile Card Layout for Tables */
+        @media (max-width: 768px) {
+            .cost-table-wrapper {
+                overflow-x: visible;
+                box-shadow: none;
+            }
+            
+            .cost-table {
+                display: none;
+            }
+            
+            .table-cards {
+                display: block;
+            }
+            
+            .table-card {
+                background: white;
+                border-radius: 8px;
+                padding: 15px;
+                margin-bottom: 15px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                border-left: 4px solid #7fb069;
+            }
+            
+            .table-card.completed {
+                background: #e8f5e8;
+                border-left-color: #2d5a2d;
+            }
+            
+            .table-card.pending {
+                background: #f8f4e6;
+                border-left-color: #6b5b00;
+            }
+            
+            .table-card.subtotal-row {
+                background: #e9ecef;
+                border-left-color: #495057;
+            }
+            
+            .table-card.total-row {
+                background: #7fb069;
+                color: white;
+                border-left-color: #5a8a4a;
+            }
+            
+            .card-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 8px;
+                flex-wrap: wrap;
+            }
+            
+            .card-label {
+                font-weight: bold;
+                color: #2c3e50;
+                margin-bottom: 2px;
+                min-width: 80px;
+            }
+            
+            .card-value {
+                text-align: right;
+                flex-grow: 1;
+            }
+            
+            .card-component {
+                font-weight: bold;
+                font-size: 1.1em;
+                margin-bottom: 10px;
+                color: #7fb069;
+            }
+            
+            .table-card.total-row .card-component,
+            .table-card.total-row .card-label {
+                color: white;
+            }
+        }
+        
+        .table-cards {
+            display: none;
+        }
+        
         .status-indicator {
             display: inline-block;
             padding: 4px 8px;
@@ -162,8 +256,8 @@
         
         .deliverables {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            grid-template-columns: 1fr;
+            gap: 15px;
             margin: 20px 0;
         }
         
@@ -177,7 +271,7 @@
         .payment-schedule {
             background: #e8f0f7;
             color: #2c3e50;
-            padding: 25px;
+            padding: 20px;
             border-radius: 10px;
             margin: 20px 0;
             border-left: 5px solid #7fb069;
@@ -185,17 +279,15 @@
         
         .terms {
             background: #f8f9fa;
-            padding: 25px;
+            padding: 20px;
             border-radius: 10px;
             margin: 20px 0;
             border: 1px solid #dee2e6;
         }
         
         .signature-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-top: 40px;
+            display: block;
+            margin-top: 30px;
             padding-top: 20px;
             border-top: 2px solid #dee2e6;
         }
@@ -205,6 +297,7 @@
             padding: 20px;
             border: 2px dashed #dee2e6;
             border-radius: 10px;
+            margin-bottom: 20px;
         }
         
         .highlight {
@@ -220,12 +313,12 @@
         
         .editable-field {
             border: 1px solid #dee2e6;
-            padding: 8px 12px;
+            padding: 12px;
             border-radius: 4px;
             width: 100%;
-            margin: 2px 0;
+            margin: 5px 0;
             font-family: inherit;
-            font-size: inherit;
+            font-size: 16px;
             background: white;
         }
         
@@ -248,15 +341,17 @@
             background: #7fb069;
             color: white;
             border: none;
-            padding: 12px 24px;
-            margin: 8px;
-            border-radius: 6px;
+            padding: 15px 20px;
+            margin: 10px 5px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: bold;
             text-decoration: none;
             display: inline-block;
             transition: all 0.3s ease;
+            min-height: 48px;
+            min-width: 120px;
         }
         
         .btn:hover {
@@ -287,17 +382,20 @@
             background: white;
             margin: 10px 0;
             cursor: crosshair;
+            max-width: 100%;
+            height: auto;
         }
         
         .signature-controls {
             text-align: center;
-            margin: 10px 0;
+            margin: 15px 0;
         }
         
         .signature-controls button {
-            padding: 6px 12px;
-            margin: 0 5px;
-            font-size: 12px;
+            padding: 10px 15px;
+            margin: 5px;
+            font-size: 14px;
+            min-height: 44px;
         }
         
         .signature-section-digital {
@@ -311,9 +409,9 @@
         .status-message {
             background: #d4edda;
             color: #155724;
-            padding: 10px;
+            padding: 15px;
             border-radius: 5px;
-            margin: 10px 0;
+            margin: 15px 0;
             text-align: center;
             display: none;
         }
@@ -341,12 +439,13 @@
         }
         
         .signature-date input {
-            border: none;
-            border-bottom: 1px solid #333;
-            background: transparent;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            background: white;
             text-align: center;
-            width: 120px;
-            padding: 5px;
+            width: 150px;
+            padding: 8px;
+            font-size: 14px;
         }
         
         @media print {
@@ -370,25 +469,148 @@
                 margin: 0;
                 padding: 20px;
             }
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px;
+            
+            .cost-table {
+                display: table !important;
+                font-size: 12px;
             }
             
-            .invoice-details {
-                grid-template-columns: 1fr;
-                gap: 20px;
+            .table-cards {
+                display: none !important;
+            }
+        }
+        
+        /* Mobile Specific Styles */
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
+            .container {
+                padding: 15px;
+                border-radius: 5px;
+            }
+            
+            .company-name {
+                font-size: 1.5em;
+            }
+            
+            .company-tagline {
+                font-size: 0.9em;
+            }
+            
+            .invoice-title {
+                font-size: 1.5em;
+            }
+            
+            .section-title {
+                font-size: 1.3em;
             }
             
             .deliverables {
                 grid-template-columns: 1fr;
             }
             
+            .btn {
+                display: block;
+                width: 100%;
+                margin: 10px 0;
+                padding: 15px;
+                font-size: 16px;
+            }
+            
+            .signature-canvas {
+                width: 100%;
+                max-width: 100%;
+            }
+            
             .signature-section {
-                grid-template-columns: 1fr;
-                gap: 20px;
+                display: block;
+            }
+            
+            .signature-box {
+                margin-bottom: 20px;
+            }
+        }
+        
+        /* Extra Small Screens */
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .invoice-info, .bill-to, .bill-from, .project-overview, .payment-schedule, .terms {
+                padding: 15px;
+            }
+            
+            .company-name {
+                font-size: 1.3em;
+            }
+            
+            .invoice-title {
+                font-size: 1.3em;
+            }
+            
+            .section-title {
+                font-size: 1.2em;
+            }
+            
+            .signature-controls button {
+                display: block;
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+        
+        /* Payment schedule table responsiveness */
+        .payment-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        .payment-table td {
+            padding: 10px;
+            border-bottom: 1px solid #dee2e6;
+            vertical-align: top;
+        }
+        
+        @media (max-width: 768px) {
+            .payment-table {
+                display: none;
+            }
+            
+            .payment-cards {
+                display: block;
+            }
+            
+            .payment-card {
+                background: white;
+                border: 1px solid #dee2e6;
+                border-radius: 8px;
+                padding: 15px;
+                margin-bottom: 10px;
+            }
+            
+            .payment-cards {
+                display: none;
+            }
+        }
+        
+        .payment-cards {
+            display: none;
+        }
+        
+        /* Ensure touch-friendly interactions */
+        @media (hover: none) and (pointer: coarse) {
+            .btn {
+                padding: 15px 20px;
+                font-size: 16px;
+            }
+            
+            .editable-field {
+                font-size: 16px;
+                padding: 12px;
             }
         }
     </style>
@@ -410,29 +632,27 @@
                 <p><strong>Due Date:</strong> Upon Receipt</p>
             </div>
             
-            <div>
-                <div class="bill-to">
-                    <h3 style="color: #7fb069; margin-bottom: 10px;">BILL TO:</h3>
-                    <label class="editable-label">Company Name:</label>
-                    <input type="text" class="editable-field" value="" placeholder="Enter company name" id="clientCompany">
+            <div class="bill-to">
+                <h3 style="color: #7fb069; margin-bottom: 15px;">BILL TO:</h3>
+                <label class="editable-label">Company Name:</label>
+                <input type="text" class="editable-field" value="" placeholder="Enter company name" id="clientCompany">
 
-                    <label class="editable-label">Address:</label>
-                    <input type="text" class="editable-field" placeholder="Enter your address" id="clientAddress">
-                    
-                    <label class="editable-label">Email:</label>
-                    <input type="email" class="editable-field" placeholder="Enter your email" id="clientEmail">
-                    
-                    <label class="editable-label">Phone:</label>
-                    <input type="tel" class="editable-field" placeholder="Enter your phone number" id="clientPhone">
-                </div>
+                <label class="editable-label">Address:</label>
+                <input type="text" class="editable-field" placeholder="Enter your address" id="clientAddress">
                 
-                <div class="bill-from">
-                    <h3 style="color: #7fb069; margin-bottom: 10px;">FROM:</h3>
-                    <p><strong>Cliff Okiko</strong></p>
-                    <p style="display:none">Email: cliff.okiko@gmail.com</p>
-                    <p>Phone: +254 792 867 928</p>
-                    <p>Location: Nairobi, Kenya</p>
-                </div>
+                <label class="editable-label">Email:</label>
+                <input type="email" class="editable-field" placeholder="Enter your email" id="clientEmail">
+                
+                <label class="editable-label">Phone:</label>
+                <input type="tel" class="editable-field" placeholder="Enter your phone number" id="clientPhone">
+            </div>
+            
+            <div class="bill-from">
+                <h3 style="color: #7fb069; margin-bottom: 10px;">FROM:</h3>
+                <p><strong>Cliff Okiko</strong></p>
+                <p style="display:none">Email: cliff.okiko@gmail.com</p>
+                <p>Phone: +254 792 867 928</p>
+                <p>Location: Nairobi, Kenya</p>
             </div>
         </div>
 
@@ -455,12 +675,12 @@
             <div class="status-message" id="statusMessage"></div>
             
             <div style="text-align: center; margin: 20px 0;">
-                <button class="btn" onclick="downloadAndEmail()" style="font-size: 16px; padding: 15px 30px; margin: 0 10px;">
+                <button class="btn" onclick="downloadAndEmail()" style="font-size: 16px; padding: 15px 30px;">
                     ⚡ Quick: PDF + Email
                 </button>
-                <br><br>
-                <button class="btn btn-secondary" onclick="generatePDF()" style="margin: 0 10px;">📄 Download as PDF</button>
-                <button class="btn btn-secondary" onclick="printInvoice()" style="margin: 0 10px;">🖨️ Print Invoice</button>
+                
+                <button class="btn btn-secondary" onclick="generatePDF()">📄 Download as PDF</button>
+                <button class="btn btn-secondary" onclick="printInvoice()">🖨️ Print Invoice</button>
             </div>
             
             <p style="text-align: center; color: #6c757d; font-size: 14px; margin-top: 15px;">
@@ -470,19 +690,19 @@
 
         <!-- Digital Signature Section -->
         <div class="signature-section-digital no-print">
-                <h3 style="color: #7fb069; margin-bottom: 15px;">✍️ DIGITAL SIGNATURE</h3>
-                <p style="margin-bottom: 15px; color: #6c757d;">Client signs below to authorize this invoice digitally.</p>
+            <h3 style="color: #7fb069; margin-bottom: 15px;">✍️ DIGITAL SIGNATURE</h3>
+            <p style="margin-bottom: 15px; color: #6c757d;">Client signs below to authorize this invoice digitally.</p>
 
-                <!-- Client signature -->
-                <div style="text-align: center;">
-                    <canvas id="signatureCanvas" class="signature-canvas" width="400" height="150"></canvas>
-                    <div class="signature-controls">
-                        <button class="btn btn-secondary" onclick="clearSignature()">Clear Signature</button>
-                        <button class="btn" onclick="saveSignature()">Save Signature</button>
-                    </div>
-                    <p style="font-size: 12px; color: #6c757d;">Client: sign above using your mouse or touch screen</p>
+            <!-- Client signature -->
+            <div style="text-align: center;">
+                <canvas id="signatureCanvas" class="signature-canvas" width="400" height="150"></canvas>
+                <div class="signature-controls">
+                    <button class="btn btn-secondary" onclick="clearSignature()">Clear Signature</button>
+                    <button class="btn" onclick="saveSignature()">Save Signature</button>
                 </div>
+                <p style="font-size: 12px; color: #6c757d;">Client: sign above using your mouse or touch screen</p>
             </div>
+        </div>
 
         <!-- Project Overview -->
         <div class="project-overview">
@@ -534,397 +754,1248 @@
         <h3 style="color: #7fb069; margin: 20px 0 15px 0;">FRONTEND DEVELOPMENT (Next.js + TypeScript)</h3>
         
         <h4 style="margin: 15px 0 10px 0;">✅ COMPLETED WORK (30% Frontend Complete)</h4>
-        <table class="cost-table">
-            <thead>
-                <tr>
-                    <th>Component</th>
-                    <th>Hours</th>
-                    <th>Rate (KSH)</th>
-                    <th>Amount (KSH)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="completed">
-                    <td>Project Setup & Base Architecture</td>
-                    <td>4</td>
-                    <td>1,300</td>
-                    <td class="amount">5,200</td>
-                </tr>
-                <tr class="completed">
-                    <td>Basic Landing Page Structure</td>
-                    <td>4</td>
-                    <td>1,300</td>
-                    <td class="amount">5,200</td>
-                </tr>
-                <tr class="completed">
-                    <td>Authentication UI Components</td>
-                    <td>5</td>
-                    <td>1,300</td>
-                    <td class="amount">6,500</td>
-                </tr>
-                <tr class="completed">
-                    <td>Dashboard Layout & Navigation</td>
-                    <td>4</td>
-                    <td>1,300</td>
-                    <td class="amount">5,200</td>
-                </tr>
-                <tr class="completed">
-                    <td>Basic Routing & Components Setup</td>
-                    <td>3</td>
-                    <td>1,300</td>
-                    <td class="amount">3,900</td>
-                </tr>
-                <tr class="completed">
-                    <td>Initial Flight Interface Framework</td>
-                    <td>4</td>
-                    <td>1,300</td>
-                    <td class="amount">5,200</td>
-                </tr>
-                <tr class="completed">
-                    <td>Tours Section Basic Layout</td>
-                    <td>3</td>
-                    <td>1,300</td>
-                    <td class="amount">3,900</td>
-                </tr>
-                <tr class="subtotal-row">
-                    <td colspan="3"><strong>Frontend Completed Subtotal:</strong></td>
-                    <td class="amount"><strong>KSH 35,100</strong></td>
-                </tr>
-            </tbody>
-        </table>
+        
+        <div class="cost-table-wrapper">
+            <table class="cost-table">
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Hours</th>
+                        <th>Rate (KSH)</th>
+                        <th>Amount (KSH)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="completed">
+                        <td>Project Setup & Base Architecture</td>
+                        <td>4</td>
+                        <td>1,300</td>
+                        <td class="amount">5,200</td>
+                    </tr>
+                    <tr class="completed">
+                        <td>Basic Landing Page Structure</td>
+                        <td>4</td>
+                        <td>1,300</td>
+                        <td class="amount">5,200</td>
+                    </tr>
+                    <tr class="completed">
+                        <td>Authentication UI Components</td>
+                        <td>5</td>
+                        <td>1,300</td>
+                        <td class="amount">6,500</td>
+                    </tr>
+                    <tr class="completed">
+                        <td>Dashboard Layout & Navigation</td>
+                        <td>4</td>
+                        <td>1,300</td>
+                        <td class="amount">5,200</td>
+                    </tr>
+                    <tr class="completed">
+                        <td>Basic Routing & Components Setup</td>
+                        <td>3</td>
+                        <td>1,300</td>
+                        <td class="amount">3,900</td>
+                    </tr>
+                    <tr class="completed">
+                        <td>Initial Flight Interface Framework</td>
+                        <td>4</td>
+                        <td>1,300</td>
+                        <td class="amount">5,200</td>
+                    </tr>
+                    <tr class="completed">
+                        <td>Tours Section Basic Layout</td>
+                        <td>3</td>
+                        <td>1,300</td>
+                        <td class="amount">3,900</td>
+                    </tr>
+                    <tr class="subtotal-row">
+                        <td colspan="3"><strong>Frontend Completed Subtotal:</strong></td>
+                        <td class="amount"><strong>KSH 35,100</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- Mobile Card Layout -->
+            <div class="table-cards">
+                <div class="table-card completed">
+                    <div class="card-component">Project Setup & Base Architecture</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">4</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 5,200</span>
+                    </div>
+                </div>
+                
+                <div class="table-card completed">
+                    <div class="card-component">Basic Landing Page Structure</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">4</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 5,200</span>
+                    </div>
+                </div>
+                
+                <div class="table-card completed">
+                    <div class="card-component">Authentication UI Components</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">5</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 6,500</span>
+                    </div>
+                </div>
+                
+                <div class="table-card completed">
+                    <div class="card-component">Dashboard Layout & Navigation</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">4</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 5,200</span>
+                    </div>
+                </div>
+                
+                <div class="table-card completed">
+                    <div class="card-component">Basic Routing & Components Setup</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">3</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 3,900</span>
+                    </div>
+                </div>
+                
+                <div class="table-card completed">
+                    <div class="card-component">Initial Flight Interface Framework</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">4</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 5,200</span>
+                    </div>
+                </div>
+                
+                <div class="table-card completed">
+                    <div class="card-component">Tours Section Basic Layout</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">3</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 3,900</span>
+                    </div>
+                </div>
+                
+                <div class="table-card subtotal-row">
+                    <div class="card-component">Frontend Completed Subtotal:</div>
+                    <div class="card-row">
+                        <span class="card-label">Total:</span>
+                        <span class="card-value amount"><strong>KSH 35,100</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <h4 style="margin: 15px 0 10px 0;">🔄 PENDING WORK (70% Frontend Remaining)</h4>
-        <table class="cost-table">
-            <thead>
-                <tr>
-                    <th>Component</th>
-                    <th>Hours</th>
-                    <th>Rate (KSH)</th>
-                    <th>Amount (KSH)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="pending">
-                    <td>Complete Landing Page with Modern Effects</td>
-                    <td>8</td>
-                    <td>1,300</td>
-                    <td class="amount">10,400</td>
-                </tr>
-                <tr class="pending">
-                    <td>Flight Booking Interface & Search System</td>
-                    <td>12</td>
-                    <td>1,300</td>
-                    <td class="amount">15,600</td>
-                </tr>
-                <tr class="pending">
-                    <td>Car Rental Interface with Advanced Filtering</td>
-                    <td>10</td>
-                    <td>1,300</td>
-                    <td class="amount">13,000</td>
-                </tr>
-                <tr class="pending">
-                    <td>Premium Tours Gallery with Booking System</td>
-                    <td>12</td>
-                    <td>1,300</td>
-                    <td class="amount">15,600</td>
-                </tr>
-                <tr class="pending">
-                    <td>Visa Processing Forms & Document Upload</td>
-                    <td>8</td>
-                    <td>1,300</td>
-                    <td class="amount">10,400</td>
-                </tr>
-                <tr class="pending">
-                    <td>Complete E-commerce Platform & Shopping Cart</td>
-                    <td>14</td>
-                    <td>1,300</td>
-                    <td class="amount">18,200</td>
-                </tr>
-                <tr class="pending">
-                    <td>User Dashboard & Account Management</td>
-                    <td>8</td>
-                    <td>1,300</td>
-                    <td class="amount">10,400</td>
-                </tr>
-                <tr class="pending">
-                    <td>Admin Panel Frontend</td>
-                    <td>10</td>
-                    <td>1,300</td>
-                    <td class="amount">13,000</td>
-                </tr>
-                <tr class="pending">
-                    <td>Additional Pages (About, Contact, Blog)</td>
-                    <td>6</td>
-                    <td>1,300</td>
-                    <td class="amount">7,800</td>
-                </tr>
-                <tr class="pending">
-                    <td>Mobile Optimization & Responsive Design</td>
-                    <td>10</td>
-                    <td>1,300</td>
-                    <td class="amount">13,000</td>
-                </tr>
-                <tr class="pending">
-                    <td>Advanced Animations & Interactive Components</td>
-                    <td>6</td>
-                    <td>1,300</td>
-                    <td class="amount">7,800</td>
-                </tr>
-                <tr class="pending">
-                    <td>Payment Gateway Frontend Integration</td>
-                    <td>6</td>
-                    <td>1,300</td>
-                    <td class="amount">7,800</td>
-                </tr>
-                <tr class="subtotal-row">
-                    <td colspan="3"><strong>Frontend Pending Subtotal:</strong></td>
-                    <td class="amount"><strong>KSH 163,000</strong></td>
-                </tr>
-                <tr class="total-row">
-                    <td colspan="3"><strong>Frontend Total:</strong></td>
-                    <td><strong>KSH 198,100</strong></td>
-                </tr>
-            </tbody>
-        </table>
+        
+        <div class="cost-table-wrapper">
+            <table class="cost-table">
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Hours</th>
+                        <th>Rate (KSH)</th>
+                        <th>Amount (KSH)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="pending">
+                        <td>Complete Landing Page with Modern Effects</td>
+                        <td>8</td>
+                        <td>1,300</td>
+                        <td class="amount">10,400</td>
+                    </tr>
+                    <tr class="pending">
+                        <td>Flight Booking Interface & Search System</td>
+                        <td>12</td>
+                        <td>1,300</td>
+                        <td class="amount">15,600</td>
+                    </tr>
+                    <tr class="pending">
+                        <td>Car Rental Interface with Advanced Filtering</td>
+                        <td>10</td>
+                        <td>1,300</td>
+                        <td class="amount">13,000</td>
+                    </tr>
+                    <tr class="pending">
+                        <td>Premium Tours Gallery with Booking System</td>
+                        <td>12</td>
+                        <td>1,300</td>
+                        <td class="amount">15,600</td>
+                    </tr>
+                    <tr class="pending">
+                        <td>Visa Processing Forms & Document Upload</td>
+                        <td>8</td>
+                        <td>1,300</td>
+                        <td class="amount">10,400</td>
+                    </tr>
+                    <tr class="pending">
+                        <td>Complete E-commerce Platform & Shopping Cart</td>
+                        <td>14</td>
+                        <td>1,300</td>
+                        <td class="amount">18,200</td>
+                    </tr>
+                    <tr class="pending">
+                        <td>User Dashboard & Account Management</td>
+                        <td>8</td>
+                        <td>1,300</td>
+                        <td class="amount">10,400</td>
+                    </tr>
+                    <tr class="pending">
+                        <td>Admin Panel Frontend</td>
+                        <td>10</td>
+                        <td>1,300</td>
+                        <td class="amount">13,000</td>
+                    </tr>
+                    <tr class="pending">
+                        <td>Additional Pages (About, Contact, Blog)</td>
+                        <td>6</td>
+                        <td>1,300</td>
+                        <td class="amount">7,800</td>
+                    </tr>
+                    <tr class="pending">
+                        <td>Mobile Optimization & Responsive Design</td>
+                        <td>10</td>
+                        <td>1,300</td>
+                        <td class="amount">13,000</td>
+                    </tr>
+                    <tr class="pending">
+                        <td>Advanced Animations & Interactive Components</td>
+                        <td>6</td>
+                        <td>1,300</td>
+                        <td class="amount">7,800</td>
+                    </tr>
+                    <tr class="pending">
+                        <td>Payment Gateway Frontend Integration</td>
+                        <td>6</td>
+                        <td>1,300</td>
+                        <td class="amount">7,800</td>
+                    </tr>
+                    <tr class="subtotal-row">
+                        <td colspan="3"><strong>Frontend Pending Subtotal:</strong></td>
+                        <td class="amount"><strong>KSH 163,000</strong></td>
+                    </tr>
+                    <tr class="total-row">
+                        <td colspan="3"><strong>Frontend Total:</strong></td>
+                        <td><strong>KSH 198,100</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- Mobile Card Layout for Pending Work -->
+            <div class="table-cards">
+                <div class="table-card pending">
+                    <div class="card-component">Complete Landing Page with Modern Effects</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">8</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 10,400</span>
+                    </div>
+                </div>
+                
+                <div class="table-card pending">
+                    <div class="card-component">Flight Booking Interface & Search System</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">12</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 15,600</span>
+                    </div>
+                </div>
+                
+                <div class="table-card pending">
+                    <div class="card-component">Car Rental Interface with Advanced Filtering</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">10</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 13,000</span>
+                    </div>
+                </div>
+                
+                <div class="table-card pending">
+                    <div class="card-component">Premium Tours Gallery with Booking System</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">12</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 15,600</span>
+                    </div>
+                </div>
+                
+                <div class="table-card pending">
+                    <div class="card-component">Visa Processing Forms & Document Upload</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">8</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 10,400</span>
+                    </div>
+                </div>
+                
+                <div class="table-card pending">
+                    <div class="card-component">Complete E-commerce Platform & Shopping Cart</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">14</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 18,200</span>
+                    </div>
+                </div>
+                
+                <div class="table-card pending">
+                    <div class="card-component">User Dashboard & Account Management</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">8</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 10,400</span>
+                    </div>
+                </div>
+                
+                <div class="table-card pending">
+                    <div class="card-component">Admin Panel Frontend</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">10</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 13,000</span>
+                    </div>
+                </div>
+                
+                <div class="table-card pending">
+                    <div class="card-component">Additional Pages (About, Contact, Blog)</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">6</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 7,800</span>
+                    </div>
+                </div>
+                
+                <div class="table-card pending">
+                    <div class="card-component">Mobile Optimization & Responsive Design</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">10</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 13,000</span>
+                    </div>
+                </div>
+                
+                <div class="table-card pending">
+                    <div class="card-component">Advanced Animations & Interactive Components</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">6</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 7,800</span>
+                    </div>
+                </div>
+                
+                <div class="table-card pending">
+                    <div class="card-component">Payment Gateway Frontend Integration</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">6</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 7,800</span>
+                    </div>
+                </div>
+                
+                <div class="table-card subtotal-row">
+                    <div class="card-component">Frontend Pending Subtotal:</div>
+                    <div class="card-row">
+                        <span class="card-label">Total:</span>
+                        <span class="card-value amount"><strong>KSH 163,000</strong></span>
+                    </div>
+                </div>
+                
+                <div class="table-card total-row">
+                    <div class="card-component">Frontend Total:</div>
+                    <div class="card-row">
+                        <span class="card-label">Total:</span>
+                        <span class="card-value"><strong>KSH 198,100</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Backend Development -->
         <h3 style="color: #7fb069; margin: 30px 0 15px 0;">BACKEND DEVELOPMENT (NestJS + PostgreSQL)</h3>
         
         <h4 style="margin: 15px 0 10px 0;">✅ COMPLETED WORK (80% Backend Complete)</h4>
-        <table class="cost-table">
-            <thead>
-                <tr>
-                    <th>Component</th>
-                    <th>Hours</th>
-                    <th>Rate (KSH)</th>
-                    <th>Amount (KSH)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="completed">
-                    <td>RESTful API Architecture & Setup</td>
-                    <td>6</td>
-                    <td>1,300</td>
-                    <td class="amount">7,800</td>
-                </tr>
-                <tr class="completed">
-                    <td>JWT Authentication with Role-Based Access</td>
-                    <td>6</td>
-                    <td>1,300</td>
-                    <td class="amount">7,800</td>
-                </tr>
-                <tr class="completed">
-                    <td>PostgreSQL Database Design with Prisma ORM</td>
-                    <td>6</td>
-                    <td>1,300</td>
-                    <td class="amount">7,800</td>
-                </tr>
-                <tr class="completed">
-                    <td>User Management System (USER, ADMIN, STAFF)</td>
-                    <td>5</td>
-                    <td>1,300</td>
-                    <td class="amount">6,500</td>
-                </tr>
-                <tr class="completed">
-                    <td>Tours & Safari Management API</td>
-                    <td>8</td>
-                    <td>1,300</td>
-                    <td class="amount">10,400</td>
-                </tr>
-                <tr class="completed">
-                    <td>Flight Management System API</td>
-                    <td>7</td>
-                    <td>1,300</td>
-                    <td class="amount">9,100</td>
-                </tr>
-                <tr class="completed">
-                    <td>Car Rental Management API</td>
-                    <td>7</td>
-                    <td>1,300</td>
-                    <td class="amount">9,100</td>
-                </tr>
-                <tr class="completed">
-                    <td>Visa Processing Backend System</td>
-                    <td>6</td>
-                    <td>1,300</td>
-                    <td class="amount">7,800</td>
-                </tr>
-                <tr class="completed">
-                    <td>E-commerce Backend & Inventory Management</td>
-                    <td>10</td>
-                    <td>1,300</td>
-                    <td class="amount">13,000</td>
-                </tr>
-                <tr class="completed">
-                    <td>Comprehensive Data Models & Relationships</td>
-                    <td>5</td>
-                    <td>1,300</td>
-                    <td class="amount">6,500</td>
-                </tr>
-                <tr class="completed">
-                    <td>API Documentation with Swagger/OpenAPI</td>
-                    <td>4</td>
-                    <td>1,300</td>
-                    <td class="amount">5,200</td>
-                </tr>
-                <tr class="completed">
-                    <td>Data Validation with Class-Validator</td>
-                    <td>3</td>
-                    <td>1,300</td>
-                    <td class="amount">3,900</td>
-                </tr>
-                <tr class="completed">
-                    <td>CORS Configuration & Security Setup</td>
-                    <td>3</td>
-                    <td>1,300</td>
-                    <td class="amount">3,900</td>
-                </tr>
-                <tr class="completed">
-                    <td>Database Migrations & Seeding</td>
-                    <td>4</td>
-                    <td>1,300</td>
-                    <td class="amount">5,200</td>
-                </tr>
-                <tr class="subtotal-row">
-                    <td colspan="3"><strong>Backend Completed Subtotal:</strong></td>
-                    <td class="amount"><strong>KSH 119,900</strong></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="cost-table-wrapper">
+            <table class="cost-table">
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Hours</th>
+                        <th>Rate (KSH)</th>
+                        <th>Amount (KSH)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="completed">
+                        <td>RESTful API Architecture & Setup</td>
+                        <td>6</td>
+                        <td>1,300</td>
+                        <td class="amount">7,800</td>
+                    </tr>
+                    <tr class="completed">
+                        <td>JWT Authentication with Role-Based Access</td>
+                        <td>6</td>
+                        <td>1,300</td>
+                        <td class="amount">7,800</td>
+                    </tr>
+                    <tr class="completed">
+                        <td>PostgreSQL Database Design with Prisma ORM</td>
+                        <td>6</td>
+                        <td>1,300</td>
+                        <td class="amount">7,800</td>
+                    </tr>
+                    <tr class="completed">
+                        <td>User Management System (USER, ADMIN, STAFF)</td>
+                        <td>5</td>
+                        <td>1,300</td>
+                        <td class="amount">6,500</td>
+                    </tr>
+                    <tr class="completed">
+                        <td>Tours & Safari Management API</td>
+                        <td>8</td>
+                        <td>1,300</td>
+                        <td class="amount">10,400</td>
+                    </tr>
+                    <tr class="completed">
+                        <td>Flight Management System API</td>
+                        <td>7</td>
+                        <td>1,300</td>
+                        <td class="amount">9,100</td>
+                    </tr>
+                    <tr class="completed">
+                        <td>Car Rental Management API</td>
+                        <td>7</td>
+                        <td>1,300</td>
+                        <td class="amount">9,100</td>
+                    </tr>
+                    <tr class="completed">
+                        <td>Visa Processing Backend System</td>
+                        <td>6</td>
+                        <td>1,300</td>
+                        <td class="amount">7,800</td>
+                    </tr>
+                    <tr class="completed">
+                        <td>E-commerce Backend & Inventory Management</td>
+                        <td>10</td>
+                        <td>1,300</td>
+                        <td class="amount">13,000</td>
+                    </tr>
+                    <tr class="completed">
+                        <td>Comprehensive Data Models & Relationships</td>
+                        <td>5</td>
+                        <td>1,300</td>
+                        <td class="amount">6,500</td>
+                    </tr>
+                    <tr class="completed">
+                        <td>API Documentation with Swagger/OpenAPI</td>
+                        <td>4</td>
+                        <td>1,300</td>
+                        <td class="amount">5,200</td>
+                    </tr>
+                    <tr class="completed">
+                        <td>Data Validation with Class-Validator</td>
+                        <td>3</td>
+                        <td>1,300</td>
+                        <td class="amount">3,900</td>
+                    </tr>
+                    <tr class="completed">
+                        <td>CORS Configuration & Security Setup</td>
+                        <td>3</td>
+                        <td>1,300</td>
+                        <td class="amount">3,900</td>
+                    </tr>
+                    <tr class="completed">
+                        <td>Database Migrations & Seeding</td>
+                        <td>4</td>
+                        <td>1,300</td>
+                        <td class="amount">5,200</td>
+                    </tr>
+                    <tr class="subtotal-row">
+                        <td colspan="3"><strong>Backend Completed Subtotal:</strong></td>
+                        <td class="amount"><strong>KSH 119,900</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- Mobile Cards for Backend Completed -->
+            <div class="table-cards">
+                <div class="table-card completed">
+                    <div class="card-component">RESTful API Architecture & Setup</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">6</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 7,800</span>
+                    </div>
+                </div>
+                
+                <div class="table-card completed">
+                    <div class="card-component">JWT Authentication with Role-Based Access</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">6</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 7,800</span>
+                    </div>
+                </div>
+                
+                <div class="table-card completed">
+                    <div class="card-component">PostgreSQL Database Design with Prisma ORM</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">6</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 7,800</span>
+                    </div>
+                </div>
+                
+                <div class="table-card completed">
+                    <div class="card-component">User Management System (USER, ADMIN, STAFF)</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">5</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 6,500</span>
+                    </div>
+                </div>
+                
+                <div class="table-card completed">
+                    <div class="card-component">Tours & Safari Management API</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">8</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 10,400</span>
+                    </div>
+                </div>
+                
+                <div class="table-card completed">
+                    <div class="card-component">Flight Management System API</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">7</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 9,100</span>
+                    </div>
+                </div>
+                
+                <div class="table-card completed">
+                    <div class="card-component">Car Rental Management API</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">7</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 9,100</span>
+                    </div>
+                </div>
+                
+                <div class="table-card completed">
+                    <div class="card-component">Visa Processing Backend System</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">6</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 7,800</span>
+                    </div>
+                </div>
+                
+                <div class="table-card completed">
+                    <div class="card-component">E-commerce Backend & Inventory Management</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">10</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 13,000</span>
+                    </div>
+                </div>
+                
+                <div class="table-card completed">
+                    <div class="card-component">Comprehensive Data Models & Relationships</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">5</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 6,500</span>
+                    </div>
+                </div>
+                
+                <div class="table-card completed">
+                    <div class="card-component">API Documentation with Swagger/OpenAPI</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">4</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 5,200</span>
+                    </div>
+                </div>
+                
+                <div class="table-card completed">
+                    <div class="card-component">Data Validation with Class-Validator</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">3</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 3,900</span>
+                    </div>
+                </div>
+                
+                <div class="table-card completed">
+                    <div class="card-component">CORS Configuration & Security Setup</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">3</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 3,900</span>
+                    </div>
+                </div>
+                
+                <div class="table-card completed">
+                    <div class="card-component">Database Migrations & Seeding</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">4</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 5,200</span>
+                    </div>
+                </div>
+                
+                <div class="table-card subtotal-row">
+                    <div class="card-component">Backend Completed Subtotal:</div>
+                    <div class="card-row">
+                        <span class="card-label">Total:</span>
+                        <span class="card-value amount"><strong>KSH 119,900</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <h4 style="margin: 15px 0 10px 0;">🔄 PENDING WORK (20% Backend Remaining)</h4>
-        <table class="cost-table">
-            <thead>
-                <tr>
-                    <th>Component</th>
-                    <th>Hours</th>
-                    <th>Rate (KSH)</th>
-                    <th>Amount (KSH)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="pending">
-                    <td>Live Flight API Integration (Amadeus/Skyscanner)</td>
-                    <td>6</td>
-                    <td>1,300</td>
-                    <td class="amount">7,800</td>
-                </tr>
-                <tr class="pending">
-                    <td>Payment Gateway Backend Integration</td>
-                    <td>5</td>
-                    <td>1,300</td>
-                    <td class="amount">6,500</td>
-                </tr>
-                <tr class="pending">
-                    <td>Email Notification System Setup</td>
-                    <td>4</td>
-                    <td>1,300</td>
-                    <td class="amount">5,200</td>
-                </tr>
-                <tr class="pending">
-                    <td>Admin Panel Backend Enhancements</td>
-                    <td>3</td>
-                    <td>1,300</td>
-                    <td class="amount">3,900</td>
-                </tr>
-                <tr class="pending">
-                    <td>Performance Optimization & Caching</td>
-                    <td>2</td>
-                    <td>1,300</td>
-                    <td class="amount">2,600</td>
-                </tr>
-                <tr class="subtotal-row">
-                    <td colspan="3"><strong>Backend Pending Subtotal:</strong></td>
-                    <td class="amount"><strong>KSH 26,000</strong></td>
-                </tr>
-                <tr class="total-row">
-                    <td colspan="3"><strong>Backend Total:</strong></td>
-                    <td><strong>KSH 145,900</strong></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="cost-table-wrapper">
+            <table class="cost-table">
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Hours</th>
+                        <th>Rate (KSH)</th>
+                        <th>Amount (KSH)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="pending">
+                        <td>Live Flight API Integration (Amadeus/Skyscanner)</td>
+                        <td>6</td>
+                        <td>1,300</td>
+                        <td class="amount">7,800</td>
+                    </tr>
+                    <tr class="pending">
+                        <td>Payment Gateway Backend Integration</td>
+                        <td>5</td>
+                        <td>1,300</td>
+                        <td class="amount">6,500</td>
+                    </tr>
+                    <tr class="pending">
+                        <td>Email Notification System Setup</td>
+                        <td>4</td>
+                        <td>1,300</td>
+                        <td class="amount">5,200</td>
+                    </tr>
+                    <tr class="pending">
+                        <td>Admin Panel Backend Enhancements</td>
+                        <td>3</td>
+                        <td>1,300</td>
+                        <td class="amount">3,900</td>
+                    </tr>
+                    <tr class="pending">
+                        <td>Performance Optimization & Caching</td>
+                        <td>2</td>
+                        <td>1,300</td>
+                        <td class="amount">2,600</td>
+                    </tr>
+                    <tr class="subtotal-row">
+                        <td colspan="3"><strong>Backend Pending Subtotal:</strong></td>
+                        <td class="amount"><strong>KSH 26,000</strong></td>
+                    </tr>
+                    <tr class="total-row">
+                        <td colspan="3"><strong>Backend Total:</strong></td>
+                        <td><strong>KSH 145,900</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- Mobile Cards for Backend Pending -->
+            <div class="table-cards">
+                <div class="table-card pending">
+                    <div class="card-component">Live Flight API Integration (Amadeus/Skyscanner)</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">6</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 7,800</span>
+                    </div>
+                </div>
+                
+                <div class="table-card pending">
+                    <div class="card-component">Payment Gateway Backend Integration</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">5</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 6,500</span>
+                    </div>
+                </div>
+                
+                <div class="table-card pending">
+                    <div class="card-component">Email Notification System Setup</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">4</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 5,200</span>
+                    </div>
+                </div>
+                
+                <div class="table-card pending">
+                    <div class="card-component">Admin Panel Backend Enhancements</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">3</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 3,900</span>
+                    </div>
+                </div>
+                
+                <div class="table-card pending">
+                    <div class="card-component">Performance Optimization & Caching</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">2</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 2,600</span>
+                    </div>
+                </div>
+                
+                <div class="table-card subtotal-row">
+                    <div class="card-component">Backend Pending Subtotal:</div>
+                    <div class="card-row">
+                        <span class="card-label">Total:</span>
+                        <span class="card-value amount"><strong>KSH 26,000</strong></span>
+                    </div>
+                </div>
+                
+                <div class="table-card total-row">
+                    <div class="card-component">Backend Total:</div>
+                    <div class="card-row">
+                        <span class="card-label">Total:</span>
+                        <span class="card-value"><strong>KSH 145,900</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Integration & Deployment -->
         <h3 style="color: #7fb069; margin: 30px 0 15px 0;">INTEGRATION & DEPLOYMENT</h3>
         
-        <table class="cost-table">
-            <thead>
-                <tr>
-                    <th>Component</th>
-                    <th>Hours</th>
-                    <th>Rate (KSH)</th>
-                    <th>Amount (KSH)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="completed">
-                    <td>Development Environment Setup</td>
-                    <td>3</td>
-                    <td>1,300</td>
-                    <td class="amount">3,900</td>
-                </tr>
-                <tr class="completed">
-                    <td>Basic Frontend-Backend Connection</td>
-                    <td>3</td>
-                    <td>1,300</td>
-                    <td class="amount">3,900</td>
-                </tr>
-                <tr class="completed">
-                    <td>API Testing & Documentation</td>
-                    <td>2</td>
-                    <td>1,300</td>
-                    <td class="amount">2,600</td>
-                </tr>
-                <tr class="subtotal-row">
-                    <td colspan="3"><strong>Integration Completed Subtotal:</strong></td>
-                    <td class="amount"><strong>KSH 10,400</strong></td>
-                </tr>
-                <tr class="pending">
-                    <td>Complete Frontend-Backend Integration</td>
-                    <td>6</td>
-                    <td>1,300</td>
-                    <td class="amount">7,800</td>
-                </tr>
-                <tr class="pending">
-                    <td>Vercel Deployment Setup (Frontend)</td>
-                    <td>3</td>
-                    <td>1,300</td>
-                    <td class="amount">3,900</td>
-                </tr>
-                <tr class="pending">
-                    <td>Render Deployment Setup (Backend)</td>
-                    <td>3</td>
-                    <td>1,300</td>
-                    <td class="amount">3,900</td>
-                </tr>
-                <tr class="pending">
-                    <td>Production Environment Configuration</td>
-                    <td>3</td>
-                    <td>1,300</td>
-                    <td class="amount">3,900</td>
-                </tr>
-                <tr class="pending">
-                    <td>Comprehensive Quality Assurance & Testing</td>
-                    <td>6</td>
-                    <td>1,300</td>
-                    <td class="amount">7,800</td>
-                </tr>
-                <tr class="pending">
-                    <td>Documentation & Client Handover</td>
-                    <td>3</td>
-                    <td>1,300</td>
-                    <td class="amount">3,900</td>
-                </tr>
-                <tr class="subtotal-row">
-                    <td colspan="3"><strong>Integration Pending Subtotal:</strong></td>
-                    <td class="amount"><strong>KSH 31,200</strong></td>
-                </tr>
-                <tr class="total-row">
-                    <td colspan="3"><strong>Integration & Deployment Total:</strong></td>
-                    <td><strong>KSH 41,600</strong></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="cost-table-wrapper">
+            <table class="cost-table">
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Hours</th>
+                        <th>Rate (KSH)</th>
+                        <th>Amount (KSH)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="completed">
+                        <td>Development Environment Setup</td>
+                        <td>3</td>
+                        <td>1,300</td>
+                        <td class="amount">3,900</td>
+                    </tr>
+                    <tr class="completed">
+                        <td>Basic Frontend-Backend Connection</td>
+                        <td>3</td>
+                        <td>1,300</td>
+                        <td class="amount">3,900</td>
+                    </tr>
+                    <tr class="completed">
+                        <td>API Testing & Documentation</td>
+                        <td>2</td>
+                        <td>1,300</td>
+                        <td class="amount">2,600</td>
+                    </tr>
+                    <tr class="subtotal-row">
+                        <td colspan="3"><strong>Integration Completed Subtotal:</strong></td>
+                        <td class="amount"><strong>KSH 10,400</strong></td>
+                    </tr>
+                    <tr class="pending">
+                        <td>Complete Frontend-Backend Integration</td>
+                        <td>6</td>
+                        <td>1,300</td>
+                        <td class="amount">7,800</td>
+                    </tr>
+                    <tr class="pending">
+                        <td>Vercel Deployment Setup (Frontend)</td>
+                        <td>3</td>
+                        <td>1,300</td>
+                        <td class="amount">3,900</td>
+                    </tr>
+                    <tr class="pending">
+                        <td>Render Deployment Setup (Backend)</td>
+                        <td>3</td>
+                        <td>1,300</td>
+                        <td class="amount">3,900</td>
+                    </tr>
+                    <tr class="pending">
+                        <td>Production Environment Configuration</td>
+                        <td>3</td>
+                        <td>1,300</td>
+                        <td class="amount">3,900</td>
+                    </tr>
+                    <tr class="pending">
+                        <td>Comprehensive Quality Assurance & Testing</td>
+                        <td>6</td>
+                        <td>1,300</td>
+                        <td class="amount">7,800</td>
+                    </tr>
+                    <tr class="pending">
+                        <td>Documentation & Client Handover</td>
+                        <td>3</td>
+                        <td>1,300</td>
+                        <td class="amount">3,900</td>
+                    </tr>
+                    <tr class="subtotal-row">
+                        <td colspan="3"><strong>Integration Pending Subtotal:</strong></td>
+                        <td class="amount"><strong>KSH 31,200</strong></td>
+                    </tr>
+                    <tr class="total-row">
+                        <td colspan="3"><strong>Integration & Deployment Total:</strong></td>
+                        <td><strong>KSH 41,600</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- Mobile Cards for Integration -->
+            <div class="table-cards">
+                <div class="table-card completed">
+                    <div class="card-component">Development Environment Setup</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">3</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 3,900</span>
+                    </div>
+                </div>
+                
+                <div class="table-card completed">
+                    <div class="card-component">Basic Frontend-Backend Connection</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">3</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 3,900</span>
+                    </div>
+                </div>
+                
+                <div class="table-card completed">
+                    <div class="card-component">API Testing & Documentation</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">2</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 2,600</span>
+                    </div>
+                </div>
+                
+                <div class="table-card subtotal-row">
+                    <div class="card-component">Integration Completed Subtotal:</div>
+                    <div class="card-row">
+                        <span class="card-label">Total:</span>
+                        <span class="card-value amount"><strong>KSH 10,400</strong></span>
+                    </div>
+                </div>
+                
+                <div class="table-card pending">
+                    <div class="card-component">Complete Frontend-Backend Integration</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">6</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 7,800</span>
+                    </div>
+                </div>
+                
+                <div class="table-card pending">
+                    <div class="card-component">Vercel Deployment Setup (Frontend)</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">3</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 3,900</span>
+                    </div>
+                </div>
+                
+                <div class="table-card pending">
+                    <div class="card-component">Render Deployment Setup (Backend)</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">3</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 3,900</span>
+                    </div>
+                </div>
+                
+                <div class="table-card pending">
+                    <div class="card-component">Production Environment Configuration</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">3</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 3,900</span>
+                    </div>
+                </div>
+                
+                <div class="table-card pending">
+                    <div class="card-component">Comprehensive Quality Assurance & Testing</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">6</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 7,800</span>
+                    </div>
+                </div>
+                
+                <div class="table-card pending">
+                    <div class="card-component">Documentation & Client Handover</div>
+                    <div class="card-row">
+                        <span class="card-label">Hours:</span>
+                        <span class="card-value">3</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Rate:</span>
+                        <span class="card-value">KSH 1,300</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount">KSH 3,900</span>
+                    </div>
+                </div>
+                
+                <div class="table-card subtotal-row">
+                    <div class="card-component">Integration Pending Subtotal:</div>
+                    <div class="card-row">
+                        <span class="card-label">Total:</span>
+                        <span class="card-value amount"><strong>KSH 31,200</strong></span>
+                    </div>
+                </div>
+                
+                <div class="table-card total-row">
+                    <div class="card-component">Integration & Deployment Total:</div>
+                    <div class="card-row">
+                        <span class="card-label">Total:</span>
+                        <span class="card-value"><strong>KSH 41,600</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Project Cost Summary -->
         <div class="payment-schedule">
@@ -959,48 +2030,133 @@
         <div style="background: #f0f7f0; padding: 20px; border-radius: 10px; margin: 20px 0;">
             <h3 style="color: #7fb069; margin-bottom: 15px;">Current Status: 65% Complete</h3>
             
-            <table class="cost-table">
-                <thead>
-                    <tr>
-                        <th>Phase</th>
-                        <th>Status</th>
-                        <th>Deliverable</th>
-                        <th>Timeline</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="completed">
-                        <td><strong>✅ Phase 1: Foundation</strong></td>
-                        <td>COMPLETED</td>
-                        <td>Project setup, database design, API architecture</td>
-                        <td>Completed</td>
-                    </tr>
-                    <tr class="completed">
-                        <td><strong>✅ Phase 2: Backend Development</strong></td>
-                        <td>80% COMPLETE</td>
-                        <td>API development, authentication, database models</td>
-                        <td>Mostly Complete</td>
-                    </tr>
-                    <tr class="pending">
-                        <td><strong>🔄 Phase 3: Frontend Development</strong></td>
-                        <td>30% COMPLETE</td>
-                        <td>User interfaces, booking systems, responsive design</td>
-                        <td>3-4 weeks remaining</td>
-                    </tr>
-                    <tr class="pending">
-                        <td><strong>🔄 Phase 4: Integration & Testing</strong></td>
-                        <td>40% COMPLETE</td>
-                        <td>API integrations, payment gateway, testing</td>
-                        <td>1-2 weeks remaining</td>
-                    </tr>
-                    <tr class="pending">
-                        <td><strong>🔄 Phase 5: Deployment & Handover</strong></td>
-                        <td>PENDING</td>
-                        <td>Live deployment, documentation, training</td>
-                        <td>1 week</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="cost-table-wrapper">
+                <table class="cost-table">
+                    <thead>
+                        <tr>
+                            <th>Phase</th>
+                            <th>Status</th>
+                            <th>Deliverable</th>
+                            <th>Timeline</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="completed">
+                            <td><strong>✅ Phase 1: Foundation</strong></td>
+                            <td>COMPLETED</td>
+                            <td>Project setup, database design, API architecture</td>
+                            <td>Completed</td>
+                        </tr>
+                        <tr class="completed">
+                            <td><strong>✅ Phase 2: Backend Development</strong></td>
+                            <td>80% COMPLETE</td>
+                            <td>API development, authentication, database models</td>
+                            <td>Mostly Complete</td>
+                        </tr>
+                        <tr class="pending">
+                            <td><strong>🔄 Phase 3: Frontend Development</strong></td>
+                            <td>30% COMPLETE</td>
+                            <td>User interfaces, booking systems, responsive design</td>
+                            <td>3-4 weeks remaining</td>
+                        </tr>
+                        <tr class="pending">
+                            <td><strong>🔄 Phase 4: Integration & Testing</strong></td>
+                            <td>40% COMPLETE</td>
+                            <td>API integrations, payment gateway, testing</td>
+                            <td>1-2 weeks remaining</td>
+                        </tr>
+                        <tr class="pending">
+                            <td><strong>🔄 Phase 5: Deployment & Handover</strong></td>
+                            <td>PENDING</td>
+                            <td>Live deployment, documentation, training</td>
+                            <td>1 week</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <!-- Mobile Timeline Cards -->
+                <div class="table-cards">
+                    <div class="table-card completed">
+                        <div class="card-component">✅ Phase 1: Foundation</div>
+                        <div class="card-row">
+                            <span class="card-label">Status:</span>
+                            <span class="card-value">COMPLETED</span>
+                        </div>
+                        <div class="card-row">
+                            <span class="card-label">Deliverable:</span>
+                            <span class="card-value">Project setup, database design, API architecture</span>
+                        </div>
+                        <div class="card-row">
+                            <span class="card-label">Timeline:</span>
+                            <span class="card-value">Completed</span>
+                        </div>
+                    </div>
+                    
+                    <div class="table-card completed">
+                        <div class="card-component">✅ Phase 2: Backend Development</div>
+                        <div class="card-row">
+                            <span class="card-label">Status:</span>
+                            <span class="card-value">80% COMPLETE</span>
+                        </div>
+                        <div class="card-row">
+                            <span class="card-label">Deliverable:</span>
+                            <span class="card-value">API development, authentication, database models</span>
+                        </div>
+                        <div class="card-row">
+                            <span class="card-label">Timeline:</span>
+                            <span class="card-value">Mostly Complete</span>
+                        </div>
+                    </div>
+                    
+                    <div class="table-card pending">
+                        <div class="card-component">🔄 Phase 3: Frontend Development</div>
+                        <div class="card-row">
+                            <span class="card-label">Status:</span>
+                            <span class="card-value">30% COMPLETE</span>
+                        </div>
+                        <div class="card-row">
+                            <span class="card-label">Deliverable:</span>
+                            <span class="card-value">User interfaces, booking systems, responsive design</span>
+                        </div>
+                        <div class="card-row">
+                            <span class="card-label">Timeline:</span>
+                            <span class="card-value">3-4 weeks remaining</span>
+                        </div>
+                    </div>
+                    
+                    <div class="table-card pending">
+                        <div class="card-component">🔄 Phase 4: Integration & Testing</div>
+                        <div class="card-row">
+                            <span class="card-label">Status:</span>
+                            <span class="card-value">40% COMPLETE</span>
+                        </div>
+                        <div class="card-row">
+                            <span class="card-label">Deliverable:</span>
+                            <span class="card-value">API integrations, payment gateway, testing</span>
+                        </div>
+                        <div class="card-row">
+                            <span class="card-label">Timeline:</span>
+                            <span class="card-value">1-2 weeks remaining</span>
+                        </div>
+                    </div>
+                    
+                    <div class="table-card pending">
+                        <div class="card-component">🔄 Phase 5: Deployment & Handover</div>
+                        <div class="card-row">
+                            <span class="card-label">Status:</span>
+                            <span class="card-value">PENDING</span>
+                        </div>
+                        <div class="card-row">
+                            <span class="card-label">Deliverable:</span>
+                            <span class="card-value">Live deployment, documentation, training</span>
+                        </div>
+                        <div class="card-row">
+                            <span class="card-label">Timeline:</span>
+                            <span class="card-value">1 week</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
             <h4 style="margin: 20px 0 10px 0; color: #7fb069;">Remaining Duration: 6 weeks from contract signing to live deployment</h4>
             
@@ -1017,7 +2173,9 @@
             <h2 style="margin-bottom: 20px; color: #7fb069;">PAYMENT SCHEDULE</h2>
             <p><em>Based on 65% work completion status</em></p>
             <br>
-            <table style="width: 100%; color: #2c3e50;">
+            
+            <!-- Desktop Payment Table -->
+            <table class="payment-table" style="width: 100%; color: #2c3e50;">
                 <tr style="border-bottom: 1px solid #dee2e6;">
                     <td style="padding: 10px;"><strong>Contract Signing & Project Initiation</strong></td>
                     <td style="padding: 10px;"><strong>50%</strong></td>
@@ -1037,6 +2195,58 @@
                     <td style="padding: 10px;"><strong>Week 6 (Go-Live)</strong></td>
                 </tr>
             </table>
+            
+            <!-- Mobile Payment Cards -->
+            <div class="payment-cards">
+                <div class="payment-card">
+                    <h4 style="color: #7fb069; margin-bottom: 10px;">Contract Signing & Project Initiation</h4>
+                    <div class="card-row">
+                        <span class="card-label">Percentage:</span>
+                        <span class="card-value"><strong>50%</strong></span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount"><strong>KSH 90,000</strong></span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Timeline:</span>
+                        <span class="card-value"><strong>Upon Agreement</strong></span>
+                    </div>
+                </div>
+                
+                <div class="payment-card">
+                    <h4 style="color: #7fb069; margin-bottom: 10px;">Frontend Development Completion</h4>
+                    <div class="card-row">
+                        <span class="card-label">Percentage:</span>
+                        <span class="card-value"><strong>30%</strong></span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount"><strong>KSH 54,000</strong></span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Timeline:</span>
+                        <span class="card-value"><strong>Week 3-4 (Frontend Demo)</strong></span>
+                    </div>
+                </div>
+                
+                <div class="payment-card">
+                    <h4 style="color: #7fb069; margin-bottom: 10px;">Live Deployment & Project Handover</h4>
+                    <div class="card-row">
+                        <span class="card-label">Percentage:</span>
+                        <span class="card-value"><strong>20%</strong></span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Amount:</span>
+                        <span class="card-value amount"><strong>KSH 36,000</strong></span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Timeline:</span>
+                        <span class="card-value"><strong>Week 6 (Go-Live)</strong></span>
+                    </div>
+                </div>
+            </div>
+            
             <br>
             <p><strong>Delivery Timeline:</strong> 6 weeks from contract signing to live deployment</p>
         </div>
@@ -1119,8 +2329,8 @@
         <!-- Bank Details -->
         <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
             <h3 style="color: #7fb069; margin-bottom: 15px;">PAYMENT DETAILS</h3>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                <div>
+            <div style="display: block;">
+                <div style="margin-bottom: 20px;">
                     <h4>Bank Transfer:</h4>
                     <p>Account Name: Cliff Okiko<br>
                     Bank: [Bank Name]<br>
@@ -1137,7 +2347,7 @@
 
         <!-- Signatures -->
         <div class="signature-section">
-                <div class="signature-box">
+            <div class="signature-box">
                 <h4 style="margin-bottom: 20px;">CLIENT AUTHORIZATION</h4>
                 <div id="clientSignatureDisplay" style="min-height: 60px; border-bottom: 1px solid #333; margin: 10px 0; position: relative;">
                     <img id="clientSignatureImg" style="max-height: 50px; max-width: 200px; display: none;" />
@@ -1167,19 +2377,19 @@
         </div>
 
         <!-- Footer -->
-        <div style="text-align: center; margin-top: 40px; padding: 30px; background: #f8f9fa; border-radius: 10px;">
+        <div style="text-align: center; margin-top: 40px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
             <h3 style="color: #7fb069; margin-bottom: 20px;">📋 Invoice Completion Instructions</h3>
             
             <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border: 1px solid #dee2e6;">
                 <h4 style="color: #2c3e50; margin-bottom: 15px;">🚀 3 Simple Steps to Complete Your Invoice:</h4>
                 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; text-align: left;">
-                    <div style="padding: 15px; background: #f8f9fa; border-radius: 6px; border-left: 4px solid #7fb069;">
+                <div style="text-align: left;">
+                    <div style="padding: 15px; background: #f8f9fa; border-radius: 6px; border-left: 4px solid #7fb069; margin-bottom: 15px;">
                         <h5 style="color: #7fb069; margin-bottom: 8px;">STEP 1: Fill Details</h5>
                         <p style="font-size: 14px; color: #2c3e50; margin: 0;">Complete your company information in the "BILL TO" section at the top of this invoice</p>
                     </div>
                     
-                    <div style="padding: 15px; background: #f8f9fa; border-radius: 6px; border-left: 4px solid #7fb069;">
+                    <div style="padding: 15px; background: #f8f9fa; border-radius: 6px; border-left: 4px solid #7fb069; margin-bottom: 15px;">
                         <h5 style="color: #7fb069; margin-bottom: 8px;">STEP 2: Digital Sign</h5>
                         <p style="font-size: 14px; color: #2c3e50; margin: 0;">Use the signature pad above to sign digitally with your mouse or touch screen</p>
                     </div>
@@ -1232,6 +2442,9 @@
 
             // Generate and insert hardcoded provider signature image
             createProviderSignatureImage();
+            
+            // Resize canvas for mobile on load
+            resizeCanvas();
         }
 
         // Auto-update company name in signature section
@@ -1343,93 +2556,6 @@
             
             showStatus('🖨️ Opening print dialog...', 'success');
             window.print();
-        }
-
-        // Share by email function
-        function shareByEmail() {
-            const clientCompany = document.getElementById('clientCompany').value || 'Client';
-            const clientEmail = document.getElementById('clientEmail').value;
-            const clientAddress = document.getElementById('clientAddress').value;
-            const clientPhone = document.getElementById('clientPhone').value;
-            
-            if (!hasSignature) {
-                showStatus('Please add your digital signature before sharing', 'warning');
-                return;
-            }
-
-            // Generate current invoice URL with timestamp for reference
-            const currentURL = window.location.href;
-            const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-            
-            // Multiple recipients
-            const recipients = [
-                'cliff.okiko@gmail.com',
-                'muthaigasam222@gmail.com'
-            ];
-
-            const subject = `✅ SIGNED INVOICE - ${clientCompany} - Letrum Travel Platform Development`;
-            const body = `Dear Cliff Okiko,
-
-I have completed and digitally signed the invoice for the Letrum Travel Platform development project.
-
-📋 CLIENT DETAILS:
-Company: ${clientCompany}
-Email: ${clientEmail || 'Not provided'}
-Address: ${clientAddress || 'Not provided'}
-Phone: ${clientPhone || 'Not provided'}
-
-📄 INVOICE DETAILS:
-Invoice Number: KG-LTR-2025-001
-Total Amount: KSH 180,000
-Signed Date: ${new Date().toLocaleDateString()}
-
-💰 PAYMENT SCHEDULE AGREED:
-✅ 50% (KSH 90,000) - Upon contract signing - READY TO PAY
-⏳ 30% (KSH 54,000) - Frontend completion demo
-⏳ 20% (KSH 36,000) - Live deployment
-
-📎 SIGNED INVOICE:
-I have downloaded the signed PDF invoice and will attach it to this email.
-Original Invoice Link: ${currentURL}
-Reference ID: INV-${timestamp}
-
-🚀 NEXT STEPS:
-1. ✅ Invoice reviewed and digitally signed
-2. 💰 Payment of KSH 90,000 ready to send
-3. ⏰ Please confirm bank details for transfer
-4. 🔥 Ready to start the 6-week development timeline
-
-📞 PAYMENT CONFIRMATION:
-I will send payment confirmation once bank details are confirmed.
-Project timeline can begin immediately after payment receipt.
-
-This invoice has been digitally signed and approved. Please proceed with the project as outlined.
-
-Best regards,
-${clientCompany}
-
----
-📧 Auto-generated from signed invoice system
-🔗 Original form: ${currentURL}
-📅 Generated: ${new Date().toLocaleString()}`;
-
-            const emailParams = new URLSearchParams({
-                subject: subject,
-                body: body
-            });
-
-            // Create email with multiple recipients
-            const recipientString = recipients.join(';');
-            window.open(`mailto:${recipientString}?${emailParams.toString()}`);
-            
-            showStatus('✅ Email opened! Please attach the PDF invoice before sending.', 'success');
-            
-            // Show additional instructions
-            setTimeout(() => {
-                if (confirm('📄 Would you like to download the PDF now to attach to your email?')) {
-                    generatePDF();
-                }
-            }, 1000);
         }
 
         // Save data function
@@ -1567,46 +2693,6 @@ ${clientCompany}
             showStatus('Signature saved successfully!', 'success');
         }
 
-        // Provider signature clear
-        
-
-        // Generate shareable link with tracking
-        function generateShareableLink() {
-            const clientCompany = document.getElementById('clientCompany').value || 'Client';
-            const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-            const trackingId = `INV-${timestamp}`;
-            const currentURL = window.location.href;
-            
-            // Create a reference link with tracking info
-            const shareableInfo = `
-📋 INVOICE TRACKING INFORMATION:
-
-🔗 Invoice Link: ${currentURL}
-📅 Reference ID: ${trackingId}
-🏢 Client: ${clientCompany}
-📧 For: Letrum Travel Platform Development
-💰 Amount: KSH 180,000
-
-📝 INSTRUCTIONS FOR CLIENT:
-1. Open the link above
-2. Fill in your company details
-3. Sign digitally using the signature pad
-4. Download PDF and attach to email
-5. Send to cliff.okiko@gmail.com & muthaigasam222@gmail.com
-
-⚠️ NOTE: Each device saves data locally. Please complete the process on the same device.
-            `;
-            
-            // Copy to clipboard
-            navigator.clipboard.writeText(shareableInfo).then(() => {
-                showStatus('📋 Tracking info copied to clipboard! Share this with your client.', 'success');
-            }).catch(() => {
-                // Fallback: show in alert
-                alert(shareableInfo);
-                showStatus('📋 Tracking info displayed. Please copy manually.', 'success');
-            });
-        }
-
         // Enhanced download and email function (main action)
         function downloadAndEmail() {
             // Validation checks
@@ -1700,6 +2786,7 @@ ${clientCompany}
             });
         }
         
+        // Keyboard shortcuts
         document.addEventListener('keydown', function(e) {
             if (e.ctrlKey || e.metaKey) {
                 switch(e.key) {
@@ -1719,6 +2806,28 @@ ${clientCompany}
             }
         });
 
+        // Resize signature canvas for mobile
+        function resizeCanvas() {
+            const canvas = document.getElementById('signatureCanvas');
+            if (!canvas) return;
+            
+            const container = canvas.parentElement;
+            const containerWidth = container.clientWidth;
+            
+            if (containerWidth < 450) {
+                canvas.width = Math.max(300, containerWidth - 40);
+                canvas.height = Math.max(120, canvas.width * 0.375);
+                // Need to reinitialize signature pad after resize
+                if (signaturePad) {
+                    signaturePad.clear();
+                    hasSignature = false;
+                }
+            } else {
+                canvas.width = 400;
+                canvas.height = 150;
+            }
+        }
+
         // Initialize everything when page loads
         window.onload = function() {
             initSignaturePad();
@@ -1730,20 +2839,14 @@ ${clientCompany}
             }
         };
 
-        // Resize signature canvas for mobile
-        function resizeCanvas() {
-            const canvas = document.getElementById('signatureCanvas');
-            const container = canvas.parentElement;
-            const containerWidth = container.clientWidth;
-            
-            if (containerWidth < 400) {
-                canvas.width = containerWidth - 40;
-                canvas.height = Math.max(120, canvas.width * 0.375);
-            }
-        }
-
-        // Resize on window resize
-        window.addEventListener('resize', resizeCanvas);
+        // Resize on window resize and orientation change
+        window.addEventListener('resize', function() {
+            setTimeout(resizeCanvas, 100);
+        });
+        
+        window.addEventListener('orientationchange', function() {
+            setTimeout(resizeCanvas, 200);
+        });
     </script>
 </body>
 </html>
