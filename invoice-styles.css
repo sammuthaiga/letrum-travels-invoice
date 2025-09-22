@@ -1,0 +1,1063 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #7fb069;
+    --primary-dark: #6a9c5a;
+    --secondary-color: #6c757d;
+    --text-primary: #2c3e50;
+    --text-secondary: #495057;
+    --bg-light: #f8f9fa;
+    --bg-lighter: #f0f7f0;
+    --bg-accent: #e8f0f7;
+    --border-color: #dee2e6;
+    --success-bg: #e8f5e8;
+    --success-text: #2d5a2d;
+    --pending-bg: #f8f4e6;
+    --pending-text: #6b5b00;
+    --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    font-family: var(--font-primary);
+    line-height: 1.6;
+    color: var(--text-primary);
+    background-color: var(--bg-light);
+    padding: 10px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* Header Styles */
+.header {
+    border-bottom: 3px solid var(--primary-color);
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.company-name {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--text-primary);
+    margin-bottom: 5px;
+}
+
+.company-tagline {
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+/* Invoice Details */
+.invoice-details {
+    margin-bottom: 30px;
+}
+
+.invoice-info {
+    background: var(--bg-lighter);
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.invoice-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.invoice-meta p {
+    margin: 5px 0;
+    font-size: 0.95rem;
+}
+
+/* Form Sections */
+.bill-to, .bill-from {
+    margin-bottom: 20px;
+    padding: 20px;
+    background: var(--bg-light);
+    border-radius: 8px;
+}
+
+.bill-to h3, .bill-from h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.editable-label {
+    font-weight: bold;
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.editable-field {
+    border: 1px solid var(--border-color);
+    padding: 12px;
+    border-radius: 4px;
+    width: 100%;
+    font-family: inherit;
+    font-size: 1rem;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.editable-field:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(127, 176, 105, 0.2);
+}
+
+/* Section Titles */
+.section-title {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin: 30px 0 20px 0;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+}
+
+/* Project Overview */
+.project-overview {
+    background: var(--bg-accent);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    border-left: 5px solid var(--primary-color);
+}
+
+.project-overview h2 {
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.project-details p {
+    margin: 8px 0;
+    color: var(--text-primary);
+}
+
+/* Deliverables */
+.deliverables {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.deliverable-item {
+    background: var(--bg-lighter);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.deliverable-item h4 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+/* Cost Tables - Ultra Responsive */
+.cost-section {
+    margin: 30px 0;
+}
+
+.cost-section-title {
+    color: var(--primary-color);
+    margin: 30px 0 15px 0;
+    font-size: 1.3rem;
+}
+
+.subsection-title {
+    margin: 15px 0 10px 0;
+    font-size: 1.1rem;
+}
+
+.completed-marker {
+    color: var(--success-text);
+}
+
+.pending-marker {
+    color: var(--pending-text);
+}
+
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 15px -5px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    position: relative;
+}
+
+.cost-table, .timeline-table {
+    width: 100%;
+    min-width: 320px;
+    border-collapse: collapse;
+    background: white;
+}
+
+.cost-table th, .timeline-table th {
+    background: var(--primary-color);
+    color: white;
+    padding: 12px 8px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.cost-table td, .timeline-table td {
+    padding: 10px 8px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.85rem;
+}
+
+/* Make first column wider for descriptions */
+.cost-table th:first-child,
+.cost-table td:first-child {
+    min-width: 140px;
+}
+
+/* Make numeric columns narrower */
+.cost-table th:nth-child(2),
+.cost-table td:nth-child(2),
+.cost-table th:nth-child(3),
+.cost-table td:nth-child(3) {
+    width: 60px;
+    text-align: center;
+}
+
+.cost-table th:last-child,
+.cost-table td:last-child {
+    width: 80px;
+    text-align: right;
+    font-weight: bold;
+}
+
+.cost-table tr:hover {
+    background: var(--bg-light);
+}
+
+.completed {
+    background: var(--success-bg) !important;
+    color: var(--success-text);
+}
+
+.pending {
+    background: var(--pending-bg) !important;
+    color: var(--pending-text);
+}
+
+.subtotal-row {
+    background: #e9ecef !important;
+    font-weight: bold;
+    color: var(--text-secondary);
+}
+
+.total-row {
+    background: var(--primary-color) !important;
+    color: white;
+    font-weight: bold;
+}
+
+.amount {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.total-row .amount {
+    color: white;
+}
+
+/* Payment Schedule */
+.payment-schedule {
+    background: var(--bg-accent);
+    padding: 25px;
+    border-radius: 10px;
+    margin: 20px 0;
+    border-left: 5px solid var(--primary-color);
+}
+
+.payment-schedule h2 {
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+.cost-breakdown {
+    margin: 20px 0;
+}
+
+.cost-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 0.95rem;
+}
+
+.cost-line.total {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.cost-line.final-total {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    padding: 15px 0;
+}
+
+.highlight {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+hr {
+    margin: 15px 0;
+    border: none;
+    border-top: 1px solid var(--border-color);
+}
+
+hr.bold-line {
+    border-top: 2px solid var(--primary-color);
+}
+
+/* Payment Grid */
+.payment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.payment-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.payment-card h4 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+.payment-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.payment-percentage {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.payment-amount {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+.payment-timing {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Status Box */
+.status-box {
+    background: var(--bg-light);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.status-box h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.status-item {
+    margin: 10px 0;
+}
+
+.status-indicator {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.status-complete {
+    background: var(--success-bg);
+    color: var(--success-text);
+}
+
+.status-pending {
+    background: var(--pending-bg);
+    color: var(--pending-text);
+}
+
+.status-note {
+    font-style: italic;
+    color: var(--text-secondary);
+    margin-top: 10px;
+}
+
+/* Timeline */
+.timeline-section {
+    background: var(--bg-lighter);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.timeline-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.timeline-details {
+    margin-top: 20px;
+}
+
+.timeline-details h4 {
+    color: var(--primary-color);
+    margin: 15px 0 10px 0;
+}
+
+.timeline-details ul {
+    margin-left: 20px;
+}
+
+.timeline-details li {
+    margin: 8px 0;
+}
+
+/* Terms */
+.terms {
+    background: var(--bg-light);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    border: 1px solid var(--border-color);
+}
+
+.terms h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.terms-section {
+    margin: 20px 0;
+}
+
+.terms-section h4 {
+    margin: 15px 0 10px 0;
+    color: var(--text-primary);
+}
+
+.terms-section ul {
+    margin-left: 20px;
+}
+
+.terms-section li {
+    margin: 5px 0;
+}
+
+/* Payment Details Box */
+.payment-details-box {
+    background: var(--bg-light);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.payment-details-box h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.payment-methods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.payment-method h4 {
+    margin-bottom: 10px;
+    color: var(--text-primary);
+}
+
+/* Signature Section */
+.signature-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid var(--border-color);
+}
+
+.signature-box {
+    text-align: center;
+    padding: 20px;
+    border: 2px dashed var(--border-color);
+    border-radius: 10px;
+}
+
+.signature-box h4 {
+    margin-bottom: 20px;
+    color: var(--text-primary);
+}
+
+.signature-display {
+    min-height: 60px;
+    border-bottom: 1px solid #333;
+    margin: 10px 0;
+    position: relative;
+}
+
+.signature-img {
+    max-height: 50px;
+    max-width: 200px;
+}
+
+.placeholder {
+    color: #ccc;
+    font-style: italic;
+}
+
+.signature-date {
+    margin-top: 15px;
+}
+
+.date-input {
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 0.9rem;
+    width: auto;
+}
+
+.company-display {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.provider-name {
+    margin-bottom: 10px;
+}
+
+.provider-signature {
+    min-height: 40px;
+    margin-bottom: 8px;
+}
+
+/* Digital Signature Section */
+.signature-section-digital {
+    background: var(--bg-light);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    border: 1px solid var(--border-color);
+}
+
+.signature-section-digital h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.signature-instructions {
+    margin-bottom: 15px;
+    color: var(--text-secondary);
+}
+
+.signature-container {
+    text-align: center;
+}
+
+.signature-canvas {
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    background: white;
+    margin: 10px auto;
+    cursor: crosshair;
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    height: 150px;
+}
+
+.signature-controls {
+    text-align: center;
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.signature-hint {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* Action Buttons Section */
+.action-buttons {
+    background: var(--bg-light);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    text-align: center;
+    border: 2px dashed var(--primary-color);
+}
+
+.action-buttons h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.instruction-box {
+    background: var(--success-bg);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.instruction-box h4 {
+    color: var(--success-text);
+    margin-bottom: 10px;
+}
+
+.instruction-box ol {
+    color: var(--success-text);
+    margin-left: 20px;
+    line-height: 1.8;
+    text-align: left;
+}
+
+.quick-tip {
+    color: var(--success-text);
+    font-style: italic;
+    margin-top: 10px;
+}
+
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+/* Buttons */
+.btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    min-height: 48px;
+    white-space: nowrap;
+}
+
+.btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(127, 176, 105, 0.3);
+}
+
+.btn-primary {
+    font-size: 1.1rem;
+    padding: 15px 30px;
+}
+
+.btn-secondary {
+    background: var(--secondary-color);
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+}
+
+/* Status Message */
+.status-message {
+    background: #d4edda;
+    color: #155724;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 15px 0;
+    text-align: center;
+    display: none;
+}
+
+.status-message.error {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.status-message.warning {
+    background: #fff3cd;
+    color: #856404;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    background: var(--bg-light);
+    border-radius: 10px;
+}
+
+.footer h3 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.footer h4 {
+    color: var(--primary-color);
+    margin: 20px 0;
+}
+
+.completion-steps {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    border: 1px solid var(--border-color);
+}
+
+.completion-steps h4 {
+    color: var(--text-primary);
+    margin-bottom: 15px;
+}
+
+.step-card {
+    padding: 15px;
+    background: var(--bg-light);
+    border-radius: 6px;
+    border-left: 4px solid var(--primary-color);
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.step-card h5 {
+    color: var(--primary-color);
+    margin-bottom: 8px;
+}
+
+.step-card p {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.footer-note {
+    background: var(--success-bg);
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.footer-note p {
+    color: var(--success-text);
+    margin: 0;
+    font-weight: bold;
+}
+
+.footer-contact {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.footer-contact p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.help-text {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 15px;
+}
+
+/* Print Styles */
+@media print {
+    .action-buttons, 
+    .no-print,
+    .signature-section-digital {
+        display: none !important;
+    }
+    
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .container {
+        box-shadow: none;
+        margin: 0;
+        padding: 20px;
+        max-width: 100%;
+    }
+    
+    .cost-table {
+        font-size: 10px;
+    }
+    
+    .editable-field {
+        border: none;
+        border-bottom: 1px solid #333;
+        background: transparent;
+    }
+}
+
+/* Mobile Responsiveness - Enhanced */
+@media (max-width: 768px) {
+    body {
+        padding: 5px;
+    }
+    
+    .container {
+        padding: 15px;
+        border-radius: 5px;
+    }
+    
+    .company-name {
+        font-size: 1.4rem;
+    }
+    
+    .company-tagline {
+        font-size: 0.85rem;
+    }
+    
+    .invoice-title {
+        font-size: 1.4rem;
+    }
+    
+    .section-title {
+        font-size: 1.2rem;
+    }
+    
+    .cost-section-title {
+        font-size: 1.1rem;
+    }
+    
+    .deliverables {
+        grid-template-columns: 1fr;
+    }
+    
+    .payment-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .payment-methods {
+        grid-template-columns: 1fr;
+    }
+    
+    .signature-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .button-group {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+        padding: 15px;
+    }
+    
+    /* Enhanced Table Mobile View */
+    .table-responsive {
+        margin: 10px -10px;
+        padding: 0 5px;
+    }
+    
+    .cost-table, .timeline-table {
+        font-size: 0.75rem;
+    }
+    
+    .cost-table th, .timeline-table th {
+        padding: 8px 5px;
+        font-size: 0.7rem;
+    }
+    
+    .cost-table td, .timeline-table td {
+        padding: 6px 5px;
+        font-size: 0.7rem;
+    }
+    
+    /* Make columns even more compact on mobile */
+    .cost-table th:first-child,
+    .cost-table td:first-child {
+        min-width: 100px;
+        font-size: 0.65rem;
+    }
+    
+    .cost-table th:nth-child(2),
+    .cost-table td:nth-child(2),
+    .cost-table th:nth-child(3),
+    .cost-table td:nth-child(3) {
+        width: 40px;
+    }
+    
+    .cost-table th:last-child,
+    .cost-table td:last-child {
+        width: 60px;
+    }
+    
+    /* Add scroll indicator for tables */
+    .table-responsive::after {
+        content: '← Swipe to view →';
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.7rem;
+        color: var(--text-secondary);
+        font-style: italic;
+    }
+    
+    /* Adjust cost breakdown for mobile */
+    .cost-line {
+        font-size: 0.85rem;
+    }
+    
+    .cost-line.final-total {
+        font-size: 1.1rem;
+    }
+    
+    /* Signature canvas responsive */
+    .signature-canvas {
+        max-width: 100%;
+        height: 120px;
+    }
+}
+
+/* Extra Small Screens */
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .company-name {
+        font-size: 1.2rem;
+    }
+    
+    .invoice-title {
+        font-size: 1.2rem;
+    }
+    
+    .section-title {
+        font-size: 1rem;
+    }
+    
+    .bill-to, .bill-from, .project-overview {
+        padding: 15px;
+    }
+    
+    .editable-field {
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+    
+    /* Ultra compact tables for small screens */
+    .cost-table, .timeline-table {
+        font-size: 0.65rem;
+    }
+    
+    .cost-table th, .timeline-table th {
+        padding: 6px 3px;
+        font-size: 0.6rem;
+    }
+    
+    .cost-table td, .timeline-table td {
+        padding: 5px 3px;
+        font-size: 0.6rem;
+    }
+    
+    /* Further reduce column widths */
+    .cost-table th:first-child,
+    .cost-table td:first-child {
+        min-width: 80px;
+    }
+    
+    .cost-table th:nth-child(2),
+    .cost-table td:nth-child(2),
+    .cost-table th:nth-child(3),
+    .cost-table td:nth-child(3) {
+        width: 35px;
+        font-size: 0.6rem;
+    }
+    
+    .cost-table th:last-child,
+    .cost-table td:last-child {
+        width: 55px;
+        font-size: 0.65rem;
+    }
+    
+    /* Simplify payment details */
+    .payment-percentage {
+        font-size: 1.2rem;
+    }
+    
+    .payment-amount {
+        font-size: 0.9rem;
+    }
+}
+
+/* Touch-friendly adjustments */
+@media (hover: none) and (pointer: coarse) {
+    .btn {
+        padding: 15px 20px;
+        font-size: 1rem;
+    }
+    
+    .editable-field {
+        font-size: 16px;
+        padding: 12px;
+    }
+    
+    .date-input {
+        font-size: 16px;
+        padding: 10px;
+    }
+}
