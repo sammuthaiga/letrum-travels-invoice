@@ -221,17 +221,29 @@ function generatePDF() {
             }
         }
     }
+
+    // Prevent sticky headers and other positioned elements from breaking html2pdf pagination
+    const clonedTHs = clone.querySelectorAll('th');
+    clonedTHs.forEach(th => {
+        th.style.position = 'static';
+        th.style.top = 'auto';
+    });
+    const clonedHeaders = clone.querySelectorAll('.header');
+    clonedHeaders.forEach(h => {
+        h.style.position = 'static';
+    });
     
     // PDF generation options
     const opt = {
-        margin: 0.3,
+        margin: 0.2,
         filename: `Invoice_${clientCompany.replace(/\s+/g, '_')}_${Date.now()}.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { 
-            scale: 2, 
+            scale: 1.8, 
             useCORS: true,
             letterRendering: true,
-            scrollY: -window.scrollY
+            scrollY: -window.scrollY,
+            backgroundColor: '#ffffff'
         },
         jsPDF: { 
             unit: 'in', 
@@ -242,25 +254,42 @@ function generatePDF() {
     
     // Create temporary wrapper
     const wrapper = document.createElement('div');
-    wrapper.style.padding = '20px';
+    wrapper.style.padding = '10px';
+    wrapper.style.background = '#ffffff';
     wrapper.appendChild(clone);
     document.body.appendChild(wrapper);
-    
-    // Generate PDF
-    return html2pdf()
-        .set(opt)
-        .from(wrapper)
-        .save()
-        .then(() => {
-            showStatus('✅ PDF downloaded successfully!', 'success');
-            wrapper.remove();
-        })
-        .catch((err) => {
-            showStatus('❌ Error generating PDF. Please try again.', 'error');
-            wrapper.remove();
-            console.error('PDF generation error:', err);
-            throw err;
-        });
+
+    // Helper: wait for images inside wrapper to finish loading (important for dataURL signatures)
+    function waitForImagesToLoad(root) {
+        const imgs = Array.from(root.querySelectorAll('img'));
+        if (!imgs.length) return Promise.resolve();
+        return Promise.all(imgs.map(img => new Promise((resolve) => {
+            if (img.complete && img.naturalHeight !== 0) return resolve();
+            // ensure display so html2canvas can capture them
+            img.style.display = img.style.display || 'block';
+            img.onload = () => resolve();
+            img.onerror = () => resolve();
+            // small timeout fallback
+            setTimeout(resolve, 1500);
+        })));
+    }
+
+    // Generate PDF after images are ready
+    return waitForImagesToLoad(wrapper).then(() => {
+        return html2pdf()
+            .set(opt)
+            .from(wrapper)
+            .save()
+            .then(() => {
+                showStatus('✅ PDF downloaded successfully!', 'success');
+                wrapper.remove();
+            });
+    }).catch((err) => {
+        showStatus('❌ Error generating PDF. Please try again.', 'error');
+        if (wrapper && wrapper.parentNode) wrapper.remove();
+        console.error('PDF generation error:', err);
+        throw err;
+    });
 }
 
 // Print invoice function
@@ -391,16 +420,13 @@ ${clientCompany}
 🔗 Original form: ${currentURL}
 📅 Generated: ${new Date().toLocaleString()}`;
     
-    // Create mailto URL
-    const params = new URLSearchParams({
-        subject: subject,
-        body: bodyContent
-    });
-    
-    const mailto = `mailto:${recipients.join(',')}?${params.toString()}`;
-    
-    // Open email client
-    window.open(mailto);
+    // Create mailto URL using encodeURIComponent (avoids '+' for spaces)
+    const encodedSubject = encodeURIComponent(subject).replace(/\+/g, '%20');
+    const encodedBody = encodeURIComponent(bodyContent).replace(/\+/g, '%20');
+    const mailto = `mailto:${recipients.join(',')}?subject=${encodedSubject}&body=${encodedBody}`;
+
+    // Open email client (use _blank to avoid being blocked by some browsers)
+    window.open(mailto, '_blank');
     
     showStatus('✅ Email opened! Please attach the downloaded PDF before sending.', 'success');
 }

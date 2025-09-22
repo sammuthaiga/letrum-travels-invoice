@@ -211,19 +211,20 @@ body {
 
 .cost-table, .timeline-table {
     width: 100%;
-    min-width: 320px;
+    min-width: 0; /* allow tables to compress on small screens */
     border-collapse: collapse;
     background: white;
 }
 
 .cost-table th, .timeline-table th {
     background: var(--primary-color);
-    color: white;
+    color: #000; /* make headers black */
     padding: 12px 8px;
     text-align: left;
     font-weight: 600;
     font-size: 0.85rem;
-    white-space: nowrap;
+    white-space: normal; /* allow wrapping */
+    word-break: break-word;
     position: sticky;
     top: 0;
     z-index: 10;
@@ -919,11 +920,14 @@ hr.bold-line {
     .cost-table th, .timeline-table th {
         padding: 8px 5px;
         font-size: 0.7rem;
+        white-space: normal;
+        word-break: break-word;
     }
-    
+
     .cost-table td, .timeline-table td {
         padding: 6px 5px;
         font-size: 0.7rem;
+        white-space: normal;
     }
     
     /* Make columns even more compact on mobile */
@@ -946,16 +950,7 @@ hr.bold-line {
     }
     
     /* Add scroll indicator for tables */
-    .table-responsive::after {
-        content: '← Swipe to view →';
-        position: absolute;
-        bottom: -20px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 0.7rem;
-        color: var(--text-secondary);
-        font-style: italic;
-    }
+    /* remove visual swipe hint - allow table to compress and wrap content instead */
     
     /* Adjust cost breakdown for mobile */
     .cost-line {
