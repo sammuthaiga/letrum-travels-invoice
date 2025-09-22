@@ -479,6 +479,14 @@ hr.bold-line {
     border-left: 4px solid var(--pending-text);
 }
 
+/* Ensure completion status text inside timeline cards is black */
+.timeline-card .status-indicator,
+.timeline-card .status-item,
+.timeline-card p,
+.timeline-card span {
+    color: #000 !important;
+}
+
 .timeline-phase {
     font-weight: bold;
     color: var(--primary-color);
