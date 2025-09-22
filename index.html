@@ -414,7 +414,7 @@
                 <div class="bill-to">
                     <h3 style="color: #7fb069; margin-bottom: 10px;">BILL TO:</h3>
                     <label class="editable-label">Company Name:</label>
-                    <input type="text" class="editable-field" value="Letrum Agencies" id="clientCompany">
+                    <input type="text" class="editable-field" value="" id="clientCompany">
                     
                     <label class="editable-label">Address:</label>
                     <input type="text" class="editable-field" placeholder="Enter your address" id="clientAddress">
@@ -429,8 +429,8 @@
                 <div class="bill-from">
                     <h3 style="color: #7fb069; margin-bottom: 10px;">FROM:</h3>
                     <p><strong>Cliff Okiko</strong></p>
-                    <p>Email: cliff.okiko@gmail.com</p>
-                    <p>Phone: +254 792 867 928</p>
+                    <p style="display:none">Email: cliff.okiko@gmail.com</p>
+                    <p>Phone: +254 7XX XXX XXX</p>
                     <p>Location: Nairobi, Kenya</p>
                 </div>
             </div>
@@ -438,38 +438,51 @@
 
         <!-- Action Buttons -->
         <div class="action-buttons no-print">
-            <h3 style="color: #7fb069; margin-bottom: 15px;">📋 INVOICE ACTIONS</h3>
-            <p style="margin-bottom: 15px; color: #6c757d;">Fill in your details above, then use these tools to save and share your invoice:</p>
+            <h3 style="color: #7fb069; margin-bottom: 15px;">📋 INVOICE COMPLETION STEPS</h3>
+            
+            <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #7fb069;">
+                <h4 style="color: #2d5a2d; margin-bottom: 10px;">📝 How to Complete & Share This Invoice:</h4>
+                <ol style="color: #2d5a2d; margin-left: 20px; line-height: 1.6;">
+                    <li><strong>Fill Required Fields:</strong> Enter your company details in the "BILL TO" section above</li>
+                    <li><strong>Add Digital Signature:</strong> Sign in the signature pad below using your mouse or touch</li>
+                    <li><strong>Share Signed Invoice:</strong> Click "Quick: PDF + Email" to send your signed invoice to us</li>
+                </ol>
+                <p style="color: #2d5a2d; font-style: italic; margin-top: 10px;">
+                    ⚡ <strong>Quick Tip:</strong> The "Quick: PDF + Email" button will generate your signed invoice as PDF and open your email client with everything pre-filled!
+                </p>
+            </div>
             
             <div class="status-message" id="statusMessage"></div>
             
-            <div style="margin-bottom: 15px;">
-                <button class="btn" onclick="generatePDF()">📄 Download as PDF</button>
-                <button class="btn" onclick="printInvoice()">🖨️ Print Invoice</button>
-                <button class="btn btn-secondary" onclick="shareByEmail()">📧 Share via Email</button>
+            <div style="text-align: center; margin: 20px 0;">
+                <button class="btn" onclick="downloadAndEmail()" style="font-size: 16px; padding: 15px 30px; margin: 0 10px;">
+                    ⚡ Quick: PDF + Email
+                </button>
+                <br><br>
+                <button class="btn btn-secondary" onclick="generatePDF()" style="margin: 0 10px;">📄 Download as PDF</button>
+                <button class="btn btn-secondary" onclick="printInvoice()" style="margin: 0 10px;">🖨️ Print Invoice</button>
             </div>
             
-            <div style="margin-bottom: 15px;">
-                <button class="btn btn-secondary" onclick="saveData()">💾 Save Details</button>
-                <button class="btn btn-danger" onclick="resetForm()">🔄 Reset Form</button>
-                <button class="btn btn-secondary" onclick="loadSavedData()">📁 Load Saved</button>
-            </div>
+            <p style="text-align: center; color: #6c757d; font-size: 14px; margin-top: 15px;">
+                <strong>Need help?</strong> Email cliff.okiko@gmail.com for assistance
+            </p>
         </div>
 
         <!-- Digital Signature Section -->
         <div class="signature-section-digital no-print">
-            <h3 style="color: #7fb069; margin-bottom: 15px;">✍️ DIGITAL SIGNATURE</h3>
-            <p style="margin-bottom: 15px; color: #6c757d;">Sign below to authorize this invoice digitally:</p>
-            
-            <div style="text-align: center;">
-                <canvas id="signatureCanvas" class="signature-canvas" width="400" height="150"></canvas>
-                <div class="signature-controls">
-                    <button class="btn btn-secondary" onclick="clearSignature()">Clear Signature</button>
-                    <button class="btn" onclick="saveSignature()">Save Signature</button>
+                <h3 style="color: #7fb069; margin-bottom: 15px;">✍️ DIGITAL SIGNATURE</h3>
+                <p style="margin-bottom: 15px; color: #6c757d;">Client signs below to authorize this invoice digitally.</p>
+
+                <!-- Client signature -->
+                <div style="text-align: center;">
+                    <canvas id="signatureCanvas" class="signature-canvas" width="400" height="150"></canvas>
+                    <div class="signature-controls">
+                        <button class="btn btn-secondary" onclick="clearSignature()">Clear Signature</button>
+                        <button class="btn" onclick="saveSignature()">Save Signature</button>
+                    </div>
+                    <p style="font-size: 12px; color: #6c757d;">Client: sign above using your mouse or touch screen</p>
                 </div>
-                <p style="font-size: 12px; color: #6c757d;">Sign above using your mouse or touch screen</p>
             </div>
-        </div>
 
         <!-- Project Overview -->
         <div class="project-overview">
@@ -1110,21 +1123,21 @@
                 <div>
                     <h4>Bank Transfer:</h4>
                     <p>Account Name: Cliff Okiko<br>
-                    Bank: I&M Bank<br>
-                    Account Number: Available on Request<br>
-                    Branch: Available on Request</p>
+                    Bank: [Bank Name]<br>
+                    Account Number: [Account Number]<br>
+                    Branch: [Branch Code]</p>
                 </div>
                 <div>
                     <h4>Mobile Money:</h4>
-                    <p>M-Pesa Mobile No: 0792867928<br>
-                    </p>
+                    <p>M-Pesa Paybill: [Paybill Number]<br>
+                    Account: [Account Reference]</p>
                 </div>
             </div>
         </div>
 
         <!-- Signatures -->
         <div class="signature-section">
-            <div class="signature-box">
+                <div class="signature-box">
                 <h4 style="margin-bottom: 20px;">CLIENT AUTHORIZATION</h4>
                 <div id="clientSignatureDisplay" style="min-height: 60px; border-bottom: 1px solid #333; margin: 10px 0; position: relative;">
                     <img id="clientSignatureImg" style="max-height: 50px; max-width: 200px; display: none;" />
@@ -1134,33 +1147,76 @@
                     <label>Date: </label>
                     <input type="date" id="clientDate" class="editable-field" style="width: auto; display: inline-block;">
                 </div>
-                <p style="margin-top: 15px;"><strong><span id="displayClientCompany">Letrum Agencies</span></strong></p>
+                <p style="margin-top: 15px;"><strong><span id="displayClientCompany"></span></strong></p>
             </div>
             
             <div class="signature-box">
                 <h4 style="margin-bottom: 20px;">PROVIDER AUTHORIZATION</h4>
-                <p>Signature: _________________________</p>
+                <div id="providerAuthDisplay">
+                    <p style="margin: 0 0 8px 0;"><strong>Cliff Okiko</strong></p>
+                    <div style="min-height: 40px; margin-bottom: 8px;">
+                        <img id="providerSignatureImg" style="max-height: 50px; max-width: 220px; display: none;" />
+                    </div>
+                    <p id="providerEmailLabel" style="font-size: 12px; color: #6c757d; margin: 0;">cliff.okiko@gmail.com</p>
+                </div>
                 <div class="signature-date">
                     <label>Date: </label>
                     <input type="date" value="2025-09-21" class="editable-field" style="width: auto; display: inline-block;">
                 </div>
-                <p style="margin-top: 15px;"><strong>Cliff Okiko</strong></p>
             </div>
         </div>
 
         <!-- Footer -->
-        <div style="text-align: center; margin-top: 40px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
-            <h3 style="color: #7fb069;">Thank you for choosing Cliff Okiko for your software development needs.</h3>
-            <p><em>This proposal is valid for 30 days from the date of issue. Project timeline begins upon receipt of initial payment and required project materials.</em></p>
+        <div style="text-align: center; margin-top: 40px; padding: 30px; background: #f8f9fa; border-radius: 10px;">
+            <h3 style="color: #7fb069; margin-bottom: 20px;">📋 Invoice Completion Instructions</h3>
+            
+            <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border: 1px solid #dee2e6;">
+                <h4 style="color: #2c3e50; margin-bottom: 15px;">🚀 3 Simple Steps to Complete Your Invoice:</h4>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; text-align: left;">
+                    <div style="padding: 15px; background: #f8f9fa; border-radius: 6px; border-left: 4px solid #7fb069;">
+                        <h5 style="color: #7fb069; margin-bottom: 8px;">STEP 1: Fill Details</h5>
+                        <p style="font-size: 14px; color: #2c3e50; margin: 0;">Complete your company information in the "BILL TO" section at the top of this invoice</p>
+                    </div>
+                    
+                    <div style="padding: 15px; background: #f8f9fa; border-radius: 6px; border-left: 4px solid #7fb069;">
+                        <h5 style="color: #7fb069; margin-bottom: 8px;">STEP 2: Digital Sign</h5>
+                        <p style="font-size: 14px; color: #2c3e50; margin: 0;">Use the signature pad above to sign digitally with your mouse or touch screen</p>
+                    </div>
+                    
+                    <div style="padding: 15px; background: #f8f9fa; border-radius: 6px; border-left: 4px solid #7fb069;">
+                        <h5 style="color: #7fb069; margin-bottom: 8px;">STEP 3: Send Invoice</h5>
+                        <p style="font-size: 14px; color: #2c3e50; margin: 0;">Click "Quick: PDF + Email" to generate and share your signed invoice automatically</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                <p style="color: #2d5a2d; margin: 0; font-weight: bold;">
+                    ⚡ The "Quick: PDF + Email" button will create your signed invoice as a PDF and open your email client 
+                    with Cliff Okiko's email addresses pre-filled. Simply attach the downloaded PDF and send!
+                </p>
+            </div>
+            
+            <h4 style="color: #7fb069; margin-top: 30px;">Thank you for choosing Cliff Okiko for your software development needs.</h4>
+            <p style="color: #6c757d; margin-top: 10px;"><em>This proposal is valid for 30 days from the date of issue. Project timeline begins upon receipt of initial payment and required project materials.</em></p>
+            
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #dee2e6;">
+                <p style="color: #6c757d; font-size: 14px;">
+                    <strong>Need Help?</strong> Email cliff.okiko@gmail.com | Phone: +254 7XX XXX XXX
+                </p>
+            </div>
         </div>
     </div>
 
     <script>
-        let signaturePad;
-        let hasSignature = false;
+    let signaturePad; // client signature pad
+    let hasSignature = false;
+    let providerSignatureDataUrl = null; // hardcoded provider signature image data url
 
         // Initialize signature pad
         function initSignaturePad() {
+            // Client signature pad
             const canvas = document.getElementById('signatureCanvas');
             signaturePad = new SignaturePad(canvas, {
                 backgroundColor: 'rgb(255, 255, 255)',
@@ -1173,6 +1229,9 @@
                     document.getElementById('signaturePlaceholder').style.display = 'none';
                 }
             });
+
+            // Generate and insert hardcoded provider signature image
+            createProviderSignatureImage();
         }
 
         // Auto-update company name in signature section
@@ -1195,39 +1254,94 @@
             }, 3000);
         }
 
-        // Generate PDF function
+        // Generate PDF function (individual use)
         function generatePDF() {
             const clientCompany = document.getElementById('clientCompany').value || 'Client';
-            
-            if (!hasSignature) {
-                showStatus('Please add your digital signature before generating PDF', 'warning');
-                return;
+
+            showStatus('📄 Generating PDF... Please wait...', 'warning');
+
+            // Create a cleaned clone to remove helper UI and signature canvases
+            const original = document.querySelector('.container');
+            const clone = original.cloneNode(true);
+
+            // Remove interactive/helper sections from clone
+            const helpers = clone.querySelectorAll('.no-print, .action-buttons, .signature-section-digital, .signature-controls');
+            helpers.forEach(h => h.remove());
+
+            // Replace provider and client canvases with their saved images if available
+            const provImgSrc = providerSignatureDataUrl || (document.getElementById('providerSignatureImg') ? document.getElementById('providerSignatureImg').src : null);
+            const clientImgSrc = (hasSignature && document.getElementById('clientSignatureImg')) ? document.getElementById('clientSignatureImg').src : null;
+
+            // Provider signature spot in cloned provider authorization
+            const provDisplay = clone.querySelector('#providerAuthDisplay');
+            if (provDisplay) {
+                // remove any canvas inside and insert image
+                const existingCanv = provDisplay.querySelector('canvas');
+                if (existingCanv) existingCanv.remove();
+                const pimg = provDisplay.querySelector('#providerSignatureImg') || document.createElement('img');
+                pimg.id = 'providerSignatureImg';
+                if (provImgSrc) {
+                    pimg.src = provImgSrc;
+                    pimg.style.display = 'block';
+                } else {
+                    pimg.style.display = 'none';
+                }
+                provDisplay.insertBefore(pimg, provDisplay.firstChild);
             }
 
-            showStatus('Generating PDF... Please wait...', 'warning');
+            // Client signature spot in cloned client authorization
+            const clientDisplay = clone.querySelector('#clientSignatureDisplay');
+            if (clientDisplay) {
+                const cimg = clientDisplay.querySelector('#clientSignatureImg') || document.createElement('img');
+                cimg.id = 'clientSignatureImg';
+                if (clientImgSrc) {
+                    cimg.src = clientImgSrc;
+                    cimg.style.display = 'block';
+                } else {
+                    cimg.style.display = 'none';
+                }
+                // remove canvas placeholders
+                const canv = clone.querySelector('#signatureCanvas');
+                if (canv) canv.remove();
+                clientDisplay.insertBefore(cimg, clientDisplay.firstChild);
+            }
 
-            const element = document.querySelector('.container');
             const opt = {
-                margin: 0.5,
-                filename: `Letrum_Invoice_${clientCompany.replace(/\s+/g, '_')}.pdf`,
+                margin: 0.3,
+                filename: `Invoice_${clientCompany.replace(/\s+/g, '_')}.pdf`,
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2, useCORS: true },
                 jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
             };
 
-            html2pdf().set(opt).from(element).save().then(() => {
-                showStatus('PDF downloaded successfully!', 'success');
-            }).catch(() => {
-                showStatus('Error generating PDF. Please try again.', 'error');
-            });
+            // Generate PDF from the cleaned clone appended to body temporarily
+            const wrapper = document.createElement('div');
+            wrapper.style.padding = '20px';
+            wrapper.appendChild(clone);
+            document.body.appendChild(wrapper);
+
+            // Return the promise so callers can chain actions (e.g., open email after save)
+            const pdfPromise = html2pdf().set(opt).from(wrapper).save()
+                .then(() => {
+                    showStatus('✅ PDF downloaded successfully!', 'success');
+                    wrapper.remove();
+                }).catch(() => {
+                    showStatus('❌ Error generating PDF. Please try again.', 'error');
+                    wrapper.remove();
+                    throw new Error('PDF generation failed');
+                });
+
+            return pdfPromise;
         }
 
         // Print invoice function
         function printInvoice() {
             if (!hasSignature) {
-                showStatus('Please add your digital signature before printing', 'warning');
+                showStatus('❌ Please add your digital signature before printing', 'warning');
                 return;
             }
+            
+            showStatus('🖨️ Opening print dialog...', 'success');
             window.print();
         }
 
@@ -1235,40 +1349,69 @@
         function shareByEmail() {
             const clientCompany = document.getElementById('clientCompany').value || 'Client';
             const clientEmail = document.getElementById('clientEmail').value;
+            const clientAddress = document.getElementById('clientAddress').value;
+            const clientPhone = document.getElementById('clientPhone').value;
             
             if (!hasSignature) {
                 showStatus('Please add your digital signature before sharing', 'warning');
                 return;
             }
 
+            // Generate current invoice URL with timestamp for reference
+            const currentURL = window.location.href;
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+            
             // Multiple recipients
             const recipients = [
                 'cliff.okiko@gmail.com',
                 'muthaigasam222@gmail.com'
             ];
 
-            const subject = `Signed Invoice for ${clientCompany} - Letrum Travel Platform Development`;
+            const subject = `✅ SIGNED INVOICE - ${clientCompany} - Letrum Travel Platform Development`;
             const body = `Dear Cliff Okiko,
 
-Please find the signed invoice for the Letrum Travel Platform development project.
+I have completed and digitally signed the invoice for the Letrum Travel Platform development project.
 
-Client Details:
-- Company: ${clientCompany}
-- Email: ${clientEmail || 'Not provided'}
-- Invoice Number: KG-LTR-2025-001
-- Total Amount: KSH 180,000
+📋 CLIENT DETAILS:
+Company: ${clientCompany}
+Email: ${clientEmail || 'Not provided'}
+Address: ${clientAddress || 'Not provided'}
+Phone: ${clientPhone || 'Not provided'}
 
-Payment Schedule:
-- 50% (KSH 90,000) - Upon contract signing ✓ Ready to pay
-- 30% (KSH 54,000) - Frontend completion demo
-- 20% (KSH 36,000) - Live deployment
+📄 INVOICE DETAILS:
+Invoice Number: KG-LTR-2025-001
+Total Amount: KSH 180,000
+Signed Date: ${new Date().toLocaleDateString()}
 
-This invoice has been digitally signed and approved. Please proceed with the project timeline as outlined.
+💰 PAYMENT SCHEDULE AGREED:
+✅ 50% (KSH 90,000) - Upon contract signing - READY TO PAY
+⏳ 30% (KSH 54,000) - Frontend completion demo
+⏳ 20% (KSH 36,000) - Live deployment
 
-Payment will be sent to the provided banking details.
+📎 SIGNED INVOICE:
+I have downloaded the signed PDF invoice and will attach it to this email.
+Original Invoice Link: ${currentURL}
+Reference ID: INV-${timestamp}
+
+🚀 NEXT STEPS:
+1. ✅ Invoice reviewed and digitally signed
+2. 💰 Payment of KSH 90,000 ready to send
+3. ⏰ Please confirm bank details for transfer
+4. 🔥 Ready to start the 6-week development timeline
+
+📞 PAYMENT CONFIRMATION:
+I will send payment confirmation once bank details are confirmed.
+Project timeline can begin immediately after payment receipt.
+
+This invoice has been digitally signed and approved. Please proceed with the project as outlined.
 
 Best regards,
-${clientCompany}`;
+${clientCompany}
+
+---
+📧 Auto-generated from signed invoice system
+🔗 Original form: ${currentURL}
+📅 Generated: ${new Date().toLocaleString()}`;
 
             const emailParams = new URLSearchParams({
                 subject: subject,
@@ -1279,7 +1422,14 @@ ${clientCompany}`;
             const recipientString = recipients.join(';');
             window.open(`mailto:${recipientString}?${emailParams.toString()}`);
             
-            showStatus('Email client opened with invoice details', 'success');
+            showStatus('✅ Email opened! Please attach the PDF invoice before sending.', 'success');
+            
+            // Show additional instructions
+            setTimeout(() => {
+                if (confirm('📄 Would you like to download the PDF now to attach to your email?')) {
+                    generatePDF();
+                }
+            }, 1000);
         }
 
         // Save data function
@@ -1302,7 +1452,7 @@ ${clientCompany}`;
         function resetForm() {
             if (confirm('Are you sure you want to reset all fields? This will clear all entered data.')) {
                 // Clear all input fields
-                document.getElementById('clientCompany').value = 'Letrum Agencies';
+                document.getElementById('clientCompany').value = '';
                 document.getElementById('clientAddress').value = '';
                 document.getElementById('clientEmail').value = '';
                 document.getElementById('clientPhone').value = '';
@@ -1312,7 +1462,7 @@ ${clientCompany}`;
                 clearSignature();
                 
                 // Update display
-                document.getElementById('displayClientCompany').textContent = 'Letrum Agencies';
+                document.getElementById('displayClientCompany').textContent = '';
                 
                 // Clear saved data
                 localStorage.removeItem('letrum_invoice_data');
@@ -1326,7 +1476,7 @@ ${clientCompany}`;
             const savedData = localStorage.getItem('letrum_invoice_data');
             if (savedData) {
                 const data = JSON.parse(savedData);
-                document.getElementById('clientCompany').value = data.company || 'Letrum Agencies';
+                document.getElementById('clientCompany').value = data.company || '';
                 document.getElementById('clientAddress').value = data.address || '';
                 document.getElementById('clientEmail').value = data.email || '';
                 document.getElementById('clientPhone').value = data.phone || '';
@@ -1342,9 +1492,12 @@ ${clientCompany}`;
                     document.getElementById('clientSignatureImg').style.display = 'block';
                     document.getElementById('signaturePlaceholder').style.display = 'none';
                 }
+
+                // Provider signature is generated programmatically on load
+                createProviderSignatureImage();
                 
                 // Update display name
-                document.getElementById('displayClientCompany').textContent = data.company || 'Letrum Agencies';
+                document.getElementById('displayClientCompany').textContent = data.company || '';
                 
                 showStatus('Saved data loaded successfully!', 'success');
             } else {
@@ -1359,6 +1512,41 @@ ${clientCompany}`;
             document.getElementById('clientSignatureImg').style.display = 'none';
             document.getElementById('signaturePlaceholder').style.display = 'inline';
             showStatus('Signature cleared', 'success');
+        }
+
+        // Create a hardcoded, stylized provider signature image from the name
+        function createProviderSignatureImage() {
+            const name = 'Cliff Okiko';
+            // create canvas
+            const canvas = document.createElement('canvas');
+            canvas.width = 600;
+            canvas.height = 160;
+            const ctx = canvas.getContext('2d');
+            // background transparent
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // stylized text
+            ctx.fillStyle = '#0b3d0b';
+            ctx.font = '48px "Great Vibes", "Brush Script MT", "Pacifico", cursive';
+            ctx.textBaseline = 'middle';
+            // center text
+            const textWidth = ctx.measureText(name).width;
+            ctx.fillText(name, (canvas.width - textWidth) / 2, canvas.height / 2 + 10);
+            // slight underline flourish
+            ctx.strokeStyle = 'rgba(11,61,11,0.7)';
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.moveTo((canvas.width - textWidth) / 2 + 10, canvas.height / 2 + 30);
+            ctx.quadraticCurveTo(canvas.width / 2, canvas.height / 2 + 50, (canvas.width + textWidth) / 2 - 10, canvas.height / 2 + 30);
+            ctx.stroke();
+
+            const dataUrl = canvas.toDataURL('image/png');
+            providerSignatureDataUrl = dataUrl;
+
+            const img = document.getElementById('providerSignatureImg');
+            if (img) {
+                img.src = dataUrl;
+                img.style.display = 'block';
+            }
         }
 
         // Save signature function
@@ -1379,7 +1567,139 @@ ${clientCompany}`;
             showStatus('Signature saved successfully!', 'success');
         }
 
-        // Add keyboard shortcuts
+        // Provider signature clear
+        
+
+        // Generate shareable link with tracking
+        function generateShareableLink() {
+            const clientCompany = document.getElementById('clientCompany').value || 'Client';
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+            const trackingId = `INV-${timestamp}`;
+            const currentURL = window.location.href;
+            
+            // Create a reference link with tracking info
+            const shareableInfo = `
+📋 INVOICE TRACKING INFORMATION:
+
+🔗 Invoice Link: ${currentURL}
+📅 Reference ID: ${trackingId}
+🏢 Client: ${clientCompany}
+📧 For: Letrum Travel Platform Development
+💰 Amount: KSH 180,000
+
+📝 INSTRUCTIONS FOR CLIENT:
+1. Open the link above
+2. Fill in your company details
+3. Sign digitally using the signature pad
+4. Download PDF and attach to email
+5. Send to cliff.okiko@gmail.com & muthaigasam222@gmail.com
+
+⚠️ NOTE: Each device saves data locally. Please complete the process on the same device.
+            `;
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(shareableInfo).then(() => {
+                showStatus('📋 Tracking info copied to clipboard! Share this with your client.', 'success');
+            }).catch(() => {
+                // Fallback: show in alert
+                alert(shareableInfo);
+                showStatus('📋 Tracking info displayed. Please copy manually.', 'success');
+            });
+        }
+
+        // Enhanced download and email function (main action)
+        function downloadAndEmail() {
+            // Validation checks
+            const clientCompany = document.getElementById('clientCompany').value;
+            const clientEmail = document.getElementById('clientEmail').value;
+            const clientAddress = document.getElementById('clientAddress').value;
+            const clientPhone = document.getElementById('clientPhone').value;
+
+            // Check required fields
+            if (!clientCompany || clientCompany === 'Letrum Agencies') {
+                showStatus('❌ Please enter your company name', 'error');
+                document.getElementById('clientCompany').focus();
+                return;
+            }
+            if (!clientEmail) {
+                showStatus('❌ Please enter your email address', 'error');
+                document.getElementById('clientEmail').focus();
+                return;
+            }
+            if (!clientAddress) {
+                showStatus('❌ Please enter your company address', 'error');
+                document.getElementById('clientAddress').focus();
+                return;
+            }
+            if (!clientPhone) {
+                showStatus('❌ Please enter your phone number', 'error');
+                document.getElementById('clientPhone').focus();
+                return;
+            }
+            if (!hasSignature) {
+                showStatus('❌ Please add your digital signature before proceeding', 'error');
+                return;
+            }
+
+            showStatus('⚡ Generating your signed invoice PDF...', 'warning');
+
+            // Use generatePDF which returns a promise
+            generatePDF().then(() => {
+                // After PDF is ready, open detailed email body
+                setTimeout(function() {
+                        var recipients = ['cliff.okiko@gmail.com', 'muthaigasam222@gmail.com'];
+                        var subject = `✅ SIGNED INVOICE - ${clientCompany} - Letrum Travel Platform Development`;
+                        var currentURL = window.location.href;
+                        var timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+
+                        // Build body with real newlines then encode once via URLSearchParams
+                        var bodyPlain = `Dear Cliff Okiko,\n\n` +
+                            `I have completed and digitally signed the invoice for the Letrum Travel Platform development project.\n\n` +
+                            `📋 CLIENT DETAILS:\n` +
+                            `Company: ${clientCompany}\n` +
+                            `Email: ${clientEmail || 'Not provided'}\n` +
+                            `Address: ${clientAddress || 'Not provided'}\n` +
+                            `Phone: ${clientPhone || 'Not provided'}\n\n` +
+                            `📄 INVOICE DETAILS:\n` +
+                            `Invoice Number: KG-LTR-2025-001\n` +
+                            `Total Amount: KSH 180,000\n` +
+                            `Signed Date: ${new Date().toLocaleDateString()}\n\n` +
+                            `💰 PAYMENT SCHEDULE AGREED:\n` +
+                            `✅ 50% (KSH 90,000) - Upon contract signing - READY TO PAY\n` +
+                            `⏳ 30% (KSH 54,000) - Frontend completion demo\n` +
+                            `⏳ 20% (KSH 36,000) - Live deployment\n\n` +
+                            `📎 SIGNED INVOICE:\n` +
+                            `I have downloaded the signed PDF invoice and will attach it to this email.\n` +
+                            `Original Invoice Link: ${currentURL}\n` +
+                            `Reference ID: INV-${timestamp}\n\n` +
+                            `🚀 NEXT STEPS:\n` +
+                            `1. Invoice signed and attached\n` +
+                            `2. Ready to send KSH 90,000 deposit to 0792867928\n` +
+                            `3. Ready to begin 6-week development timeline\n` +
+                            `4. Excited to start this project!\n\n` +
+                            `📞 PAYMENT CONFIRMATION:\n` +
+                            `Our preferred payment method is MPESA to this number (0792867928)\n` +
+                            `Bank Details available on request.\n\n` +
+                            `This invoice has been digitally signed and approved. Please proceed with the project as outlined.\n\n` +
+                            `Best regards,\n${clientCompany}\n\n` +
+                            `---\n` +
+                            `📧 Auto-generated from signed invoice system\n` +
+                            `🔗 Original form: ${currentURL}\n` +
+                            `📅 Generated: ${new Date().toLocaleString()}`;
+
+                        // Use URLSearchParams for broader compatibility
+                        var params = new URLSearchParams({ subject: subject, body: bodyPlain });
+                        // Use comma-separated recipients (more widely supported)
+                        var mailto = 'mailto:' + recipients.join(',') + '?' + params.toString();
+                        window.open(mailto);
+                    showStatus('✅ Email opened! Please attach the downloaded PDF before sending.', 'success');
+                }, 800);
+            }).catch((err) => {
+                showStatus('❌ Could not generate PDF; email not opened.', 'error');
+                console.error(err);
+            });
+        }
+        
         document.addEventListener('keydown', function(e) {
             if (e.ctrlKey || e.metaKey) {
                 switch(e.key) {
