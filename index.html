@@ -12,17 +12,32 @@
     
     <!-- Custom Styles -->
     <link rel="stylesheet" href="invoice-styles.css">
+    
+    <!-- PDF-specific meta tags -->
+    <style>
+        /* Ensure consistent rendering across browsers */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        
+        /* Improve font rendering for PDF */
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <!-- Header -->
-        <div class="header">
+        <header class="header">
             <div class="company-name">CLIFF OKIKO</div>
             <div class="company-tagline">Software Development & Digital Solutions</div>
-        </div>
+        </header>
 
         <!-- Invoice Details -->
-        <div class="invoice-details">
+        <section class="invoice-details">
             <div class="invoice-info">
                 <div class="invoice-title">INVOICE</div>
                 <div class="invoice-meta">
@@ -36,19 +51,19 @@
                 <h3>BILL TO:</h3>
                 <div class="form-group">
                     <label class="editable-label">Company Name:</label>
-                    <input type="text" class="editable-field" placeholder="Enter company name" id="clientCompany">
+                    <input type="text" class="editable-field" placeholder="Enter company name" id="clientCompany" autocomplete="organization">
                 </div>
                 <div class="form-group">
                     <label class="editable-label">Address:</label>
-                    <input type="text" class="editable-field" placeholder="Enter your address" id="clientAddress">
+                    <input type="text" class="editable-field" placeholder="Enter your address" id="clientAddress" autocomplete="street-address">
                 </div>
                 <div class="form-group">
                     <label class="editable-label">Email:</label>
-                    <input type="email" class="editable-field" placeholder="Enter your email" id="clientEmail">
+                    <input type="email" class="editable-field" placeholder="allanthathi@gmail.com" id="clientEmail" autocomplete="email">
                 </div>
                 <div class="form-group">
                     <label class="editable-label">Phone:</label>
-                    <input type="tel" class="editable-field" placeholder="Enter your phone number" id="clientPhone">
+                    <input type="tel" class="editable-field" placeholder="0722678252" id="clientPhone" autocomplete="tel">
                 </div>
             </div>
             
@@ -58,10 +73,10 @@
                 <p>Phone: +254 792 867 928</p>
                 <p>Location: Nairobi, Kenya</p>
             </div>
-        </div>
+        </section>
 
         <!-- Action Buttons -->
-        <div class="action-buttons no-print">
+        <section class="action-buttons no-print">
             <h3>📋 INVOICE COMPLETION STEPS</h3>
             
             <div class="instruction-box">
@@ -76,38 +91,38 @@
                 </p>
             </div>
             
-            <div class="status-message" id="statusMessage"></div>
+            <div class="status-message" id="statusMessage" style="display: none;"></div>
             
             <div class="button-group">
-                <button class="btn btn-primary" onclick="downloadAndEmail()">
+                <button class="btn btn-primary" onclick="downloadAndEmail()" type="button">
                     ⚡ Quick: PDF + Email
                 </button>
-                <button class="btn btn-secondary" onclick="generatePDF()">📄 Download PDF</button>
-                <button class="btn btn-secondary" onclick="printInvoice()">🖨️ Print</button>
+                <button class="btn btn-secondary" onclick="generatePDF()" type="button">📄 Download PDF</button>
+                <button class="btn btn-secondary" onclick="printInvoice()" type="button">🖨️ Print</button>
             </div>
             
             <p class="help-text">
                 <strong>Need help?</strong> Email cliff.okiko@gmail.com for assistance
             </p>
-        </div>
+        </section>
 
         <!-- Digital Signature Section -->
-        <div class="signature-section-digital no-print">
-            <h3>✍️ DIGITAL SIGNATURE</h3>
+        <section class="signature-section-digital no-print">
+            <h3>✏️ DIGITAL SIGNATURE</h3>
             <p class="signature-instructions">Client signs below to authorize this invoice digitally.</p>
 
             <div class="signature-container">
-                <canvas id="signatureCanvas" class="signature-canvas"></canvas>
+                <canvas id="signatureCanvas" class="signature-canvas" width="400" height="150"></canvas>
                 <div class="signature-controls">
-                    <button class="btn btn-secondary" onclick="clearSignature()">Clear</button>
-                    <button class="btn btn-primary" onclick="saveSignature()">Save Signature</button>
+                    <button class="btn btn-secondary" onclick="clearSignature()" type="button">Clear</button>
+                    <button class="btn btn-primary" onclick="saveSignature()" type="button">Save Signature</button>
                 </div>
                 <p class="signature-hint">Sign above using your mouse or touch screen</p>
             </div>
-        </div>
+        </section>
 
         <!-- Project Overview -->
-        <div class="project-overview">
+        <section class="project-overview">
             <h2>PROJECT OVERVIEW</h2>
             <div class="project-details">
                 <p><strong>Project:</strong> Letrum Travels - Complete Travel Agency Platform</p>
@@ -115,459 +130,463 @@
                 <p><strong>Technology Stack:</strong> Next.js, NestJS, PostgreSQL, TypeScript</p>
                 <p><strong>Deployment:</strong> Frontend (Vercel) + Backend (Render)</p>
             </div>
-        </div>
+        </section>
 
         <!-- Scope of Work -->
-        <h2 class="section-title">SCOPE OF WORK</h2>
-        
-        <div class="deliverables">
-            <div class="deliverable-item">
-                <h4>1. Flight Booking Engine</h4>
-                <p>Integration with flight APIs, search and compare prices, detailed flight information, secure booking and payment processing</p>
+        <section>
+            <h2 class="section-title">SCOPE OF WORK</h2>
+            
+            <div class="deliverables">
+                <div class="deliverable-item">
+                    <h4>1. Flight Booking Engine</h4>
+                    <p>Integration with flight APIs, search and compare prices, detailed flight information, secure booking and payment processing</p>
+                </div>
+                <div class="deliverable-item">
+                    <h4>2. Car Rental System</h4>
+                    <p>Advanced search by location, live availability, dynamic pricing, comprehensive booking summary</p>
+                </div>
+                <div class="deliverable-item">
+                    <h4>3. Visa Processing</h4>
+                    <p>Comprehensive application forms, document upload, admin dashboard, status tracking</p>
+                </div>
+                <div class="deliverable-item">
+                    <h4>4. Tour & Safari Packages</h4>
+                    <p>Stunning package galleries, detailed itineraries, advanced filtering, instant booking system</p>
+                </div>
+                <div class="deliverable-item">
+                    <h4>5. E-Commerce Platform</h4>
+                    <p>Complete travel products catalog, shopping cart, inventory management, order tracking</p>
+                </div>
+                <div class="deliverable-item">
+                    <h4>6. Client Account Management</h4>
+                    <p>User registration, booking history, visa status tracking, personal preferences</p>
+                </div>
             </div>
-            <div class="deliverable-item">
-                <h4>2. Car Rental System</h4>
-                <p>Advanced search by location, live availability, dynamic pricing, comprehensive booking summary</p>
-            </div>
-            <div class="deliverable-item">
-                <h4>3. Visa Processing</h4>
-                <p>Comprehensive application forms, document upload, admin dashboard, status tracking</p>
-            </div>
-            <div class="deliverable-item">
-                <h4>4. Tour & Safari Packages</h4>
-                <p>Stunning package galleries, detailed itineraries, advanced filtering, instant booking system</p>
-            </div>
-            <div class="deliverable-item">
-                <h4>5. E-Commerce Platform</h4>
-                <p>Complete travel products catalog, shopping cart, inventory management, order tracking</p>
-            </div>
-            <div class="deliverable-item">
-                <h4>6. Client Account Management</h4>
-                <p>User registration, booking history, visa status tracking, personal preferences</p>
-            </div>
-        </div>
+        </section>
 
         <!-- Cost Breakdown -->
-        <h2 class="section-title">DETAILED COST BREAKDOWN</h2>
-        
-        <!-- Frontend Development -->
-        <div class="cost-section">
-            <h3 class="cost-section-title">FRONTEND DEVELOPMENT (Next.js + TypeScript)</h3>
+        <section>
+            <h2 class="section-title">DETAILED COST BREAKDOWN</h2>
             
-            <h4 class="subsection-title completed-marker">✅ COMPLETED WORK (30% Frontend Complete)</h4>
-            
-            <div class="table-responsive">
-                <table class="cost-table">
-                    <thead>
-                        <tr>
-                            <th>Component</th>
-                            <th>Hrs</th>
-                            <th>Rate</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="completed">
-                            <td>Project Setup & Base Architecture</td>
-                            <td>4</td>
-                            <td>1,300</td>
-                            <td class="amount">5,200</td>
-                        </tr>
-                        <tr class="completed">
-                            <td>Basic Landing Page Structure</td>
-                            <td>4</td>
-                            <td>1,300</td>
-                            <td class="amount">5,200</td>
-                        </tr>
-                        <tr class="completed">
-                            <td>Authentication UI Components</td>
-                            <td>5</td>
-                            <td>1,300</td>
-                            <td class="amount">6,500</td>
-                        </tr>
-                        <tr class="completed">
-                            <td>Dashboard Layout & Navigation</td>
-                            <td>4</td>
-                            <td>1,300</td>
-                            <td class="amount">5,200</td>
-                        </tr>
-                        <tr class="completed">
-                            <td>Basic Routing & Components Setup</td>
-                            <td>3</td>
-                            <td>1,300</td>
-                            <td class="amount">3,900</td>
-                        </tr>
-                        <tr class="completed">
-                            <td>Initial Flight Interface Framework</td>
-                            <td>4</td>
-                            <td>1,300</td>
-                            <td class="amount">5,200</td>
-                        </tr>
-                        <tr class="completed">
-                            <td>Tours Section Basic Layout</td>
-                            <td>3</td>
-                            <td>1,300</td>
-                            <td class="amount">3,900</td>
-                        </tr>
-                        <tr class="subtotal-row">
-                            <td colspan="3"><strong>Frontend Completed Subtotal:</strong></td>
-                            <td class="amount"><strong>35,100</strong></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <!-- Frontend Development -->
+            <div class="cost-section">
+                <h3 class="cost-section-title">FRONTEND DEVELOPMENT (Next.js + TypeScript)</h3>
+                
+                <h4 class="subsection-title completed-marker">✅ COMPLETED WORK (30% Frontend Complete)</h4>
+                
+                <div class="table-responsive">
+                    <table class="cost-table">
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Hrs</th>
+                                <th>Rate</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="completed">
+                                <td>Project Setup & Base Architecture</td>
+                                <td>4</td>
+                                <td>1,300</td>
+                                <td class="amount">5,200</td>
+                            </tr>
+                            <tr class="completed">
+                                <td>Basic Landing Page Structure</td>
+                                <td>4</td>
+                                <td>1,300</td>
+                                <td class="amount">5,200</td>
+                            </tr>
+                            <tr class="completed">
+                                <td>Authentication UI Components</td>
+                                <td>5</td>
+                                <td>1,300</td>
+                                <td class="amount">6,500</td>
+                            </tr>
+                            <tr class="completed">
+                                <td>Dashboard Layout & Navigation</td>
+                                <td>4</td>
+                                <td>1,300</td>
+                                <td class="amount">5,200</td>
+                            </tr>
+                            <tr class="completed">
+                                <td>Basic Routing & Components Setup</td>
+                                <td>3</td>
+                                <td>1,300</td>
+                                <td class="amount">3,900</td>
+                            </tr>
+                            <tr class="completed">
+                                <td>Initial Flight Interface Framework</td>
+                                <td>4</td>
+                                <td>1,300</td>
+                                <td class="amount">5,200</td>
+                            </tr>
+                            <tr class="completed">
+                                <td>Tours Section Basic Layout</td>
+                                <td>3</td>
+                                <td>1,300</td>
+                                <td class="amount">3,900</td>
+                            </tr>
+                            <tr class="subtotal-row">
+                                <td colspan="3"><strong>Frontend Completed Subtotal:</strong></td>
+                                <td class="amount"><strong>35,100</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h4 class="subsection-title pending-marker">📄 PENDING WORK (70% Frontend Remaining)</h4>
+                
+                <div class="table-responsive">
+                    <table class="cost-table">
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Hrs</th>
+                                <th>Rate</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="pending">
+                                <td>Complete Landing Page with Modern Effects</td>
+                                <td>8</td>
+                                <td>1,300</td>
+                                <td class="amount">10,400</td>
+                            </tr>
+                            <tr class="pending">
+                                <td>Flight Booking Interface & Search System</td>
+                                <td>12</td>
+                                <td>1,300</td>
+                                <td class="amount">15,600</td>
+                            </tr>
+                            <tr class="pending">
+                                <td>Car Rental Interface with Advanced Filtering</td>
+                                <td>10</td>
+                                <td>1,300</td>
+                                <td class="amount">13,000</td>
+                            </tr>
+                            <tr class="pending">
+                                <td>Premium Tours Gallery with Booking System</td>
+                                <td>12</td>
+                                <td>1,300</td>
+                                <td class="amount">15,600</td>
+                            </tr>
+                            <tr class="pending">
+                                <td>Visa Processing Forms & Document Upload</td>
+                                <td>8</td>
+                                <td>1,300</td>
+                                <td class="amount">10,400</td>
+                            </tr>
+                            <tr class="pending">
+                                <td>Complete E-commerce Platform & Shopping Cart</td>
+                                <td>14</td>
+                                <td>1,300</td>
+                                <td class="amount">18,200</td>
+                            </tr>
+                            <tr class="pending">
+                                <td>User Dashboard & Account Management</td>
+                                <td>8</td>
+                                <td>1,300</td>
+                                <td class="amount">10,400</td>
+                            </tr>
+                            <tr class="pending">
+                                <td>Admin Panel Frontend</td>
+                                <td>10</td>
+                                <td>1,300</td>
+                                <td class="amount">13,000</td>
+                            </tr>
+                            <tr class="pending">
+                                <td>Additional Pages (About, Contact, Blog)</td>
+                                <td>6</td>
+                                <td>1,300</td>
+                                <td class="amount">7,800</td>
+                            </tr>
+                            <tr class="pending">
+                                <td>Mobile Optimization & Responsive Design</td>
+                                <td>10</td>
+                                <td>1,300</td>
+                                <td class="amount">13,000</td>
+                            </tr>
+                            <tr class="pending">
+                                <td>Advanced Animations & Interactive Components</td>
+                                <td>6</td>
+                                <td>1,300</td>
+                                <td class="amount">7,800</td>
+                            </tr>
+                            <tr class="pending">
+                                <td>Payment Gateway Frontend Integration</td>
+                                <td>6</td>
+                                <td>1,300</td>
+                                <td class="amount">7,800</td>
+                            </tr>
+                            <tr class="subtotal-row">
+                                <td colspan="3"><strong>Frontend Pending Subtotal:</strong></td>
+                                <td class="amount"><strong>163,000</strong></td>
+                            </tr>
+                            <tr class="total-row">
+                                <td colspan="3"><strong>Frontend Total:</strong></td>
+                                <td><strong>198,100</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            
-            <h4 class="subsection-title pending-marker">🔄 PENDING WORK (70% Frontend Remaining)</h4>
-            
-            <div class="table-responsive">
-                <table class="cost-table">
-                    <thead>
-                        <tr>
-                            <th>Component</th>
-                            <th>Hrs</th>
-                            <th>Rate</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="pending">
-                            <td>Complete Landing Page with Modern Effects</td>
-                            <td>8</td>
-                            <td>1,300</td>
-                            <td class="amount">10,400</td>
-                        </tr>
-                        <tr class="pending">
-                            <td>Flight Booking Interface & Search System</td>
-                            <td>12</td>
-                            <td>1,300</td>
-                            <td class="amount">15,600</td>
-                        </tr>
-                        <tr class="pending">
-                            <td>Car Rental Interface with Advanced Filtering</td>
-                            <td>10</td>
-                            <td>1,300</td>
-                            <td class="amount">13,000</td>
-                        </tr>
-                        <tr class="pending">
-                            <td>Premium Tours Gallery with Booking System</td>
-                            <td>12</td>
-                            <td>1,300</td>
-                            <td class="amount">15,600</td>
-                        </tr>
-                        <tr class="pending">
-                            <td>Visa Processing Forms & Document Upload</td>
-                            <td>8</td>
-                            <td>1,300</td>
-                            <td class="amount">10,400</td>
-                        </tr>
-                        <tr class="pending">
-                            <td>Complete E-commerce Platform & Shopping Cart</td>
-                            <td>14</td>
-                            <td>1,300</td>
-                            <td class="amount">18,200</td>
-                        </tr>
-                        <tr class="pending">
-                            <td>User Dashboard & Account Management</td>
-                            <td>8</td>
-                            <td>1,300</td>
-                            <td class="amount">10,400</td>
-                        </tr>
-                        <tr class="pending">
-                            <td>Admin Panel Frontend</td>
-                            <td>10</td>
-                            <td>1,300</td>
-                            <td class="amount">13,000</td>
-                        </tr>
-                        <tr class="pending">
-                            <td>Additional Pages (About, Contact, Blog)</td>
-                            <td>6</td>
-                            <td>1,300</td>
-                            <td class="amount">7,800</td>
-                        </tr>
-                        <tr class="pending">
-                            <td>Mobile Optimization & Responsive Design</td>
-                            <td>10</td>
-                            <td>1,300</td>
-                            <td class="amount">13,000</td>
-                        </tr>
-                        <tr class="pending">
-                            <td>Advanced Animations & Interactive Components</td>
-                            <td>6</td>
-                            <td>1,300</td>
-                            <td class="amount">7,800</td>
-                        </tr>
-                        <tr class="pending">
-                            <td>Payment Gateway Frontend Integration</td>
-                            <td>6</td>
-                            <td>1,300</td>
-                            <td class="amount">7,800</td>
-                        </tr>
-                        <tr class="subtotal-row">
-                            <td colspan="3"><strong>Frontend Pending Subtotal:</strong></td>
-                            <td class="amount"><strong>163,000</strong></td>
-                        </tr>
-                        <tr class="total-row">
-                            <td colspan="3"><strong>Frontend Total:</strong></td>
-                            <td><strong>198,100</strong></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
 
-        <!-- Backend Development -->
-        <div class="cost-section">
-            <h3 class="cost-section-title">BACKEND DEVELOPMENT (NestJS + PostgreSQL)</h3>
-            
-            <h4 class="subsection-title completed-marker">✅ COMPLETED WORK (80% Backend Complete)</h4>
-            
-            <div class="table-responsive">
-                <table class="cost-table">
-                    <thead>
-                        <tr>
-                            <th>Component</th>
-                            <th>Hrs</th>
-                            <th>Rate</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="completed">
-                            <td>RESTful API Architecture & Setup</td>
-                            <td>6</td>
-                            <td>1,300</td>
-                            <td class="amount">7,800</td>
-                        </tr>
-                        <tr class="completed">
-                            <td>JWT Authentication with Role-Based Access</td>
-                            <td>6</td>
-                            <td>1,300</td>
-                            <td class="amount">7,800</td>
-                        </tr>
-                        <tr class="completed">
-                            <td>PostgreSQL Database Design with Prisma ORM</td>
-                            <td>6</td>
-                            <td>1,300</td>
-                            <td class="amount">7,800</td>
-                        </tr>
-                        <tr class="completed">
-                            <td>User Management System</td>
-                            <td>5</td>
-                            <td>1,300</td>
-                            <td class="amount">6,500</td>
-                        </tr>
-                        <tr class="completed">
-                            <td>Tours & Safari Management API</td>
-                            <td>8</td>
-                            <td>1,300</td>
-                            <td class="amount">10,400</td>
-                        </tr>
-                        <tr class="completed">
-                            <td>Flight Management System API</td>
-                            <td>7</td>
-                            <td>1,300</td>
-                            <td class="amount">9,100</td>
-                        </tr>
-                        <tr class="completed">
-                            <td>Car Rental Management API</td>
-                            <td>7</td>
-                            <td>1,300</td>
-                            <td class="amount">9,100</td>
-                        </tr>
-                        <tr class="completed">
-                            <td>Visa Processing Backend System</td>
-                            <td>6</td>
-                            <td>1,300</td>
-                            <td class="amount">7,800</td>
-                        </tr>
-                        <tr class="completed">
-                            <td>E-commerce Backend & Inventory</td>
-                            <td>10</td>
-                            <td>1,300</td>
-                            <td class="amount">13,000</td>
-                        </tr>
-                        <tr class="completed">
-                            <td>Data Models & Relationships</td>
-                            <td>5</td>
-                            <td>1,300</td>
-                            <td class="amount">6,500</td>
-                        </tr>
-                        <tr class="completed">
-                            <td>API Documentation with Swagger</td>
-                            <td>4</td>
-                            <td>1,300</td>
-                            <td class="amount">5,200</td>
-                        </tr>
-                        <tr class="completed">
-                            <td>Data Validation with Class-Validator</td>
-                            <td>3</td>
-                            <td>1,300</td>
-                            <td class="amount">3,900</td>
-                        </tr>
-                        <tr class="completed">
-                            <td>CORS Configuration & Security</td>
-                            <td>3</td>
-                            <td>1,300</td>
-                            <td class="amount">3,900</td>
-                        </tr>
-                        <tr class="completed">
-                            <td>Database Migrations & Seeding</td>
-                            <td>4</td>
-                            <td>1,300</td>
-                            <td class="amount">5,200</td>
-                        </tr>
-                        <tr class="subtotal-row">
-                            <td colspan="3"><strong>Backend Completed Subtotal:</strong></td>
-                            <td class="amount"><strong>119,900</strong></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <!-- Backend Development -->
+            <div class="cost-section">
+                <h3 class="cost-section-title">BACKEND DEVELOPMENT (NestJS + PostgreSQL)</h3>
+                
+                <h4 class="subsection-title completed-marker">✅ COMPLETED WORK (80% Backend Complete)</h4>
+                
+                <div class="table-responsive">
+                    <table class="cost-table">
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Hrs</th>
+                                <th>Rate</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="completed">
+                                <td>RESTful API Architecture & Setup</td>
+                                <td>6</td>
+                                <td>1,300</td>
+                                <td class="amount">7,800</td>
+                            </tr>
+                            <tr class="completed">
+                                <td>JWT Authentication with Role-Based Access</td>
+                                <td>6</td>
+                                <td>1,300</td>
+                                <td class="amount">7,800</td>
+                            </tr>
+                            <tr class="completed">
+                                <td>PostgreSQL Database Design with Prisma ORM</td>
+                                <td>6</td>
+                                <td>1,300</td>
+                                <td class="amount">7,800</td>
+                            </tr>
+                            <tr class="completed">
+                                <td>User Management System</td>
+                                <td>5</td>
+                                <td>1,300</td>
+                                <td class="amount">6,500</td>
+                            </tr>
+                            <tr class="completed">
+                                <td>Tours & Safari Management API</td>
+                                <td>8</td>
+                                <td>1,300</td>
+                                <td class="amount">10,400</td>
+                            </tr>
+                            <tr class="completed">
+                                <td>Flight Management System API</td>
+                                <td>7</td>
+                                <td>1,300</td>
+                                <td class="amount">9,100</td>
+                            </tr>
+                            <tr class="completed">
+                                <td>Car Rental Management API</td>
+                                <td>7</td>
+                                <td>1,300</td>
+                                <td class="amount">9,100</td>
+                            </tr>
+                            <tr class="completed">
+                                <td>Visa Processing Backend System</td>
+                                <td>6</td>
+                                <td>1,300</td>
+                                <td class="amount">7,800</td>
+                            </tr>
+                            <tr class="completed">
+                                <td>E-commerce Backend & Inventory</td>
+                                <td>10</td>
+                                <td>1,300</td>
+                                <td class="amount">13,000</td>
+                            </tr>
+                            <tr class="completed">
+                                <td>Data Models & Relationships</td>
+                                <td>5</td>
+                                <td>1,300</td>
+                                <td class="amount">6,500</td>
+                            </tr>
+                            <tr class="completed">
+                                <td>API Documentation with Swagger</td>
+                                <td>4</td>
+                                <td>1,300</td>
+                                <td class="amount">5,200</td>
+                            </tr>
+                            <tr class="completed">
+                                <td>Data Validation with Class-Validator</td>
+                                <td>3</td>
+                                <td>1,300</td>
+                                <td class="amount">3,900</td>
+                            </tr>
+                            <tr class="completed">
+                                <td>CORS Configuration & Security</td>
+                                <td>3</td>
+                                <td>1,300</td>
+                                <td class="amount">3,900</td>
+                            </tr>
+                            <tr class="completed">
+                                <td>Database Migrations & Seeding</td>
+                                <td>4</td>
+                                <td>1,300</td>
+                                <td class="amount">5,200</td>
+                            </tr>
+                            <tr class="subtotal-row">
+                                <td colspan="3"><strong>Backend Completed Subtotal:</strong></td>
+                                <td class="amount"><strong>119,900</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h4 class="subsection-title pending-marker">📄 PENDING WORK (20% Backend Remaining)</h4>
+                
+                <div class="table-responsive">
+                    <table class="cost-table">
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Hrs</th>
+                                <th>Rate</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="pending">
+                                <td>Live Flight API Integration</td>
+                                <td>6</td>
+                                <td>1,300</td>
+                                <td class="amount">7,800</td>
+                            </tr>
+                            <tr class="pending">
+                                <td>Payment Gateway Backend Integration</td>
+                                <td>5</td>
+                                <td>1,300</td>
+                                <td class="amount">6,500</td>
+                            </tr>
+                            <tr class="pending">
+                                <td>Email Notification System Setup</td>
+                                <td>4</td>
+                                <td>1,300</td>
+                                <td class="amount">5,200</td>
+                            </tr>
+                            <tr class="pending">
+                                <td>Admin Panel Backend Enhancements</td>
+                                <td>3</td>
+                                <td>1,300</td>
+                                <td class="amount">3,900</td>
+                            </tr>
+                            <tr class="pending">
+                                <td>Performance Optimization & Caching</td>
+                                <td>2</td>
+                                <td>1,300</td>
+                                <td class="amount">2,600</td>
+                            </tr>
+                            <tr class="subtotal-row">
+                                <td colspan="3"><strong>Backend Pending Subtotal:</strong></td>
+                                <td class="amount"><strong>26,000</strong></td>
+                            </tr>
+                            <tr class="total-row">
+                                <td colspan="3"><strong>Backend Total:</strong></td>
+                                <td><strong>145,900</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            
-            <h4 class="subsection-title pending-marker">🔄 PENDING WORK (20% Backend Remaining)</h4>
-            
-            <div class="table-responsive">
-                <table class="cost-table">
-                    <thead>
-                        <tr>
-                            <th>Component</th>
-                            <th>Hrs</th>
-                            <th>Rate</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="pending">
-                            <td>Live Flight API Integration</td>
-                            <td>6</td>
-                            <td>1,300</td>
-                            <td class="amount">7,800</td>
-                        </tr>
-                        <tr class="pending">
-                            <td>Payment Gateway Backend Integration</td>
-                            <td>5</td>
-                            <td>1,300</td>
-                            <td class="amount">6,500</td>
-                        </tr>
-                        <tr class="pending">
-                            <td>Email Notification System Setup</td>
-                            <td>4</td>
-                            <td>1,300</td>
-                            <td class="amount">5,200</td>
-                        </tr>
-                        <tr class="pending">
-                            <td>Admin Panel Backend Enhancements</td>
-                            <td>3</td>
-                            <td>1,300</td>
-                            <td class="amount">3,900</td>
-                        </tr>
-                        <tr class="pending">
-                            <td>Performance Optimization & Caching</td>
-                            <td>2</td>
-                            <td>1,300</td>
-                            <td class="amount">2,600</td>
-                        </tr>
-                        <tr class="subtotal-row">
-                            <td colspan="3"><strong>Backend Pending Subtotal:</strong></td>
-                            <td class="amount"><strong>26,000</strong></td>
-                        </tr>
-                        <tr class="total-row">
-                            <td colspan="3"><strong>Backend Total:</strong></td>
-                            <td><strong>145,900</strong></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
 
-        <!-- Integration & Deployment -->
-        <div class="cost-section">
-            <h3 class="cost-section-title">INTEGRATION & DEPLOYMENT</h3>
-            
-            <div class="table-responsive">
-                <table class="cost-table">
-                    <thead>
-                        <tr>
-                            <th>Component</th>
-                            <th>Hrs</th>
-                            <th>Rate</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="completed">
-                            <td>Development Environment Setup</td>
-                            <td>3</td>
-                            <td>1,300</td>
-                            <td class="amount">3,900</td>
-                        </tr>
-                        <tr class="completed">
-                            <td>Basic Frontend-Backend Connection</td>
-                            <td>3</td>
-                            <td>1,300</td>
-                            <td class="amount">3,900</td>
-                        </tr>
-                        <tr class="completed">
-                            <td>API Testing & Documentation</td>
-                            <td>2</td>
-                            <td>1,300</td>
-                            <td class="amount">2,600</td>
-                        </tr>
-                        <tr class="subtotal-row">
-                            <td colspan="3"><strong>Integration Completed:</strong></td>
-                            <td class="amount"><strong>10,400</strong></td>
-                        </tr>
-                        <tr class="pending">
-                            <td>Complete Frontend-Backend Integration</td>
-                            <td>6</td>
-                            <td>1,300</td>
-                            <td class="amount">7,800</td>
-                        </tr>
-                        <tr class="pending">
-                            <td>Vercel Deployment Setup</td>
-                            <td>3</td>
-                            <td>1,300</td>
-                            <td class="amount">3,900</td>
-                        </tr>
-                        <tr class="pending">
-                            <td>Render Deployment Setup</td>
-                            <td>3</td>
-                            <td>1,300</td>
-                            <td class="amount">3,900</td>
-                        </tr>
-                        <tr class="pending">
-                            <td>Production Environment Config</td>
-                            <td>3</td>
-                            <td>1,300</td>
-                            <td class="amount">3,900</td>
-                        </tr>
-                        <tr class="pending">
-                            <td>Quality Assurance & Testing</td>
-                            <td>6</td>
-                            <td>1,300</td>
-                            <td class="amount">7,800</td>
-                        </tr>
-                        <tr class="pending">
-                            <td>Documentation & Client Handover</td>
-                            <td>3</td>
-                            <td>1,300</td>
-                            <td class="amount">3,900</td>
-                        </tr>
-                        <tr class="subtotal-row">
-                            <td colspan="3"><strong>Integration Pending:</strong></td>
-                            <td class="amount"><strong>31,200</strong></td>
-                        </tr>
-                        <tr class="total-row">
-                            <td colspan="3"><strong>Integration Total:</strong></td>
-                            <td><strong>41,600</strong></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <!-- Integration & Deployment -->
+            <div class="cost-section">
+                <h3 class="cost-section-title">INTEGRATION & DEPLOYMENT</h3>
+                
+                <div class="table-responsive">
+                    <table class="cost-table">
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Hrs</th>
+                                <th>Rate</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="completed">
+                                <td>Development Environment Setup</td>
+                                <td>3</td>
+                                <td>1,300</td>
+                                <td class="amount">3,900</td>
+                            </tr>
+                            <tr class="completed">
+                                <td>Basic Frontend-Backend Connection</td>
+                                <td>3</td>
+                                <td>1,300</td>
+                                <td class="amount">3,900</td>
+                            </tr>
+                            <tr class="completed">
+                                <td>API Testing & Documentation</td>
+                                <td>2</td>
+                                <td>1,300</td>
+                                <td class="amount">2,600</td>
+                            </tr>
+                            <tr class="subtotal-row">
+                                <td colspan="3"><strong>Integration Completed:</strong></td>
+                                <td class="amount"><strong>10,400</strong></td>
+                            </tr>
+                            <tr class="pending">
+                                <td>Complete Frontend-Backend Integration</td>
+                                <td>6</td>
+                                <td>1,300</td>
+                                <td class="amount">7,800</td>
+                            </tr>
+                            <tr class="pending">
+                                <td>Vercel Deployment Setup</td>
+                                <td>3</td>
+                                <td>1,300</td>
+                                <td class="amount">3,900</td>
+                            </tr>
+                            <tr class="pending">
+                                <td>Render Deployment Setup</td>
+                                <td>3</td>
+                                <td>1,300</td>
+                                <td class="amount">3,900</td>
+                            </tr>
+                            <tr class="pending">
+                                <td>Production Environment Config</td>
+                                <td>3</td>
+                                <td>1,300</td>
+                                <td class="amount">3,900</td>
+                            </tr>
+                            <tr class="pending">
+                                <td>Quality Assurance & Testing</td>
+                                <td>6</td>
+                                <td>1,300</td>
+                                <td class="amount">7,800</td>
+                            </tr>
+                            <tr class="pending">
+                                <td>Documentation & Client Handover</td>
+                                <td>3</td>
+                                <td>1,300</td>
+                                <td class="amount">3,900</td>
+                            </tr>
+                            <tr class="subtotal-row">
+                                <td colspan="3"><strong>Integration Pending:</strong></td>
+                                <td class="amount"><strong>31,200</strong></td>
+                            </tr>
+                            <tr class="total-row">
+                                <td colspan="3"><strong>Integration Total:</strong></td>
+                                <td><strong>41,600</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
+        </section>
 
         <!-- Project Cost Summary -->
-        <div class="payment-schedule">
+        <section class="payment-schedule">
             <h2>PROJECT COST SUMMARY</h2>
             <div class="cost-breakdown">
                 <div class="cost-line">
@@ -618,77 +637,79 @@
                     <span>KSH 180,000</span>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Work Status -->
-        <div class="status-box">
+        <section class="status-box">
             <h3>WORK COMPLETION STATUS</h3>
             <div class="status-item">
                 <span class="status-indicator status-complete">✅ Completed:</span>
                 <span>65% (Backend 80%, Frontend 30%, Integration 40%)</span>
             </div>
             <div class="status-item">
-                <span class="status-indicator status-pending">🔄 Remaining:</span>
+                <span class="status-indicator status-pending">📄 Remaining:</span>
                 <span>35% (Frontend completion, final integrations, deployment)</span>
             </div>
             <p class="status-note">This pricing reflects substantial development work completed and provides exceptional value.</p>
-        </div>
+        </section>
 
         <!-- Timeline -->
-        <h2 class="section-title">PROJECT TIMELINE</h2>
-        
-        <div class="timeline-section">
-            <h3>Current Status: 65% Complete</h3>
+        <section>
+            <h2 class="section-title">PROJECT TIMELINE</h2>
             
-            <div class="timeline-grid">
-                <div class="timeline-card completed">
-                    <div class="timeline-phase">Phase 1</div>
-                    <span class="timeline-status done">✅ DONE</span>
-                    <p class="timeline-deliverable">Project setup, database design</p>
-                    <p class="timeline-duration">Complete</p>
+            <div class="timeline-section">
+                <h3>Current Status: 65% Complete</h3>
+                
+                <div class="timeline-grid">
+                    <div class="timeline-card completed">
+                        <div class="timeline-phase">Phase 1</div>
+                        <span class="timeline-status done">✅ DONE</span>
+                        <p class="timeline-deliverable">Project setup, database design</p>
+                        <p class="timeline-duration">Complete</p>
+                    </div>
+                    
+                    <div class="timeline-card completed">
+                        <div class="timeline-phase">Phase 2</div>
+                        <span class="timeline-status in-progress">80% Complete</span>
+                        <p class="timeline-deliverable">API development, authentication</p>
+                        <p class="timeline-duration">Mostly Done</p>
+                    </div>
+                    
+                    <div class="timeline-card pending">
+                        <div class="timeline-phase">Phase 3</div>
+                        <span class="timeline-status pending">30% Complete</span>
+                        <p class="timeline-deliverable">User interfaces, booking systems</p>
+                        <p class="timeline-duration">3-4 weeks</p>
+                    </div>
+                    
+                    <div class="timeline-card pending">
+                        <div class="timeline-phase">Phase 4</div>
+                        <span class="timeline-status pending">40% Complete</span>
+                        <p class="timeline-deliverable">API integrations, testing</p>
+                        <p class="timeline-duration">1-2 weeks</p>
+                    </div>
+                    
+                    <div class="timeline-card pending">
+                        <div class="timeline-phase">Phase 5</div>
+                        <span class="timeline-status pending">📄 Pending</span>
+                        <p class="timeline-deliverable">Live deployment, documentation</p>
+                        <p class="timeline-duration">1 week</p>
+                    </div>
                 </div>
                 
-                <div class="timeline-card completed">
-                    <div class="timeline-phase">Phase 2</div>
-                    <span class="timeline-status in-progress">80% Complete</span>
-                    <p class="timeline-deliverable">API development, authentication</p>
-                    <p class="timeline-duration">Mostly Done</p>
-                </div>
-                
-                <div class="timeline-card pending">
-                    <div class="timeline-phase">Phase 3</div>
-                    <span class="timeline-status pending">30% Complete</span>
-                    <p class="timeline-deliverable">User interfaces, booking systems</p>
-                    <p class="timeline-duration">3-4 weeks</p>
-                </div>
-                
-                <div class="timeline-card pending">
-                    <div class="timeline-phase">Phase 4</div>
-                    <span class="timeline-status pending">40% Complete</span>
-                    <p class="timeline-deliverable">API integrations, testing</p>
-                    <p class="timeline-duration">1-2 weeks</p>
-                </div>
-                
-                <div class="timeline-card pending">
-                    <div class="timeline-phase">Phase 5</div>
-                    <span class="timeline-status pending">🔄 Pending</span>
-                    <p class="timeline-deliverable">Live deployment, documentation</p>
-                    <p class="timeline-duration">1 week</p>
+                <div class="timeline-details">
+                    <h4>Remaining Duration: 6 weeks to live deployment</h4>
+                    <ul>
+                        <li><strong>Weeks 1-3:</strong> Complete frontend development</li>
+                        <li><strong>Week 4-5:</strong> API integrations & payment gateways</li>
+                        <li><strong>Week 6:</strong> Final testing & deployment</li>
+                    </ul>
                 </div>
             </div>
-            
-            <div class="timeline-details">
-                <h4>Remaining Duration: 6 weeks to live deployment</h4>
-                <ul>
-                    <li><strong>Weeks 1-3:</strong> Complete frontend development</li>
-                    <li><strong>Week 4-5:</strong> API integrations & payment gateways</li>
-                    <li><strong>Week 6:</strong> Final testing & deployment</li>
-                </ul>
-            </div>
-        </div>
+        </section>
 
         <!-- Payment Schedule -->
-        <div class="payment-schedule">
+        <section class="payment-schedule">
             <h2>PAYMENT SCHEDULE</h2>
             <p class="schedule-note">Based on 65% work completion status</p>
             
@@ -722,10 +743,136 @@
             </div>
             
             <p class="delivery-timeline"><strong>Delivery Timeline:</strong> 6 weeks from contract signing</p>
-        </div>
+        </section>
+
+        <!-- NEW SECTION: Hosting & Deployment Costs -->
+        <section class="hosting-costs-section">
+            <h2 class="section-title">HOSTING & DEPLOYMENT COSTS</h2>
+            
+            <div class="hosting-subsection">
+                <h3 class="hosting-subtitle">Monthly Operational Costs (Client Responsibility)</h3>
+                <div class="hosting-grid">
+                    <div class="hosting-item">
+                        <div class="hosting-item-name">Vercel Hosting (Frontend)</div>
+                        <div class="hosting-item-cost">KSH 0 - 3,000/month</div>
+                        <div class="hosting-item-note">Pro plan if needed</div>
+                    </div>
+                    <div class="hosting-item">
+                        <div class="hosting-item-name">Render Hosting (Backend + Database)</div>
+                        <div class="hosting-item-cost">KSH 8,000 - 15,000/month</div>
+                        <div class="hosting-item-note">Production tier</div>
+                    </div>
+                    <div class="hosting-item">
+                        <div class="hosting-item-name">Domain Registration</div>
+                        <div class="hosting-item-cost">KSH 3,500/year</div>
+                        <div class="hosting-item-note">.co.ke domain</div>
+                    </div>
+                    <div class="hosting-item">
+                        <div class="hosting-item-name">SSL Certificate</div>
+                        <div class="hosting-item-cost">Included</div>
+                        <div class="hosting-item-note">With hosting providers</div>
+                    </div>
+                    <div class="hosting-item">
+                        <div class="hosting-item-name">Email Service (SendGrid/Mailgun)</div>
+                        <div class="hosting-item-cost">KSH 2,000 - 5,000/month</div>
+                        <div class="hosting-item-note">For notifications</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hosting-subsection">
+                <h3 class="hosting-subtitle">Third-Party API & Service Costs (Client Responsibility)</h3>
+                
+                <div class="api-category">
+                    <h4 class="api-category-title">Flight API Options (Choose One)</h4>
+                    <div class="hosting-grid">
+                        <div class="hosting-item api-item">
+                            <div class="hosting-item-name">Amadeus API</div>
+                            <div class="hosting-item-cost">KSH 7,800/month</div>
+                            <div class="hosting-item-note">Starter plan - $60/month</div>
+                            <div class="api-badge">Recommended</div>
+                        </div>
+                        <div class="hosting-item api-item">
+                            <div class="hosting-item-name">Skyscanner API</div>
+                            <div class="hosting-item-cost">KSH 7,800/month</div>
+                            <div class="hosting-item-note">Paid access - $60/month</div>
+                        </div>
+                        <div class="hosting-item api-item">
+                            <div class="hosting-item-name">Travelport (GDS)</div>
+                            <div class="hosting-item-cost">KSH 196,300 setup</div>
+                            <div class="hosting-item-note">+ KSH 27,300/month ($1,510 setup + $210/month)</div>
+                            <div class="api-badge premium">Enterprise</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="api-category">
+                    <h4 class="api-category-title">Payment Gateway Integration</h4>
+                    <div class="hosting-grid">
+                        <div class="hosting-item">
+                            <div class="hosting-item-name">MPESA/Stripe Onboarding</div>
+                            <div class="hosting-item-cost">KSH 6,500</div>
+                            <div class="hosting-item-note">One-time setup - $50</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="api-category">
+                    <h4 class="api-category-title">Professional Content</h4>
+                    <div class="hosting-grid">
+                        <div class="hosting-item">
+                            <div class="hosting-item-name">Stock Images (10-pack)</div>
+                            <div class="hosting-item-cost">KSH 3,900</div>
+                            <div class="hosting-item-note">One-time - $30 for bundle</div>
+                        </div>
+                        <div class="hosting-item">
+                            <div class="hosting-item-name">Individual Premium Image</div>
+                            <div class="hosting-item-cost">KSH 1,300/image</div>
+                            <div class="hosting-item-note">Per image - $10 each</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- POST-DELIVERY SUPPORT SECTION -->
+        <section class="support-section">
+            <h2 class="section-title">POST-DELIVERY SUPPORT</h2>
+            
+            <div class="support-subsection">
+                <h3 class="support-subtitle">Included (7 Days)</h3>
+                <ul class="support-list">
+                    <li>Bug fixes for delivered functionality</li>
+                    <li>Deployment assistance and troubleshooting</li>
+                    <li>Basic usage training for admin panel</li>
+                    <li>Minor UI/UX adjustments</li>
+                </ul>
+            </div>
+
+            <div class="support-subsection">
+                <h3 class="support-subtitle">Optional Maintenance Plans</h3>
+                <div class="support-plans">
+                    <div class="support-plan">
+                        <h4 class="support-plan-name">Basic Plan</h4>
+                        <div class="support-plan-price">KSH 15,000/month</div>
+                        <div class="support-plan-details">8 hours support</div>
+                    </div>
+                    <div class="support-plan">
+                        <h4 class="support-plan-name">Standard Plan</h4>
+                        <div class="support-plan-price">KSH 25,000/month</div>
+                        <div class="support-plan-details">16 hours support + updates</div>
+                    </div>
+                    <div class="support-plan">
+                        <h4 class="support-plan-name">Premium Plan</h4>
+                        <div class="support-plan-price">KSH 40,000/month</div>
+                        <div class="support-plan-details">Unlimited support + feature additions</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Terms -->
-        <div class="terms">
+        <section class="terms">
             <h2>TERMS & CONDITIONS</h2>
             
             <div class="terms-section">
@@ -746,18 +893,10 @@
                     <li>Developer retains right to use project in portfolio</li>
                 </ul>
             </div>
-            
-            <div class="terms-section">
-                <h4>Post-Delivery Support:</h4>
-                <ul>
-                    <li><strong>Included (7 Days):</strong> Bug fixes, deployment assistance, basic training</li>
-                    <li><strong>Optional Plans:</strong> KSH 15,000-40,000/month for ongoing support</li>
-                </ul>
-            </div>
-        </div>
+        </section>
 
         <!-- Payment Details -->
-        <div class="payment-details-box">
+        <section class="payment-details-box">
             <h3>PAYMENT DETAILS</h3>
             <div class="payment-methods">
                 <div class="payment-method">
@@ -773,21 +912,21 @@
                     Account: Cliff Okiko</p>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Signatures -->
-        <div class="signature-section">
+        <section class="signature-section">
             <div class="signature-box">
                 <h4>CLIENT AUTHORIZATION</h4>
                 <div id="clientSignatureDisplay" class="signature-display">
-                    <img id="clientSignatureImg" class="signature-img" style="display: none;">
+                    <img id="clientSignatureImg" class="signature-img" style="display: none;" alt="Client Signature">
                     <span id="signaturePlaceholder" class="placeholder">Digital signature will appear here</span>
                 </div>
                 <div class="signature-date">
-                    <label>Date: </label>
+                    <label for="clientDate">Date: </label>
                     <input type="date" id="clientDate" class="date-input">
                 </div>
-                <p class="company-display"><span id="displayClientCompany"></span></p>
+                <p class="company-display"><span id="displayClientCompany">Letrum Agencies</span></p>
             </div>
             
             <div class="signature-box">
@@ -795,18 +934,18 @@
                 <div id="providerAuthDisplay">
                     <p class="provider-name"><strong>Cliff Okiko</strong></p>
                     <div class="provider-signature">
-                        <img id="providerSignatureImg" class="signature-img" style="display: none;">
+                        <img id="providerSignatureImg" class="signature-img" style="display: none;" alt="Provider Signature">
                     </div>
                 </div>
                 <div class="signature-date">
-                    <label>Date: </label>
-                    <input type="date" value="2025-09-21" class="date-input">
+                    <label for="providerDate">Date: </label>
+                    <input type="date" id="providerDate" value="2025-09-21" class="date-input" readonly>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Footer -->
-        <div class="footer">
+        <footer class="footer">
             <h3>📋 Invoice Completion Instructions</h3>
             
             <div class="completion-steps">
@@ -837,7 +976,7 @@
             <div class="footer-contact">
                 <p><strong>Need Help?</strong> Email cliff.okiko@gmail.com | Phone: +254 792 867 928</p>
             </div>
-        </div>
+        </footer>
     </div>
 
     <!-- Custom JavaScript -->

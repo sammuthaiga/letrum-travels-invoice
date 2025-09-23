@@ -1,4 +1,4 @@
-// Invoice Management System - Complete JavaScript Functionality
+// Invoice Management System - Fixed Complete JavaScript Functionality
 
 // Global variables
 let signaturePad = null;
@@ -179,148 +179,285 @@ function saveSignature() {
     showStatus('Signature saved successfully!', 'success');
 }
 
-// Generate PDF function - Fixed for proper rendering
+// FINAL FIXED PDF Generation - Direct DOM replacement approach
 function generatePDF() {
     const clientCompany = document.getElementById('clientCompany').value || 'Client';
-    
     showStatus('📄 Generating PDF... Please wait...', 'warning');
-    
+
     // Get the original container
     const original = document.querySelector('.container');
+    if (!original) {
+        showStatus('❌ Error: Could not find invoice content', 'error');
+        return;
+    }
+
+    // Save current scroll position and original parent
+    const currentScrollY = window.scrollY;
+    const originalParent = original.parentNode;
+    const originalNextSibling = original.nextSibling;
     
-    // Clone the container for PDF generation
+    // Clone the content for PDF generation
     const clone = original.cloneNode(true);
     
-    // Remove non-printable elements from clone
+    // Prepare the clone for PDF
+    preparePDFContent(clone);
+    
+    // Create loading overlay
+    const overlay = document.createElement('div');
+    overlay.id = 'pdf-overlay';
+    overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 99999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    `;
+    
+    const loadingMsg = document.createElement('div');
+    loadingMsg.style.cssText = `
+        background: white;
+        padding: 40px;
+        border-radius: 10px;
+        text-align: center;
+        font-size: 18px;
+        color: #333;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    `;
+    loadingMsg.innerHTML = `
+        <div style="margin-bottom: 20px;">
+            <strong>Generating Your Invoice PDF</strong>
+        </div>
+        <div style="font-size: 14px; color: #666; margin-bottom: 20px;">
+            This will take just a moment...
+        </div>
+        <div style="margin: 0 auto; width: 250px; height: 6px; background: #eee; border-radius: 3px; overflow: hidden;">
+            <div style="width: 100%; height: 100%; background: linear-gradient(90deg, #7fb069, #8fc079); animation: shimmer 1.5s ease-in-out infinite;"></div>
+        </div>
+        <style>
+            @keyframes shimmer {
+                0% { transform: translateX(-100%); }
+                100% { transform: translateX(100%); }
+            }
+        </style>
+    `;
+    overlay.appendChild(loadingMsg);
+    document.body.appendChild(overlay);
+    
+    // Temporarily hide the original and show the clone in its place
+    original.style.display = 'none';
+    
+    // Insert clone in place of original
+    originalParent.insertBefore(clone, originalNextSibling);
+    
+    // Apply PDF-ready styles to clone
+    clone.style.cssText = `
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px;
+        background: white;
+        box-shadow: none;
+        border-radius: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 12px;
+        line-height: 1.6;
+        color: #000;
+        position: relative;
+    `;
+    
+    // Force browser to render
+    clone.offsetHeight;
+    
+    // Scroll to top to ensure full capture
+    window.scrollTo(0, 0);
+    
+    // Wait a moment for rendering to complete
+    setTimeout(() => {
+        // Configure html2pdf options
+        const opt = {
+            margin: [10, 10, 10, 10],
+            filename: `Invoice_${clientCompany.replace(/\s+/g, '_')}_${new Date().toISOString().slice(0,10)}.pdf`,
+            image: {
+                type: 'jpeg',
+                quality: 0.98
+            },
+            html2canvas: {
+                scale: 2,
+                useCORS: true,
+                logging: false,
+                letterRendering: true,
+                backgroundColor: '#ffffff',
+                scrollX: 0,
+                scrollY: -window.scrollY,
+                windowWidth: document.documentElement.scrollWidth,
+                windowHeight: document.documentElement.scrollHeight
+            },
+            jsPDF: {
+                unit: 'mm',
+                format: 'a4',
+                orientation: 'portrait',
+                compress: true
+            },
+            pagebreak: {
+                mode: ['avoid-all', 'css', 'legacy'],
+                before: '.page-break-before',
+                after: '.page-break-after'
+            }
+        };
+
+        html2pdf().set(opt).from(clone).save().then(() => {
+            showStatus('✅ PDF downloaded successfully!', 'success');
+        }).catch(() => {
+            showStatus('❌ PDF generation failed!', 'error');
+        }).finally(() => {
+            // Remove overlay and restore original
+            document.body.removeChild(overlay);
+            clone.remove();
+            original.style.display = '';
+            window.scrollTo(0, currentScrollY);
+        });
+    }, 600);
+}
+
+// Helper function to prepare content for PDF
+function preparePDFContent(clone) {
+    // Remove non-printable elements
     const elementsToRemove = clone.querySelectorAll(
-        '.no-print, .action-buttons, .signature-section-digital, .signature-controls, button'
+        '.no-print, .action-buttons, .signature-section-digital, .signature-controls, button, .status-message'
     );
     elementsToRemove.forEach(el => el.remove());
     
-    // Add signatures to clone if they exist
-    if (providerSignatureDataUrl) {
-        const provDisplay = clone.querySelector('#providerAuthDisplay');
-        if (provDisplay) {
-            const img = provDisplay.querySelector('#providerSignatureImg');
-            if (img) {
-                img.src = providerSignatureDataUrl;
-                img.style.display = 'block';
-                // Ensure image is visible
-                img.style.opacity = '1';
-                img.style.visibility = 'visible';
+    // Fix all input fields to show their values
+    const inputs = clone.querySelectorAll('input, textarea, select');
+    inputs.forEach(input => {
+        const originalInput = document.querySelector(`#${input.id}`);
+        if (originalInput) {
+            const value = originalInput.value;
+            if (input.type === 'date') {
+                // Create a text span to replace the date input
+                const span = document.createElement('span');
+                span.textContent = value || new Date().toISOString().slice(0, 10);
+                span.style.cssText = 'border-bottom: 1px solid #333; padding: 2px 0;';
+                input.parentNode.replaceChild(span, input);
+            } else {
+                // Create a text span to replace other inputs
+                const span = document.createElement('span');
+                span.textContent = value || '';
+                span.style.cssText = 'border-bottom: 1px solid #333; padding: 2px 0; display: inline-block; min-width: 200px;';
+                input.parentNode.replaceChild(span, input);
             }
+        }
+    });
+    
+    // Add signatures if they exist
+    if (providerSignatureDataUrl) {
+        const provImg = clone.querySelector('#providerSignatureImg');
+        if (provImg) {
+            provImg.src = providerSignatureDataUrl;
+            provImg.style.cssText = 'display: block; max-height: 60px; max-width: 200px; margin: 10px auto;';
         }
     }
     
     if (hasSignature && signaturePad) {
-        const clientDisplay = clone.querySelector('#clientSignatureDisplay');
-        if (clientDisplay) {
-            const img = clientDisplay.querySelector('#clientSignatureImg');
-            if (img) {
-                img.src = signaturePad.toDataURL();
-                img.style.display = 'block';
-                // Ensure image is visible
-                img.style.opacity = '1';
-                img.style.visibility = 'visible';
-            }
-            const placeholder = clientDisplay.querySelector('#signaturePlaceholder');
-            if (placeholder) {
-                placeholder.style.display = 'none';
-            }
+        const clientImg = clone.querySelector('#clientSignatureImg');
+        if (clientImg) {
+            clientImg.src = signaturePad.toDataURL();
+            clientImg.style.cssText = 'display: block; max-height: 60px; max-width: 200px; margin: 10px auto;';
+        }
+        const placeholder = clone.querySelector('#signaturePlaceholder');
+        if (placeholder) {
+            placeholder.style.display = 'none';
         }
     }
     
-    // Fix all editable fields to show values
-    const editableFields = clone.querySelectorAll('.editable-field');
-    editableFields.forEach(field => {
-        field.style.border = 'none';
-        field.style.borderBottom = '1px solid #333';
-        field.style.background = 'transparent';
-        field.setAttribute('readonly', 'readonly');
-    });
+    // Apply styles to ensure proper rendering
+    clone.style.cssText = `
+        width: 100%;
+        max-width: 794px;
+        padding: 20px;
+        background: white;
+        margin: 0;
+        box-shadow: none;
+        border-radius: 0;
+        font-size: 12px;
+        line-height: 1.5;
+        color: #000;
+    `;
     
-    // Ensure all tables are visible
-    const tables = clone.querySelectorAll('.cost-table');
+    // Fix tables for better PDF rendering
+    const tables = clone.querySelectorAll('.cost-table, .timeline-table');
     tables.forEach(table => {
-        table.style.pageBreakInside = 'avoid';
+        table.style.cssText = `
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 10px;
+            page-break-inside: avoid;
+        `;
+        
+        // Fix headers
+        const headers = table.querySelectorAll('th');
+        headers.forEach(th => {
+            th.style.cssText = `
+                background: #7fb069 !important;
+                color: #000 !important;
+                padding: 8px 4px;
+                font-size: 9px;
+                border: 1px solid #ddd;
+                font-weight: bold;
+            `;
+        });
+        
+        // Fix cells
+        const cells = table.querySelectorAll('td');
+        cells.forEach(td => {
+            td.style.cssText = `
+                padding: 6px 4px;
+                border: 1px solid #ddd;
+                font-size: 9px;
+                color: #000;
+            `;
+        });
     });
     
-    // Fix positioning issues
-    clone.style.margin = '0';
-    clone.style.padding = '20px';
-    clone.style.background = 'white';
-    
-    // PDF generation options - optimized
-    const opt = {
-        margin: [10, 10, 10, 10],
-        filename: `Invoice_${clientCompany.replace(/\s+/g, '_')}_${new Date().toISOString().slice(0,10)}.pdf`,
-        image: { 
-            type: 'jpeg', 
-            quality: 0.98 
-        },
-        html2canvas: { 
-            scale: 2,
-            useCORS: true,
-            letterRendering: true,
-            logging: false,
-            scrollY: 0,
-            scrollX: 0,
-            backgroundColor: '#ffffff',
-            windowWidth: clone.scrollWidth,
-            windowHeight: clone.scrollHeight
-        },
-        jsPDF: { 
-            unit: 'mm', 
-            format: 'a4', 
-            orientation: 'portrait',
-            compress: true
-        },
-        pagebreak: { 
-            mode: ['avoid-all', 'css', 'legacy'] 
-        }
-    };
-    
-    // Create a temporary container for PDF
-    const pdfContainer = document.createElement('div');
-    pdfContainer.style.position = 'absolute';
-    pdfContainer.style.left = '-9999px';
-    pdfContainer.style.top = '0';
-    pdfContainer.style.width = '210mm';
-    pdfContainer.style.background = 'white';
-    pdfContainer.appendChild(clone);
-    document.body.appendChild(pdfContainer);
-    
-    // Wait for images to load
-    setTimeout(() => {
-        html2pdf()
-            .set(opt)
-            .from(clone)
-            .save()
-            .then(() => {
-                showStatus('✅ PDF downloaded successfully!', 'success');
-                // Clean up
-                document.body.removeChild(pdfContainer);
-            })
-            .catch((err) => {
-                showStatus('❌ Error generating PDF. Please try again.', 'error');
-                console.error('PDF generation error:', err);
-                // Clean up on error
-                if (pdfContainer.parentNode) {
-                    document.body.removeChild(pdfContainer);
-                }
-            });
-    }, 500);
+    // Ensure all sections are visible
+    const sections = clone.querySelectorAll('section, .footer');
+    sections.forEach(section => {
+        section.style.pageBreakInside = 'avoid';
+        section.style.display = 'block';
+        section.style.visibility = 'visible';
+    });
 }
 
 // Print invoice function
 function printInvoice() {
+    // Validate before printing
+    const validationResult = validateFields();
+    if (!validationResult.isValid) {
+        showStatus(validationResult.message, 'error');
+        document.getElementById(validationResult.focusField).focus();
+        return;
+    }
+    
     if (!hasSignature) {
         showStatus('⚠️ Please add your digital signature before printing', 'warning');
         return;
     }
     
+    // Save data before printing
+    saveDataToStorage();
+    
     showStatus('🖨️ Opening print dialog...', 'success');
-    window.print();
+    
+    // Use a small delay to ensure status message shows
+    setTimeout(() => {
+        window.print();
+    }, 100);
 }
 
 // Main download and email function
@@ -332,21 +469,25 @@ function downloadAndEmail() {
         document.getElementById(validationResult.focusField).focus();
         return;
     }
-    
+
     if (!hasSignature) {
         showStatus('⚠️ Please add your digital signature before proceeding', 'error');
         return;
     }
-    
+
     showStatus('⚡ Generating your signed invoice PDF...', 'warning');
     
-    // Generate PDF then open email
+    // Save data first
+    saveDataToStorage();
+
+    // Generate PDF
     generatePDF();
-    
-    // Wait a bit for PDF generation then open email
+
+    // Wait for PDF generation to start, then open email
     setTimeout(() => {
         openEmailClient();
-    }, 2000);
+        showStatus('✅ PDF generated! Email opened! Please attach the downloaded PDF.', 'success');
+    }, 3000); // Give more time for PDF generation to start
 }
 
 // Validate form fields
@@ -359,7 +500,10 @@ function validateFields() {
     };
     
     for (const [fieldId, fieldName] of Object.entries(fields)) {
-        const value = document.getElementById(fieldId).value.trim();
+        const field = document.getElementById(fieldId);
+        if (!field) continue;
+        
+        const value = field.value.trim();
         if (!value) {
             return {
                 isValid: false,
@@ -383,9 +527,9 @@ function validateFields() {
     return { isValid: true };
 }
 
-// Open email client with pre-filled content - FIXED ENCODING
+// Open email client with pre-filled content
 function openEmailClient() {
-    const clientCompany = document.getElementById('clientCompany').value;
+    const clientCompany = document.getElementById('clientCompany').value || 'Company';
     const clientEmail = document.getElementById('clientEmail').value;
     const clientAddress = document.getElementById('clientAddress').value;
     const clientPhone = document.getElementById('clientPhone').value;
@@ -440,17 +584,15 @@ ${clientCompany}
 🔗 Original form: ${currentURL}
 📅 Generated: ${new Date().toLocaleString()}`;
     
-    // Properly encode for mailto - fixing the spaces issue
+    // Properly encode for mailto
     const encodedSubject = encodeURIComponent(subject);
     const encodedBody = encodeURIComponent(bodyContent);
     
-    // Create mailto URL without replacing spaces with +
+    // Create mailto URL
     const mailto = `mailto:${recipients}?subject=${encodedSubject}&body=${encodedBody}`;
     
     // Open email client
     window.location.href = mailto;
-    
-    showStatus('✅ Email opened! Please attach the downloaded PDF before sending.', 'success');
 }
 
 // Show status message
@@ -462,10 +604,10 @@ function showStatus(message, type = 'success') {
     statusEl.className = `status-message ${type}`;
     statusEl.style.display = 'block';
     
-    // Auto-hide after 4 seconds
+    // Auto-hide after 5 seconds (increased for important messages)
     setTimeout(() => {
         statusEl.style.display = 'none';
-    }, 4000);
+    }, 5000);
 }
 
 // Save data to localStorage
@@ -500,19 +642,22 @@ function loadSavedData() {
         
         // Load signature if exists
         if (data.signature && signaturePad) {
-            signaturePad.fromDataURL(data.signature);
-            hasSignature = true;
-            
-            const clientImg = document.getElementById('clientSignatureImg');
-            const placeholder = document.getElementById('signaturePlaceholder');
-            
-            if (clientImg) {
-                clientImg.src = data.signature;
-                clientImg.style.display = 'block';
-            }
-            if (placeholder) {
-                placeholder.style.display = 'none';
-            }
+            // Small delay to ensure canvas is ready
+            setTimeout(() => {
+                signaturePad.fromDataURL(data.signature);
+                hasSignature = true;
+                
+                const clientImg = document.getElementById('clientSignatureImg');
+                const placeholder = document.getElementById('signaturePlaceholder');
+                
+                if (clientImg) {
+                    clientImg.src = data.signature;
+                    clientImg.style.display = 'block';
+                }
+                if (placeholder) {
+                    placeholder.style.display = 'none';
+                }
+            }, 100);
         }
         
         // Update company display
@@ -602,6 +747,10 @@ function setupKeyboardShortcuts() {
                 case 'r':
                     e.preventDefault();
                     resetForm();
+                    break;
+                case 'd':
+                    e.preventDefault();
+                    generatePDF();
                     break;
                 case 'e':
                     e.preventDefault();

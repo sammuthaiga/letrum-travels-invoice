@@ -298,6 +298,188 @@ body {
     color: white;
 }
 
+/* NEW SECTION: Hosting & Deployment Costs Styles */
+.hosting-costs-section {
+    background: var(--bg-light);
+    padding: 25px;
+    border-radius: 10px;
+    margin: 30px 0;
+    border: 1px solid var(--border-color);
+}
+
+.hosting-costs-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 25px;
+}
+
+.hosting-subsection {
+    margin: 20px 0;
+}
+
+.hosting-subtitle {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.hosting-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.hosting-item {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 3px solid var(--primary-color);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    position: relative;
+}
+
+.hosting-item.api-item {
+    border-left: 4px solid var(--primary-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hosting-item.api-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.hosting-item-name {
+    font-weight: bold;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.hosting-item-cost {
+    color: var(--primary-color);
+    font-size: 1.05rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.hosting-item-note {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+/* API Category Styles */
+.api-category {
+    margin: 25px 0;
+    padding: 15px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.api-category-title {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--primary-color);
+    font-weight: 600;
+}
+
+.api-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--primary-color);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.api-badge.premium {
+    background: #f39c12;
+}
+
+/* Support Section Styles */
+.support-section {
+    background: var(--bg-accent);
+    padding: 25px;
+    border-radius: 10px;
+    margin: 30px 0;
+    border: 1px solid var(--border-color);
+}
+
+.support-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 25px;
+}
+
+.support-subsection {
+    margin: 20px 0;
+}
+
+.support-subtitle {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.support-list {
+    margin-left: 20px;
+    list-style-type: disc;
+}
+
+.support-list li {
+    margin: 8px 0;
+    color: var(--text-primary);
+}
+
+.support-plans {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.support-plan {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid var(--primary-color);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.support-plan:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(127, 176, 105, 0.2);
+}
+
+.support-plan-name {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.support-plan-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.support-plan-details {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
 /* Payment Schedule */
 .payment-schedule {
     background: var(--bg-accent);
@@ -908,34 +1090,215 @@ hr.bold-line {
     margin-top: 15px;
 }
 
-/* Print Styles */
+/* Enhanced Print Styles for Better PDF Generation */
 @media print {
+    /* Remove non-printable elements */
     .action-buttons, 
     .no-print,
-    .signature-section-digital {
+    .signature-section-digital,
+    .signature-controls,
+    button,
+    .status-message {
         display: none !important;
     }
     
-    body {
+    /* Reset page layout */
+    @page {
+        margin: 10mm;
+        size: A4;
+    }
+    
+    html, body {
+        width: 210mm;
+        height: 297mm;
         margin: 0;
         padding: 0;
+        font-size: 12px;
+        line-height: 1.4;
+        color: #000;
+        background: white;
     }
     
     .container {
         box-shadow: none;
+        border-radius: 0;
         margin: 0;
-        padding: 20px;
+        padding: 15px;
         max-width: 100%;
+        width: 100%;
+        background: white;
     }
     
-    .cost-table {
-        font-size: 10px;
+    /* Fix headers and text sizing */
+    .company-name {
+        font-size: 1.5rem;
     }
     
+    .invoice-title {
+        font-size: 1.3rem;
+    }
+    
+    .section-title {
+        font-size: 1.1rem;
+        margin: 20px 0 10px 0;
+    }
+    
+    .cost-section-title {
+        font-size: 1rem;
+        margin: 15px 0 10px 0;
+    }
+    
+    /* Fix form fields for PDF */
     .editable-field {
-        border: none;
-        border-bottom: 1px solid #333;
-        background: transparent;
+        border: none !important;
+        border-bottom: 1px solid #333 !important;
+        background: transparent !important;
+        padding: 2px 0 !important;
+        font-size: inherit !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+    }
+    
+    .date-input {
+        border: none !important;
+        border-bottom: 1px solid #333 !important;
+        background: transparent !important;
+        padding: 2px 0 !important;
+    }
+    
+    /* Fix tables for PDF */
+    .cost-table, .timeline-table {
+        font-size: 9px !important;
+        margin: 10px 0 !important;
+        width: 100% !important;
+        page-break-inside: avoid;
+    }
+    
+    .cost-table th, .timeline-table th {
+        background: #7fb069 !important;
+        color: #000 !important;
+        padding: 6px 3px !important;
+        font-size: 8px !important;
+        position: static !important;
+        top: auto !important;
+        border: 1px solid #ddd !important;
+    }
+    
+    .cost-table td, .timeline-table td {
+        padding: 5px 3px !important;
+        font-size: 8px !important;
+        border: 1px solid #ddd !important;
+        color: #000 !important;
+    }
+    
+    .total-row {
+        background: #7fb069 !important;
+        color: #000 !important;
+    }
+    
+    .total-row .amount {
+        color: #000 !important;
+    }
+    
+    /* Fix sections for PDF */
+    .hosting-costs-section,
+    .support-section,
+    .project-overview,
+    .payment-schedule,
+    .terms,
+    .payment-details-box {
+        page-break-inside: avoid;
+        margin: 10px 0 !important;
+        padding: 10px !important;
+    }
+    
+    .hosting-grid,
+    .support-plans,
+    .payment-grid {
+        display: block !important;
+    }
+    
+    .hosting-item,
+    .support-plan,
+    .payment-card {
+        margin-bottom: 8px !important;
+        page-break-inside: avoid;
+        padding: 8px !important;
+        break-inside: avoid;
+    }
+    
+    .api-category {
+        page-break-inside: avoid;
+        margin-bottom: 10px !important;
+        padding: 8px !important;
+    }
+    
+    .api-badge {
+        position: static !important;
+        display: inline-block !important;
+        margin-left: 10px !important;
+        margin-top: 5px !important;
+    }
+    
+    /* Fix timeline cards */
+    .timeline-grid {
+        display: block !important;
+    }
+    
+    .timeline-card {
+        margin-bottom: 10px !important;
+        page-break-inside: avoid;
+        padding: 10px !important;
+    }
+    
+    /* Fix signature section */
+    .signature-section {
+        display: block !important;
+        page-break-inside: avoid;
+    }
+    
+    .signature-box {
+        margin-bottom: 15px !important;
+        padding: 10px !important;
+        border: 1px solid #333 !important;
+        border-radius: 0 !important;
+    }
+    
+    .signature-img {
+        max-height: 40px !important;
+        max-width: 150px !important;
+    }
+    
+    /* Ensure proper spacing */
+    .deliverables {
+        display: block !important;
+    }
+    
+    .deliverable-item {
+        margin-bottom: 10px !important;
+        page-break-inside: avoid;
+        padding: 10px !important;
+    }
+    
+    /* Hide page-breaking elements */
+    .page-break {
+        page-break-before: always;
+    }
+    
+    /* Ensure text is readable */
+    * {
+        color: #000 !important;
+        background: transparent !important;
+    }
+    
+    .signature-box h4,
+    .footer h3,
+    .footer h4,
+    .section-title,
+    .cost-section-title,
+    .hosting-subtitle,
+    .support-subtitle {
+        color: #000 !important;
     }
 }
 
@@ -988,6 +1351,68 @@ hr.bold-line {
     
     .timeline-grid {
         grid-template-columns: 1fr;
+    }
+    
+    /* Mobile optimization for new sections */
+    .hosting-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .support-plans {
+        grid-template-columns: 1fr;
+    }
+    
+    .hosting-subtitle,
+    .support-subtitle {
+        font-size: 1rem;
+    }
+    
+    .hosting-item {
+        padding: 12px;
+    }
+    
+    .hosting-item-name {
+        font-size: 0.9rem;
+    }
+    
+    .hosting-item-cost {
+        font-size: 1rem;
+    }
+    
+    .hosting-item-note {
+        font-size: 0.8rem;
+    }
+    
+    .api-category {
+        padding: 12px;
+        margin: 15px 0;
+    }
+    
+    .api-category-title {
+        font-size: 1rem;
+    }
+    
+    .api-badge {
+        font-size: 0.65rem;
+        padding: 2px 6px;
+        top: 5px;
+        right: 5px;
+    }
+    
+    .support-plan {
+        padding: 15px;
+    }
+    
+    .support-plan-name {
+        font-size: 1rem;
+    }
+    
+    .support-plan-price {
+        font-size: 1.1rem;
+    }
+    
+    .support-plan-details {
+        font-size: 0.85rem;
     }
     
     .button-group {
@@ -1082,6 +1507,82 @@ hr.bold-line {
     
     .editable-field {
         font-size: 16px; /* Prevent zoom on iOS */
+    }
+    
+    /* Ultra compact for hosting sections on small screens */
+    .hosting-costs-section,
+    .support-section {
+        padding: 15px;
+    }
+    
+    .hosting-subsection,
+    .support-subsection {
+        margin: 15px 0;
+    }
+    
+    .hosting-subtitle,
+    .support-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 10px;
+    }
+    
+    .hosting-item {
+        padding: 10px;
+        margin-bottom: 8px;
+    }
+    
+    .hosting-item-name {
+        font-size: 0.85rem;
+        margin-bottom: 5px;
+    }
+    
+    .hosting-item-cost {
+        font-size: 0.9rem;
+    }
+    
+    .hosting-item-note {
+        font-size: 0.75rem;
+    }
+    
+    .api-category {
+        padding: 10px;
+        margin: 10px 0;
+    }
+    
+    .api-category-title {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+    }
+    
+    .api-badge {
+        font-size: 0.6rem;
+        padding: 2px 5px;
+        position: static;
+        display: inline-block;
+        margin-top: 5px;
+    }
+    
+    .support-list {
+        font-size: 0.85rem;
+        margin-left: 15px;
+    }
+    
+    .support-plan {
+        padding: 12px;
+        margin-bottom: 10px;
+    }
+    
+    .support-plan-name {
+        font-size: 0.9rem;
+    }
+    
+    .support-plan-price {
+        font-size: 1rem;
+    }
+    
+    .support-plan-details {
+        font-size: 0.8rem;
     }
     
     /* Ultra compact tables for small screens */
